@@ -12,5 +12,19 @@ color: white ;}
 <h2>Lorem ipsum</h2>
 <p>Lorem ipsum dolor sit amet</p>
 
+<button onclick="randoo()" >Generate</button>
+
+<script>
+var names = new Array("Name1","Name2","Name3","Name4")
+var output = 0
+var rnd = 0
+function randoo(){
+rnd = Math.floor(Math.random() * 4)
+output = names[rnd]
+alert(output)
+}
+</script>
+
 </body>
 </html>
+
