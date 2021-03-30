@@ -17,5 +17,37 @@ result = document.getElementById("txt").value.length
 alert(result)
 } 
 </script>
+<br><br>
+<input type="text" id="txtt">
+<button onClick="addItem()">Add Item</button>
+<br>
+<button onClick="rando()">Pick Random</button>
+<br>
+<button onClick="resetL()">Remove all items</button>
+<p style="color:#fff" id="txt2">Current Items: <br>None</p>
+</div>
+<script>
+  var items = [];
+  function addItem() {
+    items.push(document.getElementById("txtt").value);
+    console.log("Added " + items[items.length - 1]);
+    var text = ""
+    for (i = 0; i < items.length; i++) {
+	text += items[i] + "<br>";
+    document.getElementById("txt2").innerHTML = "Current items:<br>" + text}
+  }
+
+  function rando() {
+    var rnd = Math.floor(Math.random() * items.length);
+    var output = items[rnd];
+    alert(output)
+    console.log(rnd + " " + output)
+  }
+  function resetL() {
+  	console.log("Removed " + items.length + " items") 
+  	items.splice(0, items.length)
+      document.getElementById("txt2").innerHTML = "Current items:<br>None"}
+
+</script>
 </body>
 </html>
