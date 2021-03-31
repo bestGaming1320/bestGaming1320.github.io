@@ -44,10 +44,13 @@ alert(result)
     console.log(rnd + " " + output)
   }
   function resetL() {
+  	var conf = confirm("Are you sure you want to remove all items?")
+  	if (conf == true) {
   	console.log("Removed " + items.length + " items") 
   	items.splice(0, items.length)
       document.getElementById("txt2").innerHTML = "Current items:<br>None"}
-
+	  else {
+	 console.log("Canceled")}} 
 </script>
 </body>
 </html>
