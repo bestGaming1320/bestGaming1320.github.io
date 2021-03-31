@@ -9,14 +9,13 @@ body {
 color: #fff;
 background: #000;}
 </style>
-<input placeholder="" id="txt" />
-<button onclick="getL()">Get Length</button>
+<input oninput="getL()" id="txt" />
+<p id="leng">Length: 0</p>
 <script>
 var result =""
 function getL() {
 result = document.getElementById("txt").value.length
-alert(result)
-} 
+document.getElementById("leng").innerHTML = "Length: " + result} 
 </script>
 <hr>
 <input type="text" id="txtt">
