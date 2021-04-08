@@ -42,7 +42,7 @@ onclick="upgra()">Upgrade</button>
 <button type="button" class="btn"
 onclick="save()">Save</button>
 
-<br>
+<br
 <!-- Load -->
 
 <button class="btn"
@@ -87,4 +87,95 @@ pCh = lJ.pCash
 document.getElementById("costT").innerHTML = "Upgrade Cost: " + parseFloat(ugC).toFixed(2)
 document.getElementById("cashT").innerHTML ="Cash: " + parseFloat(ch).toFixed(2)
 */}
+</scipt>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Clicker Game </title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+</head>
+<b><h1 style=text-align:center>Clicker Game</h1></b>
+<body>
+<p style=text-align:center  id="cashT">Cash: 0</p>
+<p style=text-align:center  id="costT">Upgrade Cost: 5</p>
+
+<!-- Click Me Button -->
+<p id="dd"></p>
+<button type="button" class="btn"
+onclick="clicc()">Click me</button>
+
+<br>
+<!-- Upgrade Button -->
+<button type="button" class="btn"
+onclick="upgra()">Upgrade</button>
+
+<br>
+<!-- Save Button -->
+<button type="button" class="btn"
+onclick="save()">Save</button>
+
+<br>
+<!-- Load -->
+<button class="btn"
+onclick="load()">Load</button> 
+
+<script>
+//variables cash, plusCash, upgradeCash
+var ch = 0
+var pCh = 0.5
+var ugC = 5
+
+//clickEvent
+function clicc(){
+ch = ch + pCh
+document.getElementById("cashT").innerHTML ="Cash: " + ro(ch, 1e2)} 
+
+//upgradeFunction
+function upgra(){
+if (ch > ugC-0.01) {
+ch = ch-ugC
+pCh = pCh*1.32
+ugC = ugC*1.45
+document.getElementById("costT").innerHTML = "Upgrade Cost: " + ro(ugC, 1e2) 
+document.getElementById("cashT").innerHTML ="Cash: " + ro(ch, 1e2)
+}else {
+alert("You dont have enough money!")}}
+
+//saveFunction
+function save() {
+var bj = {cash: ro(ch, 1e5), uCost: ro(ugC, 1e5), pCash: ro(pCh, 1e5)}
+var bj2 = JSON.stringify(bj)
+prompt("Copy and save this json somewhere. You'll need this to load your progress",bj2)}
+
+//loadFunction
+function load() {
+var lJ = JSON.parse(prompt("Enter your Json here"))
+ch = lJ.cash
+ugC = lJ.uCost
+pCh = lJ.pCash
+document.getElementById("costT").innerHTML = "Upgrade Cost: " + ro(ugC, 1e2)
+document.getElementById("cashT").innerHTML ="Cash: " + ro(ch,1e2)}
+
+//roundFunction
+function ro(v, D){
+var round = Math.round(v*D)/D
+return round}
 </script>
+
+<style>
+body {
+background: black;
+color: white;}
+.btn {
+background-color:lightgreen;
+margin:auto;
+display:block;
+color:#99ff00;
+background:#333;
+width:200px;
+height:40px;
+margin-top:0%;
+margin-bottom=:100%;
+border:none;
+}
+</style>
