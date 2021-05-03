@@ -52,19 +52,18 @@ document.getElementById("leng").innerHTML = "Length: " + result}
 	 console.log("Canceled")}} 
 </script>
 <hr>
-<input placeholder="Text" class="txt" id="t1"/><br>
-<input placeholder="char1" class="txt" id="t2" /><br>
-<input placeholder="char2" class="txt" id="t3" /><br>
-<button onclick="rep()">Replace</button>
-<p id="opt">Output:</p>
+<input placeholder="Text" class="txt" id="t1" oninput="repl()"/><br>
+<input placeholder="char1" class="txt" id="t2" oninput="repl()"/><br>
+<input placeholder="char2" class="txt" id="t3" oninput="repl()"/><br>
+<p>Output:</p>
+<textarea style="width:200px;height:50px" id="opt" readonly></textarea>
 <script>
-	function rep() {
+	function repl() {
 var replTxt = document.getElementById("t1").value
 var repl1 = document.getElementById("t2").value
 var repl2 = document.getElementById("t3").value
 var result = replTxt.replaceAll(repl1, repl2) 
-document.getElementById("opt").innerHTML = "Output:<br>" + result
-alert(result)}
+document.getElementById("opt").innerHTML = result}
 </script>
 </body>
 </html>
