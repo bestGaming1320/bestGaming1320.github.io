@@ -3,41 +3,71 @@
 <head>
 <title>Tools</title>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<meta name="description" content="Some basic tools">
-<meta name="author" content="bestGaming132">
+<meta name="description" content="Some basic tools">
+<meta name="author" content="bestGaming132">
 <meta name="keywords" content="tool, tools"/>
 </head>
-<body>
+<body align="center">
 <style>
 body {
 color: #fff;
-background: #000;}
+background: #000;
+font-size:18px}
+
+.txt {
+color: #fff;
+background: #555;
+width:50%;
+height:18px
+border: none;
+text-align: center} 
+
+.btn {
+color:#fff;
+background: #333;
+width: 35%;
+margin-bottom: 2px;
+margin-top: 2px;
+border: 2px solid #444;
+font-size: 15px;
+}
 </style>
-<input oninput="getL()" id="txt" />
+<!-- Get Length -->
+<textarea class="txt" oninput="getL()" id="txt" ></textarea>
 <p id="leng">Length: 0</p>
+<hr>
+<!-- Random Selector -->
+<input style="border:1px solid #ccc; height:20px;" class="txt" type="text" id="txtt"><br>
+<button class="btn" onClick="addItem()">Add Item</button>
+<br>
+<button class="btn" onClick="rando()">Pick Random</button>
+<br>
+<button class="btn" onClick="resetL()">Remove all items</button>
+<p>Current Items:</p>
+<textarea style="color:#fff; background:#222; width:50%; height:50px; text-align:center" readonly id="txt2">None</textarea>
+<hr>
+<!-- Replacer -->
+<textarea class="txt" style="width:50%;height:23px" placeholder="Text" class="txt" id="t1" oninput="repl()"></textarea><br>
+<textarea style="width:50%;height:20px" placeholder="char1" class="txt" id="t2" oninput="repl()"></textarea><br>
+<textarea style="width:50%;height:20px" placeholder="char2" class="txt" id="t3" oninput="repl()"></textarea><br>
+<p>Output:</p>
+<textarea style="color:#fff;background:#222;width:50%;height:50px" id="opt" readonly></textarea>
 <script>
+//get length
 var result =""
 function getL() {
 result = document.getElementById("txt").value.length
 document.getElementById("leng").innerHTML = "Length: " + result} 
-</script>
-<hr>
-<input type="text" id="txtt">
-<button onClick="addItem()">Add Item</button>
-<br>
-<button onClick="rando()">Pick Random</button>
-<br>
-<button onClick="resetL()">Remove all items</button>
-<p style="color:#fff" id="txt2">Current Items: <br>None</p>
-<script>
+
+//random selector
   var items = [];
   function addItem() {
     items.push(document.getElementById("txtt").value);
     console.log("Added " + items[items.length - 1]);
     var text = ""
     for (i = 0; i < items.length; i++) {
-	text += items[i] + "<br>";
-    document.getElementById("txt2").innerHTML = "Current items:<br>" + text}
+	text += items[i] + "\n";
+    document.getElementById("txt2").value = text}
   }
  
   function rando() {
@@ -51,17 +81,11 @@ document.getElementById("leng").innerHTML = "Length: " + result}
   	if (conf == true) {
   	console.log("Removed " + items.length + " items") 
   	items.splice(0, items.length)
-      document.getElementById("txt2").innerHTML = "Current items:<br>None"}
+      document.getElementById("txt2").value = "None"}
 	  else {
 	 console.log("Canceled")}} 
-</script>
-<hr>
-<textarea style="width:50%;height:23px" placeholder="Text" class="txt" id="t1" oninput="repl()"></textarea><br>
-<textarea style="width:50%;height:20px" placeholder="char1" class="txt" id="t2" oninput="repl()"></textarea><br>
-<textarea style="width:50%;height:20px" placeholder="char2" class="txt" id="t3" oninput="repl()"></textarea><br>
-<p>Output:</p>
-<textarea style="width:50%;height:50px" id="opt" readonly></textarea>
-<script>
+
+//replacer
 	function repl() {
 var replTxt = document.getElementById("t1").value
 var repl1 = document.getElementById("t2").value
