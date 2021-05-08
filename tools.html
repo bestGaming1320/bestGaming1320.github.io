@@ -31,6 +31,7 @@ margin-top: 2px;
 border: 2px solid #444;
 font-size: 15px;
 }
+
 </style>
 <!-- Get Length -->
 <textarea class="txt" oninput="getL()" id="txt" ></textarea>
@@ -62,19 +63,25 @@ document.getElementById("leng").innerHTML = "Length: " + result}
 //random selector
   var items = [];
   function addItem() {
+  if (/\S/.test(document.getElementById("txtt").value)) {
     items.push(document.getElementById("txtt").value);
     console.log("Added " + items[items.length - 1]);
     var text = ""
     for (i = 0; i < items.length; i++) {
 	text += items[i] + "\n";
     document.getElementById("txt2").value = text}
+   } else {
+   console.log("Input is empty")} 
   }
  
   function rando() {
+  if (!items.length == 0) {
     var rnd = Math.floor(Math.random() * items.length);
     var output = items[rnd];
     alert(output)
     console.log(rnd + " " + output)
+   } else {
+ console.log("Items is empty")} 
   }
   function resetL() {
   	var conf = confirm("Are you sure you want to remove all items?")
