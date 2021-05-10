@@ -12,7 +12,8 @@
 body {
 color: #fff;
 background: #000;
-font-size:18px}
+font-size:18px;
+margin:5px}
 
 .txt {
 color: #fff;
@@ -20,14 +21,16 @@ background: #555;
 width:50%;
 height:18px
 border: none;
-text-align: center} 
+text-align: center;
+border:1px solid #ccc;
+} 
 
 .btn {
 color:#fff;
 background: #333;
 width: 35%;
-margin-bottom: 2px;
-margin-top: 2px;
+margin-bottom: 3px;
+margin-top: 3px;
 border: 2px solid #444;
 font-size: 15px;
 }
@@ -42,7 +45,7 @@ height: 1px;
 <!-- Get Length -->
 <p><b>Length Calculator</b></p>
 <textarea class="txt" oninput="getL()" id="txt" ></textarea>
-<p id="leng">Length: 0</p>
+<p style="margin:3px" id="leng">Length: 0</p>
 <hr>
 <!-- Random Selector -->
 <p><b>Random Selector</b></p>
@@ -52,7 +55,7 @@ height: 1px;
 <button class="btn" onClick="rando()">Pick Random</button>
 <br>
 <button class="btn" onClick="resetL()">Remove all items</button>
-<p>Current Items:</p>
+<p style="margin:4px">Current Items:</p>
 <textarea style="color:#fff; background:#222; width:50%; height:50px; text-align:center" readonly id="txt2">None</textarea>
 <hr>
 <!-- Replacer -->
@@ -60,8 +63,21 @@ height: 1px;
 <textarea class="txt" style="width:50%;height:23px" placeholder="Text" class="txt" id="t1" oninput="repl()"></textarea><br>
 <textarea style="width:50%;height:20px" placeholder="char1" class="txt" id="t2" oninput="repl()"></textarea><br>
 <textarea style="width:50%;height:20px" placeholder="char2" class="txt" id="t3" oninput="repl()"></textarea><br>
-<p>Output:</p>
+<p style="margin:3px">Output:</p>
 <textarea style="color:#fff;background:#222;width:50%;height:50px" id="opt" readonly></textarea>
+<hr>
+<!-- TextRepeater -->
+<p><b>Text Repeater</b></p>
+<textarea class="txt" placeholder="Text" id="t1"></textarea><br>
+<input style="height:20px;" class="txt" placeholder="Number" type="number" id="t2"><br>
+<p style="margin:5px">Select a mode</p>
+<select id="sel" style="color:#fff;background:#333;height:30px; width:60%;margin-bottom:5px">
+<option value="sp">Space after each item</option>
+<option value="nl">Newline after each item</option>
+<option value="nnl">Numbered newlines after each item</option>
+</select><br>
+<button class="btn" onclick="fun()">Repeat</button><br>
+<textarea style="color:#fff;background:#222;width:50%;height:50px" readonly id="t3"></textarea>
 <script>
 //get length
 var result =""
@@ -108,6 +124,24 @@ var repl1 = document.getElementById("t2").value
 var repl2 = document.getElementById("t3").value
 var result = replTxt.replaceAll(repl1, repl2) 
 document.getElementById("opt").innerHTML = result}
+
+//TextRepeater
+function fun() {
+var userText = document.getElementById("t1").value
+var userNum = document.getElementById("t2").value
+var mode = document.getElementById("sel").value
+var output = ""
+for (i=0;i < userNum; i++) {
+var nu = i +1
+console.log(nu)
+if(mode=="sp"){
+output += userText + " "}
+if(mode=="nl"){
+output += userText + "\n"}
+if(mode=="nnl") {
+output += nu + " " + userText + "\n"}
+}
+document.getElementById("t3").innerHTML = output}
 </script>
 </body>
 </html>
