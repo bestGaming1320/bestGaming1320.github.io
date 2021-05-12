@@ -61,24 +61,25 @@ height: 1px;
 <hr>
 <!-- Replacer -->
 <p><b>Text Replacer</b></p>
-<textarea class="txt" style="width:50%;height:23px" placeholder="Text" class="txt" id="t1" oninput="repl()"></textarea><br>
-<textarea style="width:50%;height:20px" placeholder="char1" class="txt" id="t2" oninput="repl()"></textarea><br>
-<textarea style="width:50%;height:20px" placeholder="char2" class="txt" id="t3" oninput="repl()"></textarea><br>
+<textarea class="txt" style="width:50%;height:23px" placeholder="Text" class="txt" id="te1" oninput="repl()"></textarea><br>
+<textarea style="width:50%;height:20px" placeholder="char1" class="txt" id="te2" oninput="repl()"></textarea><br>
+<textarea style="width:50%;height:20px" placeholder="char2" class="txt" id="te3" oninput="repl()"></textarea><br>
 <p style="margin:3px">Output:</p>
 <textarea style="color:#fff;background:#222;width:50%;height:50px" id="opt" readonly></textarea>
 <hr>
 <!-- TextRepeater -->
 <p><b>Text Repeater</b></p>
-<textarea class="txt" placeholder="Text" id="t1"></textarea><br>
-<input style="height:20px;" class="txt" placeholder="Number" type="number" id="t2"><br>
+<textarea class="txt" placeholder="Text" id="tx1"></textarea><br>
+<input style="height:20px;" class="txt" placeholder="Number" type="number" id="tx2"><br>
 <p style="margin:5px">Select a mode</p>
 <select id="sel" style="color:#fff;background:#333;height:30px; width:60%;margin-bottom:5px">
 <option value="sp">Space after each item</option>
 <option value="nl">Newline after each item</option>
 <option value="nnl">Numbered newlines after each item</option>
+<option value="dnl">Dotted newlines after each item</option>
 </select><br>
 <button class="btn" onclick="fun()">Repeat</button><br>
-<textarea style="color:#fff;background:#222;width:50%;height:50px" readonly id="t3"></textarea>
+<textarea style="color:#fff;background:#222;width:50%;height:50px" readonly id="txop"></textarea>
 <script>
 //get length
 var result =""
@@ -120,29 +121,30 @@ document.getElementById("leng").innerHTML = "Length: " + result}
 
 //replacer
 	function repl() {
-var replTxt = document.getElementById("t1").value
-var repl1 = document.getElementById("t2").value
-var repl2 = document.getElementById("t3").value
+var replTxt = document.getElementById("te1").value
+var repl1 = document.getElementById("te2").value
+var repl2 = document.getElementById("te3").value
 var result = replTxt.replaceAll(repl1, repl2) 
 document.getElementById("opt").innerHTML = result}
 
 //TextRepeater
 function fun() {
-var userText = document.getElementById("t1").value
-var userNum = document.getElementById("t2").value
+var userText = document.getElementById("tx1").value
+var userNum = document.getElementById("tx2").value
 var mode = document.getElementById("sel").value
 var output = ""
 for (i=0;i < userNum; i++) {
 var nu = i +1
-console.log(nu)
 if(mode=="sp"){
 output += userText + " "}
 if(mode=="nl"){
 output += userText + "\n"}
 if(mode=="nnl") {
 output += nu + " " + userText + "\n"}
+if(mode=="dnl") {
+output += "&#8226;" + userText + "\n"} 
 }
-document.getElementById("t3").innerHTML = output}
+document.getElementById("txop").innerHTML = output}
 </script>
 </body>
 </html>
