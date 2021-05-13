@@ -3,8 +3,8 @@
 <head>
 <title>Tools</title>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<meta name="description" content="Some basic tools">
-<meta name="author" content="bestGaming132">
+<meta name="description" content="Some basic tools">
+<meta name="author" content="bestGaming132">
 <meta name="keywords" content="tool, tools"/>
 </head>
 <body align="center">
@@ -42,9 +42,10 @@ border: none;
 height: 1px;
 }
 </style>
-<h2>Tools</h2>
+<h2 style="margin-bottom:1px">Tools</h2>
+<p id="clock" style="margin:1px">&nbsp;</p>
 <!-- Get Length -->
-<p><b>Length Calculator</b></p>
+<p style="margin-top:2px"><b>Length Calculator</b></p>
 <textarea class="txt" oninput="getL()" id="txt" ></textarea>
 <p style="margin:3px" id="leng">Length: 0</p>
 <hr>
@@ -74,6 +75,7 @@ height: 1px;
 <p style="margin:5px">Select a mode</p>
 <select id="sel" style="color:#fff;background:#333;height:30px; width:60%;margin-bottom:5px">
 <option value="sp">Space after each item</option>
+<option value="n">Nothing between each item</option>
 <option value="nl">Newline after each item</option>
 <option value="nnl">Numbered newlines after each item</option>
 <option value="dnl">Dotted newlines after each item</option>
@@ -81,6 +83,13 @@ height: 1px;
 <button class="btn" onclick="fun()">Repeat</button><br>
 <textarea style="color:#fff;background:#222;width:50%;height:50px" readonly id="txop"></textarea>
 <script>
+//clock
+var cl = setInterval(clo, 1000);
+function clo() {
+ var d = new Date();
+ var t = d.toLocaleTimeString('en-GB');
+ document.getElementById("clock").innerHTML = "<b>" +t+"</b>";}
+
 //get length
 var result =""
 function getL() {
@@ -142,7 +151,9 @@ output += userText + "\n"}
 if(mode=="nnl") {
 output += nu + " " + userText + "\n"}
 if(mode=="dnl") {
-output += "&#8226;" + userText + "\n"} 
+output += "&#8226;" + userText + "\n"}
+if(mode=="n") {
+output += userText}
 }
 document.getElementById("txop").innerHTML = output}
 </script>
