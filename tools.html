@@ -52,10 +52,9 @@ height: 1px;
 <!-- Random Selector -->
 <p><b>Random Selector</b></p>
 <input style="border:1px solid #ccc; height:20px;" class="txt" type="text" id="txtt"><br>
-<button class="btn" onClick="addItem()">Add Item</button>
-<br>
-<button class="btn" onClick="rando()">Pick Random</button>
-<br>
+<button class="btn" onClick="addItem()">Add Item</button><br>
+<button class="btn" onClick="rando(1)">Pick Random</button><br>
+<button class="btn" onClick="rando(5)">Pick 5 Random</button><br>
 <button class="btn" onClick="resetL()">Remove all items</button>
 <p style="margin:4px">Current Items:</p>
 <textarea style="color:#fff; background:#222; width:50%; height:50px; text-align:center" readonly id="txt2">None</textarea>
@@ -110,15 +109,17 @@ document.getElementById("leng").innerHTML = "Length: " + result}
    console.log("Input is empty")} 
   }
  
-  function rando() {
+function rando(num) {
   if (!items.length == 0) {
-    var rnd = Math.floor(Math.random() * items.length);
-    var output = items[rnd];
-    alert(output)
-    console.log(rnd + " " + output)
+       let output = "";
+       for (ii=0;ii<num;ii++) {
+       let rnd = Math.floor(Math.random() * items.length);
+       output += items[rnd] +"\n";}
+alert(output)
    } else {
- console.log("Items is empty")} 
-  }
+ console.log("Items is empty")}
+ }
+  
   function resetL() {
   	var conf = confirm("Are you sure you want to remove all items?")
   	if (conf == true) {
