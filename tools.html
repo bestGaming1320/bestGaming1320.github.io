@@ -85,8 +85,15 @@ height: 1px;
 <hr>
 <!-- RandomTxtGen -->
 <p><b>Random Text Generator</b></p>
-<input style="height:20px;" class="txt" placeholder="Number" type="number" id="txtN"><br>
+<input style="height:20px;" class="txt" placeholder="Characters (number)" type="number" id="txtN"><br>
 <button class="btn" onclick="rTxt()">Generate</button><br>
+<p style="margin:5px">Select a mode</p>
+<select id="sel2" style="color:#fff;background:#333;height:30px; width:60%;margin-bottom:5px">
+<option value="l">Only Letters</option>
+<option value="ln">Letters and Numbers</option>
+<option value="lns">Letters, Numbers and Special Characters</option>
+<!--<option value="cus">Custom Characters</option>-->
+</select>
 <textarea style="color:#fff;background:#222;width:50%;height:50px" readonly id="rTxtOp"></textarea>
 <script>
 //clock
@@ -170,13 +177,22 @@ document.getElementById("txop").innerHTML = output}
 
 //TextGenerator
 function rTxt() {
+mode2 = document.getElementById("sel2").value;
 let num = document.getElementById("txtN").value;
 document.getElementById("rTxtOp").innerHTML= rndT(num);}
+
 function rndT(length) { 
 var result = []; 
-var characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+var characters;
+//var cusCharacters
+if(mode2=="l") {
+characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz ";} else if(mode2=="ln") {
+characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz 0123456789";} else if(mode2=="lns") {
+characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz;!\"#$%&\'()*+,-.\/:;<=>?@[\\]^_`{|}~"} /*else if(mode2=="cus") {
+cusCharacters = prompt("Enter every character you want to use", cusCharacters);}  */
+var cLength = characters.length
 for ( var i = 0; i < length; i++ ) { 
-result.push(characters.charAt(Math.floor(Math.random() * 52))); } 
+result.push(characters.charAt(Math.floor(Math.random() * cLength))); } 
 return result.join(""); }
 </script>
 </body>
