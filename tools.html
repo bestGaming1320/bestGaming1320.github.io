@@ -14,7 +14,7 @@ color: #fff;
 background: #000;
 font-size:18px;
 margin:5px;
-min-height:1200px;}
+min-height:1500px;}
 
 .txt {
 color: #fff;
@@ -48,6 +48,7 @@ height: 1px;
 <p style="margin-top:2px"><b>Length Calculator</b></p>
 <textarea class="txt" oninput="getL()" id="txt" ></textarea>
 <p style="margin:3px" id="leng">Length: 0</p>
+<p style="margin:3px" id="wordL">Words: 0</p>
 <hr>
 <!-- Random Selector -->
 <p><b>Random Selector</b></p>
@@ -81,6 +82,12 @@ height: 1px;
 </select><br>
 <button class="btn" onclick="fun()">Repeat</button><br>
 <textarea style="color:#fff;background:#222;width:50%;height:50px" readonly id="txop"></textarea>
+<hr>
+<!-- RandomTxtGen -->
+<p><b>Random Text Generator</b></p>
+<input style="height:20px;" class="txt" placeholder="Number" type="number" id="txtN"><br>
+<button class="btn" onclick="rTxt()">Generate</button><br>
+<textarea style="color:#fff;background:#222;width:50%;height:50px" readonly id="rTxtOp"></textarea>
 <script>
 //clock
 var cl = setInterval(clo, 1000);
@@ -92,8 +99,11 @@ function clo() {
 //get length
 var result =""
 function getL() {
-result = document.getElementById("txt").value.length
-document.getElementById("leng").innerHTML = "Length: " + result} 
+resultL = document.getElementById("txt").value.length;
+document.getElementById("leng").innerHTML = "Length: " + resultL;
+var resultW = document.getElementById("txt").value.match(/\S+/g).length;
+document.getElementById("wordL").innerHTML = "Words: " + resultW;
+} 
 
 //random selector
   var items = [];
@@ -157,6 +167,17 @@ if(mode=="n") {
 output += userText}
 }
 document.getElementById("txop").innerHTML = output}
+
+//TextGenerator
+function rTxt() {
+let num = document.getElementById("txtN").value;
+document.getElementById("rTxtOp").innerHTML= rndT(num);}
+function rndT(length) { 
+var result = []; 
+var characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+for ( var i = 0; i < length; i++ ) { 
+result.push(characters.charAt(Math.floor(Math.random() * 52))); } 
+return result.join(""); }
 </script>
 </body>
 </html>
