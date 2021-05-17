@@ -212,6 +212,8 @@ var findResult = findTxt.replaceAll(findWord, "<span style=\"color:" + color +"\
 document.getElementById("findOp").innerHTML = findResult}
 function cCol() {
 color = prompt("Choose a color in HEX format", color)
+if (color==null||!/^#[0-9A-F]{6}$/i.test(color)) {
+color = "#ff3e3e"}
 document.getElementById("cC").innerHTML="Click here to change <span style='color:"+color+"'>highlight color</span>"} 
 </script>
 </body>
