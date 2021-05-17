@@ -14,7 +14,7 @@ color: #fff;
 background: #000;
 font-size:18px;
 margin:5px;
-min-height:1500px;}
+min-height:1800px;}
 
 .txt {
 color: #fff;
@@ -95,6 +95,13 @@ height: 1px;
 <!--<option value="cus">Custom Characters</option>-->
 </select>
 <textarea style="color:#fff;background:#222;width:50%;height:50px" readonly id="rTxtOp"></textarea>
+<hr>
+<!-- Finder -->
+<p><b>Finder</b></p>
+<input style="height:20px;" class="txt" placeholder="Word to find" id="fW" oninput="find()"><br>
+<textarea style="color:#fff;background:#555;width:50%;height:50px;margin:5px" id="fT" oninput="find()"></textarea><br>
+<p style="align:center;margin:auto;color:#fff;background:#222;width:51%;height:60px;overflow-y:scroll;word-wrap: break-word;outline:1px solid #9e9e9e" id="findOp"></p>
+
 <script>
 //clock
 var cl = setInterval(clo, 1000);
@@ -147,7 +154,7 @@ alert(output)
 	 console.log("Canceled")}} 
 
 //replacer
-	function repl() {
+function repl() {
 var replTxt = document.getElementById("te1").value
 var repl1 = document.getElementById("te2").value
 var repl2 = document.getElementById("te3").value
@@ -194,6 +201,13 @@ var cLength = characters.length
 for ( var i = 0; i < length; i++ ) { 
 result.push(characters.charAt(Math.floor(Math.random() * cLength))); } 
 return result.join(""); }
+
+//finder
+function find() {
+var findTxt = document.getElementById("fT").value
+var findWord = document.getElementById("fW").value
+var findResult = findTxt.replaceAll(findWord, "<span style=\"color:#0f0\">" + findWord + "</span>") 
+document.getElementById("findOp").innerHTML = findResult}
 </script>
 </body>
 </html>
