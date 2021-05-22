@@ -14,7 +14,7 @@ color: #fff;
 background: #000;
 font-size:18px;
 margin:5px;
-min-height:1800px;}
+min-height:2000px;}
 
 .txt {
 color: #fff;
@@ -102,6 +102,12 @@ height: 1px;
 <input style="height:20px;" class="txt" placeholder="Word to find" id="fW" oninput="find()"><br>
 <textarea style="color:#fff;background:#555;width:50%;height:50px;margin:5px" id="fT" oninput="find()"></textarea><br>
 <p style="align:center;margin:auto;color:#fff;background:#222;width:51%;height:60px;overflow-y:scroll;word-wrap: break-word;outline:1px solid #9e9e9e" id="findOp"></p>
+<hr>
+<!-- Base64 -->
+<p style="margin-bottom:3px"><b>Base 64</b></p>
+<textarea class="txt" id="b64ip" placeholder="Text"></textarea><br>
+<button class="btn" style="margin:2px;width:22%" onclick="b64('ec')">Encode</button> <button class="btn" style="margin:2px;width:22%" onclick="b64('dc')">Decode</button> <br>
+<textarea style="color:#fff;background:#222;width:50%;height:50px" readonly id="b64op"></textarea>
 
 <script>
 //clock
@@ -110,6 +116,7 @@ function clo() {
  var d = new Date();
  var t = d.toLocaleTimeString('en-GB');
  document.getElementById("clock").innerHTML = "<b>" +t+"</b>";}
+
 
 //get length
 var result =""
@@ -212,9 +219,20 @@ var findResult = findTxt.replaceAll(findWord, "<span style=\"color:" + color +"\
 document.getElementById("findOp").innerHTML = findResult}
 function cCol() {
 color = prompt("Choose a color in HEX format", color)
-if (color==null||!/^#[0-9A-F]{6}$/i.test(color)) {
+if (color==null||!/^#([0-9A-F]{3}){1,2}$/i.test(color)) {
 color = "#ff3e3e"}
 document.getElementById("cC").innerHTML="Click here to change <span style='color:"+color+"'>highlight color</span>"} 
+
+//Base64
+function b64(v) {
+var result64;
+let input = document.getElementById("b64ip").value;
+if (v=='ec') {
+result64 = btoa(input);} else {
+result64 = atob(input);}
+document.getElementById("b64op").innerHTML = result64;
+}
+
 </script>
 </body>
 </html>
