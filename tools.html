@@ -41,6 +41,11 @@ background:#999;
 border: none;
 height: 1px;
 }
+
+select { 
+text-align-last:center; 
+padding-right: 29px; 
+}
 </style>
 <h2 style="margin-bottom:1px">Tools</h2>
 <p id="clock" style="margin:1px">&nbsp;</p>
@@ -215,7 +220,7 @@ var color = "#ff3e3e"
 function find() {
 var findTxt = document.getElementById("fT").value
 var findWord = document.getElementById("fW").value
-var findResult = findTxt.replaceAll(findWord, "<span style=\"color:" + color +"\">" + findWord + "</span>") 
+var findResult = findTxt.replaceAll(findWord, "<span style=\"color:" + color +"\"><b>" + findWord + "</b></span>") 
 document.getElementById("findOp").innerHTML = findResult}
 function cCol() {
 color = prompt("Choose a color in HEX format", color)
