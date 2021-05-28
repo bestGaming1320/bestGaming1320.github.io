@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Color Example</title>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<meta name="description" content="Example for rainbow text in html">
+<meta name="author" content="bestGaming132">
+<meta name="keywords" content="example, color, rainbow"/>
+</head>
+<style>
+body {
+background: #000;
+color: #f00;
+text-align: center;
+align: center;
+margin-bottom : 8px;
+min-height:1500px;
+}
+button {width: 150px;
+height: 30px;
+color: white;
+background: #333;
+border-radius: 10px;
+font-size: 18px;
+margin: 5px}
+</style>
+<body align="cente">
+<div id="a" style="width:100%;height:400px;background:#f00;margin:0px"></div>
+<p id="tx" style="font-size:25px;"><b>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Pretium nibh ipsum consequat nisl vel pretium. Ultrices vitae auctor eu augue ut. Convallis aenean et tortor at. Magna sit amet purus gravida quis. Nullam non nisi est sit amet facilisis. Vulputate sapien nec sagittis aliquam malesuada bibendum arcu. Dolor purus non enim praesent elementum facilisis. Cras sed felis eget velit aliquet sagittis. Urna et pharetra pharetra massa massa ultricies mi. Urna molestie at elementum eu facilisis sed. Sed vulputate odio ut enim blandit volutpat maecenas volutpat.</b></p><br>
+<button id="bu">Button</button><br>
+<button id="bu2">Button</button><br>
+<textarea id="tx1"  style="background:#333;color:#fff;margin:5px" >Text</textarea><br>
+<textarea id="tx2"  style="background:#333;color:#fff" >Text</textarea><br><br>
+<b><ul id="lis" style="text-align:left;font-size:18px" ><li>Unordered</li><li>List</li></ul></b>
+<select id="se" onchange="changeC()" style="background:#333;color:#fff;width:150px;height:30px;text-align-last:center;font-weight:bold">
+	<option value="rb">Rainbow</option>
+	<option value="red">Red</option>
+	<option value="bl">Blue</option>
+	<option value="gr">Green</option>
+	<option value="mg">Magenta</option>
+</select>
+</body>
+<script>
+	
+var col;
+var colors = []
+//http request to get the colors
+function httpReq() {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+    	col = JSON.parse(this.responseText)
+changeC() 
+    }
+  };
+  xhttp.open("GET", "https://raw.githubusercontent.com/bestGaming1320/bestGaming1320.github.io/main/colors.json", true);
+  xhttp.send();}
+httpReq() 
+
+function changeC() {
+var op = document.getElementById("se").value
+if(op=="red") {colors=col.red}
+else if(op=="mg") {colors=col.magenta}
+else if(op=="rb") {colors=col.rainbow}
+else if(op=="bl") {colors=col.blue} 
+else if(op=="gr") {colors=col.green}
+} 
+
+//variables 
+var di = document.getElementById("a")
+var p = document.getElementById("tx")
+var btn = document.getElementById("bu")
+var btn2 = document.getElementById("bu2")
+var slc = document.getElementById("se")
+var txt1 = document.getElementById("tx1")
+var txt2 = document.getElementById("tx2")
+var list = document.getElementById("lis")
+var i = 0
+
+setInterval(ab,75)
+
+//function to change the color
+
+function ab() {
+di.style.background = colors[i]
+p.style.color = colors[i]
+btn.style.border = "3px solid" + colors[i]
+btn2.style.border = "3px solid" + colors[i]
+btn.style.color = colors[i]
+slc.style.border = "3px solid" + colors[i] 
+txt1.style.border = "3px solid" + colors[i]
+txt1.style.color = colors[i]
+txt2.style.border = "3px solid" + colors[i] 
+list.style.color = colors[i] 
+if(i>colors.length-1){i=-1;console.log("cycle ended")}
+i++}
+</script>
+</html>
