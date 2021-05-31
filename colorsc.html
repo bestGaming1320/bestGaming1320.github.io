@@ -1,0 +1,17 @@
+<html>
+<head>
+<title>Color Screen</title>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<meta name="description" content="Change the hex code in the url to change the color">
+<meta name="author" content="bestGaming132">
+<meta name="keywords" content="color"/>
+</head>
+<body style="background:#000"onhashchange="cbg()">
+</body>
+<script>
+	var fs;
+	function cbg() {
+		document.body.style.background=location.hash;}
+	cbg();
+</script>
+</html>
