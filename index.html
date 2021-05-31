@@ -3,6 +3,7 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>Index</title>
+</head>
 <style>
 body {
 background: black;
@@ -20,11 +21,17 @@ margin-bottom: 5px
 background:#666
 }
 </style>
-</head>
 <body align="center">
 <p style="font-size:25px">Select Something</p>
 <input type="button" class="btn" style="border: 2px solid #0f0;" onclick="location.href='https://bestGaming1320.github.io/tools'" value="Tools"/><br>
 <input type="button" class="btn" style="border: 2px solid #f00;" onclick="location.href='https://bestGaming1320.github.io/clicker'" value="Clicker Game"/><br>
-<input type="button" class="btn" style="border: 2px solid #0af;" value="Comming Soon"/>
+<input type="button" onclick="cs()"class="btn" style="border: 2px solid #0af;" value="Color Screen"/><br>
+<input type="button" onclick="location.href='https://bestGaming1320.github.io/colorex';" class="btn" style="border: 2px solid #ff0;" value="Color Example" />
 </body>
+<script>
+function cs() {
+var hex = prompt("Put in a color in hex format. Dont forget the #", "#000000");
+location.href = "https://bestGaming1320.github.io/colorsc" + hex;
+}
+</script>
 </html>
