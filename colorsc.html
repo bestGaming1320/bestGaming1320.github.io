@@ -6,12 +6,18 @@
 <meta name="author" content="bestGaming132">
 <meta name="keywords" content="color"/>
 </head>
-<body style="background:#000"onhashchange="cbg()">
+<body onhashchange="cbg()">
 </body>
 <script>
-	var fs;
+	alert("To change the color just change the hex code in the url");
 	function cbg() {
-		document.body.style.background=location.hash;}
+	if(location.hash==""){
+	var hex = prompt("Put in a color in hex format. Dont forget the #", "#000000");
+	document.body.style.background=hex;
+	location.hash = hex;
+} else{
+	document.body.style.background=location.hash;}}
+	
 	cbg();
 </script>
 </html>
