@@ -8,7 +8,7 @@
 </head>
 <script src="animcol.js"></script>
 <body style="background:#000;color:#fff;font-size:35px;" align="center">
-<p id="clock"></p>
+<p id="clock" onclick="document.location.reload();"></p>
 </body>
 <script>
 var cl = setInterval(clo, 100);
@@ -21,10 +21,10 @@ ms=ms+"0"
  t = d.toLocaleTimeString('en-GB') +":"+ms;
  document.getElementById("clock").innerHTML = "<b>" +t+"</b>";}
  
-var colo = prompt("What color do you want? Following colors are available: red, green, blue, magenta and rainbow.", "rainbow")
+var colo = prompt("What color do you want? Following colors are available: red, green, blue, magenta and rainbow. Click on the clock to change your choice.", "rainbow")
 if(!colo||colo=="rainbow") {colo="rb"} 
 else if(colo=="magenta") {colo="mag"}
-textc(document.getElementById("clock"), 75, colo)
+textc(document.getElementById("clock"), 250, colo)
 
 function addZero(x,n) {
 while (x.toString().length < n) {
