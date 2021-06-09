@@ -22,12 +22,12 @@ height: 30px;
 color: white;
 background: #333;
 border-radius: 10px;
-font-size: 18px;
+font-size: 19px;
 margin: 5px}
 </style>
 <body align="center">
 <div id="a" style="width:100%;height:400px;background:#f00;margin:0px"></div>
-<p id="tx" style="font-size:25px;"><b><u>The javascript of this page was updated to make it more usable. Do not use this code anymore</u> <br><br>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Pretium nibh ipsum consequat nisl vel pretium. Ultrices vitae auctor eu augue ut. Convallis aenean et tortor at. Magna sit amet purus gravida quis. Nullam non nisi est sit amet facilisis. Vulputate sapien nec sagittis aliquam malesuada bibendum arcu. Dolor purus non enim praesent elementum facilisis. Cras sed felis eget velit aliquet sagittis. Urna et pharetra pharetra massa massa ultricies mi. Urna molestie at elementum eu facilisis sed. Sed vulputate odio ut enim blandit volutpat maecenas volutpat.</b></p><br>
+<p id="tx" style="font-size:22px;"><b>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Pretium nibh ipsum consequat nisl vel pretium. Ultrices vitae auctor eu augue ut. Convallis aenean et tortor at. Magna sit amet purus gravida quis. Nullam non nisi est sit amet facilisis. Vulputate sapien nec sagittis aliquam malesuada bibendum arcu. Dolor purus non enim praesent elementum facilisis. Cras sed felis eget velit aliquet sagittis. Urna et pharetra pharetra massa massa ultricies mi. Urna molestie at elementum eu facilisis sed. Sed vulputate odio ut enim blandit volutpat maecenas volutpat.</b></p><br>
 <button id="bu">Button</button><br>
 <button id="bu2">Button</button><br>
 <textarea id="tx1"  style="background:#333;color:#fff;margin:5px" >Textarea</textarea><br>
@@ -43,28 +43,28 @@ margin: 5px}
 </body>
 <script>
 	
-var col;
+var cols;
 var colors = []
 //http request to get the colors
 function httpReq() {
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
-    	col = JSON.parse(this.responseText)
+    	cols = JSON.parse(this.responseText)
 changeC() 
     }
   };
-  xhttp.open("GET", "https://raw.githubusercontent.com/bestGaming1320/bestGaming1320.github.io/main/colors.json", true);
+  xhttp.open("GET", "https://raw.githubusercontent.com/bestGaming1320/bestGaming1320.github.io/main/old/colors.json", true);
   xhttp.send();}
 httpReq() 
 
 function changeC() {
 var op = document.getElementById("se").value
-if(op=="red") {colors=col.red}
-else if(op=="mg") {colors=col.magenta}
-else if(op=="rb") {colors=col.rainbow}
-else if(op=="bl") {colors=col.blue} 
-else if(op=="gr") {colors=col.green}
+if(op=="red") {colors=cols.red}
+else if(op=="mg") {colors=cols.magenta}
+else if(op=="rb") {colors=cols.rainbow}
+else if(op=="bl") {colors=cols.blue} 
+else if(op=="gr") {colors=cols.green}
 } 
 
 //variables 
@@ -81,7 +81,6 @@ var i = 0
 setInterval(ab,75)
 
 //function to change the color
-
 function ab() {
 di.style.background = colors[i]
 p.style.color = colors[i]
@@ -97,6 +96,3 @@ if(i>colors.length-1){i=-1;console.log("cycle ended")}
 i++}
 </script>
 </html>
-
-
-
