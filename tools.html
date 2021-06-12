@@ -14,7 +14,8 @@ color: #fff;
 background: #000;
 font-size:18px;
 margin:5px;
-min-height:2000px;}
+min-height:2400px;
+font-family:Arial;}
 
 .txt {
 color: #fff;
@@ -35,7 +36,7 @@ border:1px solid #aaa;
 margin: 3px;
 }
 
-.btn {
+button {
 color:#fff;
 background: #333;
 width: 35%;
@@ -52,6 +53,11 @@ height: 1px;
 
 select { 
 text-align-last:center;
+color:#fff;
+background:#333;
+height:30px;
+width:60%;
+margin-bottom:5px;
 }
 </style>
 <h2 style="margin-bottom:1px">Tools</h2>
@@ -90,8 +96,8 @@ text-align-last:center;
 <option value="sp">Space after each item</option>
 <option value="n">Nothing between each item</option>
 <option value="nl">Newline after each item</option>
-<option value="nnl">Numbered newlines after each item</option>
-<option value="dnl">Dotted newlines after each item</option>
+<!--<option value="nnl">Numbered newlines after each item</option>
+<option value="dnl">Dotted newlines after each item</option>-->
 </select><br>
 <button class="btn" onclick="fun()">Repeat</button><br>
 <textarea class="txt2" readonly id="txop"></textarea>
@@ -121,7 +127,19 @@ text-align-last:center;
 <textarea style="height:40px" class="txt" id="b64ip" placeholder="Text"></textarea><br>
 <button class="btn" style="margin:2px;width:22%" onclick="b64('ec')">Encode</button> <button class="btn" style="margin:2px;width:22%" onclick="b64('dc')">Decode</button> <br>
 <textarea class="txt2" readonly id="b64op"></textarea>
-
+<hr>
+<!-- Line Number -->
+<p style="margin-bottom:3px"><b>Line Number Adder</b></p>
+<textarea style="height:40px" class="txt" placeholder="Text" id="lnip"></textarea><br>
+<button onclick="addn()">Add Numbers</button><br>
+<select id="lnum"><br>
+<option value="num">Numbers only</option>
+<option value="nwd">Numbers with dots</option>
+<option value="pnu">Numbers with parenthesis</option>
+<option value="dot">Dots / Bullets</option>
+<option value="cus">Custom character</option>
+</select>
+<textarea readonly class="txt2" id="lnop"></textarea>
 <script>
 //clock
 var cl = setInterval(clo, 1000);
@@ -256,6 +274,18 @@ result64 = atob(input);}
 document.getElementById("b64op").innerHTML = result64;
 }
 
+//Line Number
+function addn() {
+let mode = document.getElementById("lnum").value
+let input = document.getElementById("lnip").value.split("\n")
+let output ="" 
+if(mode=="num") {for(n=0;n<input.length;n++){output+=(n+1)+" "+input[n]+"\n"}}
+else if(mode=="nwd") {for(n=0;n<input.length;n++){output+=(n+1)+". "+input[n]+"\n"}}
+else if(mode=="pnu") {for(n=0;n<input.length;n++){output+=(n+1)+") "+input[n]+"\n"}} 
+else if(mode=="dot") {for(n=0;n<input.length;n++){output+="\u2022 "+input[n]+"\n"}} 
+else if(mode=="cus") {var cus=prompt("Type one or more characters"); for(n=0;n<input.length;n++){output+=cus+input[n]+"\n"}}
+document.getElementById("lnop").innerHTML= output
+} 
 </script>
 </body>
 </html>
