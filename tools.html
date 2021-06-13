@@ -140,6 +140,13 @@ margin-bottom:5px;
 <option value="cus">Custom character</option>
 </select>
 <textarea readonly class="txt2" id="lnop"></textarea>
+<hr>
+<!-- Sorter -->
+<p style="margin-bottom:3px"><b>Sorter</b></p>
+<p style="margin:0px">Items are seperated with newlines</p>
+<textarea class="txt" type="text" id="sip" placeholder="Input" style="height:40px"></textarea><br>
+<button class="btn" onClick="sortf()">Sort</button><br>
+<textarea class="txt2" readonly id="sop"></textarea>
 <script>
 //clock
 var cl = setInterval(clo, 1000);
@@ -286,6 +293,16 @@ else if(mode=="dot") {for(n=0;n<input.length;n++){output+="\u2022 "+input[n]+"\n
 else if(mode=="cus") {var cus=prompt("Type one or more characters"); for(n=0;n<input.length;n++){output+=cus+input[n]+"\n"}}
 document.getElementById("lnop").innerHTML= output
 } 
+
+//Sorter
+function sortf() {
+var input = document.getElementById("sip").value.split("\n")
+var sorted = input.sort()
+var output = ""
+for(i=0;i<input.length;i++) {
+output += sorted[i]+"\n"}
+document.getElementById("sop").innerHTML = output
+}
 </script>
 </body>
 </html>
