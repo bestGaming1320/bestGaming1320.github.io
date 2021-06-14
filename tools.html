@@ -14,7 +14,7 @@ color: #fff;
 background: #000;
 font-size:18px;
 margin:5px;
-min-height:2400px;
+min-height:2600px;
 font-family:Arial;}
 
 .txt {
@@ -147,13 +147,19 @@ margin-bottom:5px;
 <textarea class="txt" type="text" id="sip" placeholder="Input" style="height:40px"></textarea><br>
 <button class="btn" onClick="sortf()">Sort</button><br>
 <textarea class="txt2" readonly id="sop"></textarea>
+<hr>
+<!-- Random Hex Generator -->
+<p style="margin-bottom:3px"><b>Random Hex Generator</b></p>
+<button onclick="genHex(1)">Generate 1 Hex Code</button><br>
+<button onclick="genHex(5)">Generate 5 Hex Codes</button><br>
+<textarea class="txt2" id="hop" style="height:70px"></textarea>
 <script>
 //clock
 var cl = setInterval(clo, 1000);
 function clo() {
  var d = new Date();
  var t = d.toLocaleTimeString('en-GB');
- document.getElementById("clock").innerHTML = "<b>" +t+"</b>";}
+ document.getElementById("clock").innerHTML = t.bold();}
 
 
 //get length
@@ -275,11 +281,14 @@ document.getElementById("cC").innerHTML="Click here to change <span style='color
 function b64(v) {
 var result64;
 let input = document.getElementById("b64ip").value;
+try{
 if (v=='ec') {
 result64 = btoa(input);} else {
 result64 = atob(input);}
+} catch(e) {
+result64 = "Cannot decode input"}
 document.getElementById("b64op").innerHTML = result64;
-}
+} 
 
 //Line Number
 function addn() {
@@ -302,6 +311,17 @@ var output = ""
 for(i=0;i<input.length;i++) {
 output += sorted[i]+"\n"}
 document.getElementById("sop").innerHTML = output
+}
+
+//random hex
+function gen() {
+var rndCol = '#'+(Math.random() * 0xFFFFFF << 0).toString(16).padStart(6, '0');
+return rndCol;}
+function genHex(x) {
+let output = ""
+for(i=0;i<x;i++){
+output += gen() + "\n"}
+document.getElementById("hop").innerHTML = output
 }
 </script>
 </body>
