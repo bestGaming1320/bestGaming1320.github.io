@@ -1,26 +1,37 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <title>Color Screen</title>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <meta name="description" content="Change the hex code in the url to change the color">
 <meta name="author" content="bestGaming132">
 <meta name="keywords" content="color"/>
+<script src="animcol.js"></script>
 </head>
 <body onhashchange="cbg()">
-<video style="visibility:hidden" autoplay muted loop><source src="b.mp4" type="video/mp4"></video>
+<video style="visibility:hidden;width:20px" autoplay muted loop><source src="b.mp4" type="video/mp4"></video>
 </body>
 <script>
 	alert("To change the color just change the hex code in the url");
 	function cbg() {
 	if(location.hash==""){
-	var hex = prompt("Put in a color in hex format. Dont forget the #", "#000000");
-	document.body.style.background=hex;
-	location.hash = hex;
-} else{
+	var hex = prompt("Put in a color in hex format. Don't forget the # with hex codes. Other allowed colors are: red, green, blue, magenta, rainbow. Do not include a # with those" , "#000000");
+	if(spcol(hex)) {
+				backc(document.body, 65, hex)
+				location.hash = ""
+  	} 
+	else {
+  	 document.body.style.background=hex;
+   	location.hash = hex;
+ } 
+} else {
 	document.body.style.background=location.hash;}}
-	
+
+//special color
+	function spcol(x) {
+	var tst = 0
+if(["red", "green", "blue", "magenta", "rainbow", "gray"].indexOf(x)>-1) {return true} else{return false}
+} 
 	cbg();
 </script>
 </html>
- 
