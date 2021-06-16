@@ -8,8 +8,8 @@
 </head>
 <script src="animcol.js"></script>
 <body style="background:#000;color:#fff;font-size:35px;" align="center">
-<p id="clock" onclick="document.location.reload();"></p>
-<video style="visibility:hidden" autoplay muted loop><source src="b.mp4" type="video/mp4"></video>
+<p id="clock" onclick="start()//document.location.reload();"></p>
+<video style="visibility:hidden;width:20px" autoplay muted loop><source src="b.mp4" type="video/mp4"></video>
 </body>
 <script>
 var cl = setInterval(clo, 100);
@@ -18,17 +18,20 @@ function clo() {
  var t;
  var ms = d.getMilliseconds()
  ms = addZero(ms.toString().slice(0, -2), 1)
-ms=ms+"0"
+ms=ms
  t = d.toLocaleTimeString('en-GB') +":"+ms;
  document.getElementById("clock").innerHTML = "<b>" +t+"</b>";}
 
 var colo;
+var anim = true;
 function start() {
-colo = prompt("What color do you want? Following colors are available: red, green, blue, magenta and rainbow. Click on the clock to change your choice.", "rainbow")
+colo = prompt("What color do you want? Following animated colors are available: red, green, blue, magenta and rainbow. You can also enter a hex code to select a color. Click on the clock to change your choice.", "rainbow")
 if(!colo||colo=="rainbow") {colo="rb"} 
 else if(colo=="magenta") {colo="mag"}
+else if(colo.includes("#")) {document.getElementById("clock").style.color=colo; anim=false}
+if(anim) {
 textc(document.getElementById("clock"), 250, colo)
-} 
+}}
 start();
 function addZero(x,n) {
 while (x.toString().length < n) {
