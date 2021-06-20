@@ -14,7 +14,7 @@ color: #fff;
 background: #000;
 font-size:18px;
 margin:5px;
-min-height:2600px;
+min-height:2900px;
 font-family:Arial;}
 
 .txt {
@@ -23,7 +23,7 @@ background: #555;
 width:50%;
 height:20px;
 text-align: center;
-border:1px solid #aaa;
+border:1px solid #888;
 } 
 
 .txt2 {
@@ -46,9 +46,9 @@ font-size: 15px;
 }
 
 hr {
-background:#999;
+background:#333;
 border: none;
-height: 1px;
+height: 0.5px;
 }
 
 select { 
@@ -71,11 +71,11 @@ margin-bottom:5px;
 <!-- Random Selector -->
 <p><b>Random Selector</b></p>
 <input class="txt" type="text" id="txtt"><br>
-<button class="btn" onClick="addItem()">Add Item</button><br>
-<button class="btn" onClick="rando(1)">Pick Random</button>
-<button class="btn" onClick="rando(5)">Pick 5 Random</button><br>
-<button class="btn" onClick="removeLast()">Remove last item</button>
-<button class="btn" onClick="resetL()">Remove all items</button>
+<button onClick="addItem()" style="width:70%">Add Item</button><br>
+<button onClick="rando(1)">Pick Random</button>
+<button onClick="rando(5)">Pick 5 Random</button><br>
+<button onClick="removeLast()">Remove last item</button>
+<button onClick="resetL()">Remove all items</button>
 <p style="margin:4px">Current Items:</p>
 <textarea class="txt2" readonly id="txt2">None</textarea>
 <hr>
@@ -99,13 +99,13 @@ margin-bottom:5px;
 <!--<option value="nnl">Numbered newlines after each item</option>
 <option value="dnl">Dotted newlines after each item</option>-->
 </select><br>
-<button class="btn" onclick="fun()">Repeat</button><br>
+<button onclick="fun()">Repeat</button><br>
 <textarea class="txt2" readonly id="txop"></textarea>
 <hr>
 <!-- RandomTxtGen -->
 <p><b>Random Text Generator</b></p>
 <input style="height:20px;" class="txt" placeholder="Characters (number)" type="number" id="txtN"><br>
-<button class="btn" onclick="rTxt()">Generate</button><br>
+<button onclick="rTxt()">Generate</button><br>
 <p style="margin:5px">Select a mode</p>
 <select id="sel2" style="color:#fff;background:#333;height:30px; width:60%;margin-bottom:5px">
 <option value="l">Only Letters</option>
@@ -125,7 +125,8 @@ margin-bottom:5px;
 <!-- Base64 -->
 <p style="margin-bottom:3px"><b>Base 64</b></p>
 <textarea style="height:40px" class="txt" id="b64ip" placeholder="Text"></textarea><br>
-<button class="btn" style="margin:2px;width:22%" onclick="b64('ec')">Encode</button> <button class="btn" style="margin:2px;width:22%" onclick="b64('dc')">Decode</button> <br>
+<button style="margin:2px;width:24%" onclick="b64('ec')">Encode</button>
+<button style="margin:2px;width:24%" onclick="b64('dc')">Decode</button> <br>
 <textarea class="txt2" readonly id="b64op"></textarea>
 <hr>
 <!-- Line Number -->
@@ -145,14 +146,20 @@ margin-bottom:5px;
 <p style="margin-bottom:3px"><b>Sorter</b></p>
 <p style="margin:0px">Items are seperated with newlines</p>
 <textarea class="txt" type="text" id="sip" placeholder="Input" style="height:40px"></textarea><br>
-<button class="btn" onClick="sortf()">Sort</button><br>
+<button onClick="sortf()">Sort</button><br>
 <textarea class="txt2" readonly id="sop"></textarea>
 <hr>
 <!-- Random Hex Generator -->
 <p style="margin-bottom:3px"><b>Random Hex Generator</b></p>
-<button onclick="genHex(1)">Generate 1 Hex Code</button><br>
-<button onclick="genHex(5)">Generate 5 Hex Codes</button><br>
+<button style="width:50%" onclick="genHex(1)">Generate 1 Hex Code</button><br>
+<button style="width:50%" onclick="genHex(5)">Generate 5 Hex Codes</button><br>
 <textarea class="txt2" id="hop" style="height:70px"></textarea>
+<hr>
+<!-- Y or N -->
+<p style="margin-bottom:3px"><b>Yes or No picker</b></p>
+<button onclick="yon(1)">Pick One</button><br>
+<button onclick="yon(5)">Pick Five</button><br>
+<button onclick="yon('c')">Pick Custom</button>
 <script>
 //clock
 var cl = setInterval(clo, 1000);
@@ -322,6 +329,16 @@ let output = ""
 for(i=0;i<x;i++){
 output += gen() + "\n"}
 document.getElementById("hop").innerHTML = output
+}
+
+//Y or N
+function yon(x) {
+let yonArr = []
+if(x="c") {x=prompt("Enter a number")} 
+for(i=0;i<x;i++){
+if(parseInt(Math.round(Math.random())) == 0) {yonArr[i]="Yes\n"} else {yonArr[i] ="No\n"} 
+}
+alert(yonArr.join("")) 
 }
 </script>
 </body>
