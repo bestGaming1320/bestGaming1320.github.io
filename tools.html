@@ -153,7 +153,7 @@ margin-bottom:5px;
 <p style="margin-bottom:3px"><b>Random Hex Generator</b></p>
 <button style="width:50%" onclick="genHex(1)">Generate 1 Hex Code</button><br>
 <button style="width:50%" onclick="genHex(5)">Generate 5 Hex Codes</button><br>
-<textarea class="txt2" id="hop" style="height:70px"></textarea>
+<textarea class="txt2" id="hop" style="height:70px" readonly></textarea>
 <hr>
 <!-- Y or N -->
 <p style="margin-bottom:3px"><b>Yes or No picker</b></p>
@@ -334,7 +334,7 @@ document.getElementById("hop").innerHTML = output
 //Y or N
 function yon(x) {
 let yonArr = []
-if(x=="c") {x=prompt("Enter a number")} 
+if(x=="c") {x=prompt("Enter a number");if(x==null||x==""){x=1}}
 for(i=0;i<x;i++){
 if(parseInt(Math.round(Math.random())) == 0) {yonArr[i]="Yes\n"} else {yonArr[i] ="No\n"} 
 }
