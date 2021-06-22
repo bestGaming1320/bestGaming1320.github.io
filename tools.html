@@ -160,6 +160,13 @@ margin-bottom:5px;
 <button onclick="yon(1)">Pick One</button><br>
 <button onclick="yon(5)">Pick Five</button><br>
 <button onclick="yon('c')">Pick Custom</button>
+<hr>
+<!-- Rnd Coord Generator-->
+<p style="margin-bottom:3px"><b>Random Coordinate Generator</b></p>
+<button onclick="genCoord(1)">Generate One</button><br>
+<button onclick="genCoord(5)">Generate Five</button><br>
+<button onclick="genCoord('c')">Generate Custom</button><br>
+<textarea class="txt2" id="rcgop" style="height:70px" readonly></textarea>
 <script>
 //clock
 var cl = setInterval(clo, 1000);
@@ -340,6 +347,19 @@ if(parseInt(Math.round(Math.random())) == 0) {yonArr[i]="Yes\n"} else {yonArr[i]
 }
 alert(yonArr.join("")) 
 }
+
+//Random Coordinate Generator
+function rint(min, max) { return Math.random() * (max - min) + min; }
+
+function genCoord(x) {
+	var output = "" 
+	if(x=="c") {x=prompt("Enter a number");if(x==null||x==""){x=1}}
+	for(i=0;i<x;i++) {
+	var hori = rint(-90,90).toFixed(5)
+	var verti = rint(-180,180).toFixed(5)
+	output += hori+", "+verti+"\n" } 
+	document.getElementById("rcgop").innerHTML = output
+} 
 </script>
 </body>
 </html>
