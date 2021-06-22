@@ -14,7 +14,7 @@ color: #fff;
 background: #000;
 font-size:18px;
 margin:5px;
-min-height:2900px;
+min-height:3400px;
 font-family:Arial;}
 
 .txt {
@@ -154,6 +154,14 @@ margin-bottom:5px;
 <button style="width:50%" onclick="genHex(1)">Generate 1 Hex Code</button><br>
 <button style="width:50%" onclick="genHex(5)">Generate 5 Hex Codes</button><br>
 <textarea class="txt2" id="hop" style="height:70px" readonly></textarea>
+<hr>
+<!-- Color Converter -->
+<p style="margin-bottom:3px"><b>Color Converter</b></p>
+<p>If you input a hex code you don't need the #<br>Hex codes need to be 6 or 7 characters long and RGB codes need to be 3 characters long for each color (add zeros if it is shorter) and need to be seperated by commas or spaces</p>
+<input placeholder="Hex / RGB Code" class="txt" id="colcip"><br>
+<button style="width:24%" onclick="convCol('hex')">To Hex</button>
+<button style="width:24%" onclick="convCol('rgb')">To RGB</button><br>
+<textarea class="txt2" id="colcop" readonly></textarea>
 <hr>
 <!-- Y or N -->
 <p style="margin-bottom:3px"><b>Yes or No picker</b></p>
@@ -337,6 +345,25 @@ for(i=0;i<x;i++){
 output += gen() + "\n"}
 document.getElementById("hop").innerHTML = output
 }
+
+//Color Converter
+function convCol(x) {
+let input = document.getElementById("colcip").value.replace("#","")
+let arr = []
+let output = ""
+if(x=="hex") {
+arr[0]=(+input.substr(0,3)).toString(16).padStart(2,0)
+arr[1]=(+input.substr(4,3)).toString(16).padStart(2,0)
+arr[2]=(+input.substr(8,3)).toString(16).padStart(2,0)
+output = "#" + arr.join("")}
+else if(x=="rgb") {
+arr[0]=parseInt("0x"+input.substr(0,2), 16);
+arr[1]=parseInt("0x"+input.substr(2,2), 16);
+arr[2]=parseInt("0x"+input.substr(4,2), 16);
+output= "rgb("+arr[0]+","+arr[1]+","+arr[2]+")"} 
+
+document.getElementById("colcop").innerHTML=output
+} 
 
 //Y or N
 function yon(x) {
