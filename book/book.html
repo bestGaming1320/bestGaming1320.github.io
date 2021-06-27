@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Json Book Loader</title>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<meta name="description" content="A website to load books with json">
+<meta name="author" content="bestGaming132">
+<meta name="keywords" content="book, eBook, json"/>
+<meta charset="UTF-8">
+</head>
+<body align="center">
+<div style="height:75vh">
+<p id="cont" style="height:70vh">Content</p>
+<p id="pageP">0</p>
+</div>
+<button class="bt" style="margin-right:33vw" onclick="cPage('p')"><b>&#8592;</b></button>
+<button class="bt" style="margin-left:33vw" onclick="cPage('n')"><b>&#8594;</b></button><br><br>
+<button onclick="load()">Load Json</button>
+</body>
+<script>
+var con = document.getElementById("cont")
+var pag = document.getElementById("pageP")
+var btn = document.getElementsByTagName("button")
+var pages = 3
+var page = 0
+var defJson = {"style":{"txtcol":"#fff","bgcol":"#000","btncol":"#fff","btnbg":"#333","btnotl":"2px solid #666","btntxtN":"&#8592;","btntxtP":"&#8594;"},"pages":3,"page1":"This is the content of page 1","page2": "Lorem ipsum dolor sit amet","page3":"<span style='color:#9f0'>Stylized text <b>works</b> too</span>"}
+var input = defJson
+
+function load() {
+input = JSON.parse(prompt("Enter your Json here"))
+if(!input) {input=defJson} 
+pages = input.pages
+page = 0
+document.body.style.background=input.style.bgcol
+document.body.style.color=input.style.txtcol
+for(i=0;i<3;i++){
+btn[i].style.color = input.style.btncol
+btn[i].style.background = input.style.btnbg
+btn[i].style.outline = input.style.btnotl
+}
+btn[0].innerHTML = input.style.btntxtP
+btn[1].innerHTML = input.style.btntxtN
+
+cPage("n")
+}
+function cPage(x) {
+if(page<pages&&x=="n") {
+ page++
+ con.innerHTML= input["page" + page]
+} else if(page>1&&x=="p"){
+ page--
+ con.innerHTML= input["page" + page]
+ }
+pag.innerHTML= page
+}
+//use <br> for newlines. All html styling tags (like <b> or <span>) work 
+</script>
+<style>
+body {
+color:#fff;
+background:#000;
+font-family: Arial
+}
+.bt{
+height:30px;
+width:50px
+}
+button {
+background:#333;
+color:#fff;
+outline: 2px solid #666;
+border: none
+}
+</style>
+</html>

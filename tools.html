@@ -153,6 +153,7 @@ margin-bottom:5px;
 <p style="margin-bottom:3px"><b>Random Hex Generator</b></p>
 <button style="width:50%" onclick="genHex(1)">Generate 1 Hex Code</button><br>
 <button style="width:50%" onclick="genHex(5)">Generate 5 Hex Codes</button><br>
+<button style="width:50%" onclick="genHex('c')">Generate  custom Hex Codes</button><br>
 <textarea class="txt2" id="hop" style="height:70px" readonly></textarea>
 <hr>
 <!-- Color Converter -->
@@ -340,6 +341,7 @@ function gen() {
 var rndCol = '#'+(Math.random() * 0xFFFFFF << 0).toString(16).padStart(6, '0');
 return rndCol;}
 function genHex(x) {
+if(x=="c") {x=prompt("Enter a number")} 
 let output = ""
 for(i=0;i<x;i++){
 output += gen() + "\n"}

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Book Documentation</title>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<meta name="description" content="A documentation for book">
+<meta name="author" content="bestGaming132">
+<meta name="keywords" content="book, doc"/>
+</head>
+<body>
+<h1 style="font-size:22px" align="center">Documentation</h1>
+<h3>Full sample Json</h3>
+<div><pre>{
+ "style" : {
+  "txtcol" : "#fff", 
+  "bgcol": "#000" ,
+  "btncol" : "#fff", 
+  "btnbg" : "#333", 
+  "btnotl" : "2px solid #666", 
+  "btntxtN" : "&amp#8592;", 
+  "btntxtP" : "&amp#8594;" 
+ }, 
+ "pages" : 3,
+ "page1" : "This is the content of page 1",
+ "page2": "Lorem ipsum dolor sit amet",
+ "page3": "&#60span style='color:#9f0'&#62Stylized text &#60b&#62works&#60b&#62 too&#60/span&#62" 
+}</pre></div>
+<h3>Style</h3>
+<div><pre>"style" : {
+  "txtcol" : "#fff", 
+  "bgcol": "#000" , 
+  "btncol" : "#fff", 
+  "btnbg" : "#333", 
+  "btnotl" : "2px solid #666", 
+  "btntxtN" : "&amp#8592;", 
+  "btntxtP" : "&amp#8594;" 
+}</pre></div><br>
+<p><pre class="pr">
+txtcol: The color of text on every page
+bgcol: The background color of every page
+btncol: The color of text on buttons
+btnbg: The background color of buttons
+btnoutl: The outline of buttons
+btntxtN: The text of the next page button
+btntxtP: The text of the previous page button
+</pre></p>
+<h3>Pages</h3>
+<div style="height:75px"><pre>
+ "pages" : 3,
+ "page1" : "This is the content of page 1",
+ "page2": "Lorem ipsum dolor sit amet",
+ "page3": "&#60span style='color:#9f0'&#62Stylized text &#60b&#62works&#60b&#62 too&#60/span&#62"
+</pre></div>
+<p><pre class="pr">
+pages: The exact number of pages. Starts at 1
+page[x]: A page. Html styling tags work here
+</pre></p>
+</body>
+<style>
+body {background: black;color: white;margin-left:15px}
+button {width: 150px;height: 30px;color: white;background: #333;border-radius: 10px;font-size: 15px;margin-bottom: 5px}
+button:hover{background:#555}
+code {background:#444;padding:3px;outline:1px solid #666}
+div {height:100px;background:#222;padding:5px;width:80%;margin:auto;outline:2px solid #333;overflow:scroll}
+pre {margin:1px;font-size:15px}
+.pr {font-family:Arial}
+</style>
+</html>
