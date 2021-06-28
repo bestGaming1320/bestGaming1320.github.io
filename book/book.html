@@ -23,7 +23,7 @@ var pag = document.getElementById("pageP")
 var btn = document.getElementsByTagName("button")
 var pages = 2
 var page = 0
-var defJson = {"style":{"txtcol":"#fff","bgcol":"#000","btncol":"#fff","btnbg":"#333","btnotl":"2px solid #666","btntxtN":"<b>&#8594;</b>","btntxtP":"<b>&#8592;</b>"},"title":"Example Json","pages":2,"page1":"Load a Json file or text to start. You can do that by clicking \"Load Json\" and change the page with the arrow buttons below or by clicking on the page number if you want a specific page.","page2":"To create a book take a look at the <a href='../docs/book.html'>documentation</a> and write the json by hand or use <a onclick='alert(\"Comming Soon\")'><u>Book Creator</u></a>(comming soon)"}
+var defJson = {"style":{"txtcol":"#fff","bgcol":"#000","btncol":"#fff","btnbg":"#333","btnotl":"2px solid #666","btntxtN":"<b>&#8594;</b>","btntxtP":"<b>&#8592;</b>"},"title":"Default Json","pages":2,"page1":"Load a Json file or text to start. You can do that by clicking \"Load Json\" and change the page with the arrow buttons below or by clicking on the page number if you want a specific page.","page2":"To create a book take a look at the <a href='../docs/book.html'>documentation</a> and write the json by hand or use <a onclick='alert(\"Comming Soon\")'><u>Book Creator</u></a>(comming soon)"}
 var input = defJson
 cPage("n") 
 
@@ -56,8 +56,8 @@ if(page<pages&&x=="n") {
 pag.innerHTML= page
 }
 function cPag() {
-let nP = prompt("Enter a page number")
-if(!isNaN(nP)) {
+let nP = parseInt(prompt("Enter a page number")) 
+if(nP&&nP<=pages&&nP>0) {
 con.innerHTML= input["page" + nP]
 page= nP
 pag.innerHTML=nP
