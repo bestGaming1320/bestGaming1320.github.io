@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<title>Stadt Land Fluss</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+</head>
+<body align="center">
+<h3 style="margin-bottom:2px">Buchstaben Generator</h3>
+<button onclick="gen()">Generieren</button><br>
+<input id="repL" type="checkbox" style="width:1em;height:1em;outline:none" onclick="nrep=!nrep">
+<label for="repL">Buchstaben dürfen sich wiederholen</label><br>
+<input readonly id="lettr" style="text-align:center;margin-bottom:50px;margin-top:5px;width:25px;outline:none">
+<!-- <p>Text Größe:
+<select onchange="cts()" id="txtS">
+			<option value="16px">16</option>
+			<option value="18px">18</option>
+			<option value="20px">20</option>
+			<option value="24px">24</option>
+			<option value="c">Eigen</option>
+			<option disabled id="cus"></option>
+</select>
+</p>
+-->
+<table>
+ <tr>
+ 			<th><input id="th1" value="Stadt"></th>
+ 			<th><input id="th2" value="Land"></th>
+ 			<th><input id="th3" value="Tier"></th>
+ 			<th><input id="th4" value="Marke"></th>
+ 			<th><input id="th5" value="Beruf"></th>
+ 			<th><input id="th6" value="Name"></th>
+ </tr>
+ <tr>
+ 			<td><input></td>
+ 			<td><input></td>
+ 			<td><input></td>
+ 			<td><input></td>
+ 			<td><input></td>
+ 			<td><input></td>
+ </tr>
+</table>
+</body>
+<style>
+body {
+background: #000;
+color: #fff;
+font-size: 16px;
+}
+input {
+width: 100%;
+background: #333;
+outline: 2px solid #333;
+color: #fff;
+border: none;
+font-size: 1em;
+padding:0
+}
+table {
+border-collapse: collapse;
+margin:auto;
+width: 90%
+}
+td, th {
+border: 1px solid #999;
+padding: 5px;
+text-align: left;
+font-size: 1em
+}
+select {
+background: #333;
+color: #fff;
+font-size: 1em;
+}
+
+button {
+color:#fff;
+background: #333;
+width: 35%;
+margin: 4px;
+border: 2px solid #444;
+font-size: 1em
+}
+</style>
+<script>
+function cts() {
+var sel = document.getElementById("txtS")
+var size = sel.value
+if(size=="c"){
+size = prompt("Gib eine Zahl ein")
+document.getElementById("cus").innerHTML = size
+sel.value = size
+document.body.style.fontSize=size+"px"
+} else {
+ document.body.style.fontSize=size
+ }
+} 
+
+var nrep = true
+function rint(min, max) { return Math.random() * (max - min) + min; }
+
+var lett = []
+function gen() {
+let result = String.fromCharCode(rint(65,91))
+if(nrep) {
+if(lett.length>=26){alert("Jeder Buchstabe kam einmal vor. Starte die Seite neu oder aktiviere \"Buchstaben dürfen sich wiederholen\", damit mehr Buchstaben generiert werden können")}
+if(lett.includes(result)) {
+if(lett.length<=25) {gen()} 
+} else {
+lett.push(result)
+document.getElementById("lettr").value = result
+
+   } 
+  } else {
+document.getElementById("lettr").value = result
+}
+}
+
+</script>
+</html>
+ 
