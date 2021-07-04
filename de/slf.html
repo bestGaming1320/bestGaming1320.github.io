@@ -4,8 +4,12 @@
 <title>Stadt Land Fluss</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
+<meta name="description" content="Stadt Land Fluss">
+<meta name="author" content="bestGaming132">
+<meta name="keywords" content="stadt, land, fluss"/>
 </head>
 <body align="center">
+<h1>Stadt Land Fluss</h1>
 <h3 style="margin-bottom:2px">Buchstaben Generator</h3>
 <button onclick="gen()">Generieren</button><br>
 <input id="repL" type="checkbox" style="width:1em;height:1em;outline:none" onclick="nrep=!nrep">
@@ -32,14 +36,15 @@
  			<th><input id="th6" value="Name"></th>
  </tr>
  <tr>
- 			<td><input></td>
- 			<td><input></td>
- 			<td><input></td>
- 			<td><input></td>
- 			<td><input></td>
- 			<td><input></td>
+ 			<td><input class="ip"></td>
+ 			<td><input class="ip"></td>
+ 			<td><input class="ip"></td>
+ 			<td><input class="ip"></td>
+ 			<td><input class="ip"></td>
+ 			<td><input class="ip"></td>
  </tr>
 </table>
+<button style="margin-top:10px" onclick="ct()">Tabelle Leeren</button>
 </body>
 <style>
 body {
@@ -103,19 +108,26 @@ var lett = []
 function gen() {
 let result = String.fromCharCode(rint(65,91))
 if(nrep) {
-if(lett.length>=26){alert("Jeder Buchstabe kam einmal vor. Starte die Seite neu oder aktiviere \"Buchstaben dürfen sich wiederholen\", damit mehr Buchstaben generiert werden können")}
+if(lett.length>=26){alert("Jeder Buchstabe kam einmal vor. Lade die Seite neu oder aktiviere \"Buchstaben dürfen sich wiederholen\", damit mehr Buchstaben generiert werden können")}
 if(lett.includes(result)) {
 if(lett.length<=25) {gen()} 
 } else {
 lett.push(result)
+//console.log(lett) 
 document.getElementById("lettr").value = result
-
    } 
   } else {
 document.getElementById("lettr").value = result
 }
 }
 
+function ct() {
+let ips = document.getElementsByClassName("ip")
+if(confirm("Willst du die Tabelle leeren? Dies kann nicht rückgängig gemacht werden!")) {
+for(i=0;i<6;i++) {
+ips[i].value = "" 
+}} 
+}
 </script>
 </html>
  
