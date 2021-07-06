@@ -8,11 +8,11 @@
 <meta name="keywords" content="color"/>
 <script src="animcol.js"></script>
 </head>
-<body onhashchange="cbg()">
+<body onhashchange="cbg()" onclick="fs()">
 <video style="visibility:hidden;width:20px" autoplay muted loop><source src="b.mp4" type="video/mp4"></video>
 </body>
 <script>
-	alert("To change the color just change the hex code in the url");
+	alert("To change the color just change the hex code in the url. You can enable and disable fullscreen mode by clicking on the background");
 	function cbg() {
 	if(location.hash==""){
 	var hex = prompt("Put in a color in hex format. Don't forget the # with hex codes. Other allowed colors are: red, green, blue, magenta, rainbow. Do not include a # with those" , "#000000");
@@ -33,5 +33,14 @@
 if(["red", "green", "blue", "magenta", "rainbow", "gray"].indexOf(x)>-1) {return true} else{return false}
 } 
 	cbg();
+	
+	//fullscreen
+	function fs() {
+  if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen();
+  } else if (document.exitFullscreen) {
+      document.exitFullscreen();
+  }
+}
 </script>
 </html>
