@@ -8,8 +8,10 @@
 <meta name="keywords" content="color"/>
 <script src="animcol.js"></script>
 </head>
-<body onhashchange="cbg()" onclick="fs()">
+<body onhashchange="cbg()">
+<div onclick="fs()" style="height:100vh;width:100vw;margin:0">
 <video style="visibility:hidden;width:20px" autoplay muted loop><source src="b.mp4" type="video/mp4"></video>
+</div>
 </body>
 <script>
 	alert("To change the color just change the hex code in the url. You can enable and disable fullscreen mode by clicking on the background");
