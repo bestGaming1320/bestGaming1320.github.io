@@ -12,6 +12,14 @@
 <body>
 <p>This is a test page</p>
 </body>
+<script>
+   setInterval(function(){document.querySelector('meta[name="theme-color"]').content=rc()}, 2500)
+   function rc() {
+      var ab = '#'+(Math.random() * 0xFFFFFF << 0).toString(16).padStart(6, '0');
+      console.log(ab)
+      return ab
+   }
+</script>
 <style>
    body {
       background: #000;

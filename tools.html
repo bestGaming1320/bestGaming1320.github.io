@@ -71,7 +71,7 @@ margin-bottom:5px;
 <!-- Random Selector -->
 <p><b>Random Selector</b></p>
 <input class="txt" type="text" id="txtt"><br>
-<button onClick="addItem()" style="width:70%">Add Item</button><br>
+<button onClick="addItem()" style="width:72%">Add Item</button><br>
 <button onClick="rando(1)">Pick Random</button>
 <button onClick="rando(5)">Pick 5 Random</button><br>
 <button onClick="removeLast()">Remove last item</button>
@@ -230,14 +230,15 @@ function resetL() {
 	  else {
 	 console.log("Canceled")}} 
 	 
-function removeLast() {
+function removeLast() {/*
 			if (!items.length<=0){
-							items.splice(-1,1) 
+							items.splice(-1,1) */
 							var text = ""
+							items.pop()
 							for (i = 0; i < items.length; i++) {
 	       text += items[i] + "\n";
         document.getElementById("txt2").value = text}
-			}}
+		/*	}*/}
 //replacer
 function repl() {
 var replTxt = document.getElementById("te1").value
