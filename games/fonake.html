@@ -6,8 +6,10 @@
 <meta name="author" content="bestGaming132">
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
 <meta charset="UTF-8">
+<meta name="ver" content="1.1">
 </head>
 <body align="center">
+<h2 id="h2">Fonake</h2>
 <canvas style="border:2px solid #999;width:400px;height:200px;rendering:pixelated" id="cvs"></canvas>
 <p id="score">Score: 0</p>
 <p id="pos" style="opacity:1" onclick="chv(this)"><p>
@@ -20,6 +22,7 @@
 <!--&#8592; 8593 8594 8595-->
 </div>
 <script>
+document.getElementById("h2").innerHTML="Fonake V"+document.querySelector('meta[name="ver"]').content;
 function log(x) {console.log(x)}
 var x=5; //posX
 var y=5; //posY
