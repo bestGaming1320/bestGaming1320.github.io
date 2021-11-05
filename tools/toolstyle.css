@@ -1,0 +1,57 @@
+body {
+   color: #fff;
+   background: #000;
+   font-size: 18px;
+   margin: 5px;
+   /*min-height:3400px*/
+   ;
+   font-family: Arial;
+}
+
+.txt {
+   color: #fff;
+   background: #555;
+   width: 70%;
+   height: 60px;
+   text-align: center;
+   border: 1px solid #888;
+}
+
+.txt2 {
+   color: #fff;
+   background: #222;
+   width: 70%;
+   height: 70px;
+   text-align: center;
+   border: 1px solid #aaa;
+   margin: 3px;
+}
+
+button {
+   color: #fff;
+   background: #333;
+   width: 35%;
+   margin: 4px;
+   border: 2px solid #444;
+   font-size: 15px;
+   border-radius: 5px;
+}
+.btn {
+   width: 72%;
+   
+}
+
+hr {
+   background: #333;
+   border: none;
+   height: 0.5px;
+}
+
+select {
+   text-align-last: center;
+   color: #fff;
+   background: #333;
+   height: 30px;
+   width: 60%;
+   margin-bottom: 5px;
+}

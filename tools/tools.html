@@ -6,60 +6,9 @@
 <meta name="description" content="Some basic tools">
 <meta name="author" content="bestGaming132">
 <meta name="keywords" content="tool, tools"/>
+<link rel="stylesheet" href="toolstyle.css">
 </head>
 <body align="center">
-<style>
-body {
-color: #fff;
-background: #000;
-font-size:18px;
-margin:5px;
-min-height:3400px;
-font-family:Arial;}
-
-.txt {
-color: #fff;
-background: #555;
-width:50%;
-height:20px;
-text-align: center;
-border:1px solid #888;
-} 
-
-.txt2 {
-color:#fff; 
-background:#222; 
-width:50%; 
-height:65px; 
-text-align:center;
-border:1px solid #aaa;
-margin: 3px;
-}
-
-button {
-color:#fff;
-background: #333;
-width: 35%;
-margin: 4px;
-border: 2px solid #444;
-font-size: 15px;
-}
-
-hr {
-background:#333;
-border: none;
-height: 0.5px;
-}
-
-select { 
-text-align-last:center;
-color:#fff;
-background:#333;
-height:30px;
-width:60%;
-margin-bottom:5px;
-}
-</style>
 <h2 style="margin-bottom:1px">Tools</h2>
 <p id="clock" style="margin:1px">&nbsp;</p>
 <!-- Get Length -->
@@ -120,7 +69,7 @@ margin-bottom:5px;
 <p onclick="cCol()" id="cC" style="margin:1px">Click here to change <span style="color:#ff3e3e">highlight color</span></p>
 <input style="height:20px;margin-bottom:3px" class="txt" placeholder="Word to find" id="fW" oninput="find()"><br>
 <textarea style="height:40px" placeholder="Text" class="txt" id="fT" oninput="find()"></textarea><br>
-<p style="align:center;margin:auto;color:#fff;background:#222;width:51%;height:65px;overflow-y:scroll;word-wrap: break-word;outline:1px solid #9e9e9e" id="findOp"></p>
+<p style="align:center;margin:auto;color:#fff;background:#222;width:70%;height:65px;overflow-y:scroll;word-wrap: break-word;outline:1px solid #9e9e9e" id="findOp"></p>
 <hr>
 <!-- Base64 -->
 <p style="margin-bottom:3px"><b>Base 64</b></p>
@@ -274,7 +223,7 @@ mode2 = document.getElementById("sel2").value;
 let num = document.getElementById("txtN").value;
 document.getElementById("rTxtOp").innerHTML= rndT(num);}
 
-function rndT(length) { 
+function rndT(length) {
 var result = []; 
 var characters;
 //var cusCharacters

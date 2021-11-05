@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <title>Base64 Tools</title>
+   <meta name="viewport" content="width=device-width, initial-scale=1" />
+   <meta name="description" content="Tools for base64">
+   <meta name="author" content="bestGaming132">
+   <meta name="keywords" content="base64" />
+   <meta charset="UTF-8">
+   <link rel="stylesheet" href="toolstyle.css">
+</head>
+
+<body align="center">
+   <p style="font-size:25px"><b>Base64 Tools</b></p>
+   <p><b>Text Converter</b></p>
+   <textarea id="tcip" class="txt" placeholder="Input"></textarea><br>
+   <button onclick="tconv(false)">To Base64</button><button onclick="tconv(true)">To Text</button><br>
+   <textarea id="tcop" class="txt2" placeholder="Output" readonly></textarea>
+   <hr>
+     <p><b>Random Base64 Text Generator</b></p>
+   <input value="10" id="rtgip" class="txt" placeholder="Length" style="height:25px"><br>
+   <button class="btn" onclick="rtg()">Generate</button>
+   <textarea id="rtgop" class="txt2" placeholder="Output" readonly></textarea>
+   <hr>
+</body>
+<script>
+   //useful functions
+   function log(str) {
+      console.log(str);
+   }
+
+   function elm(id) {
+      return document.getElementById(id);
+   }
+   //Text Converter tc
+   function tconv(b) {
+      let ip = elm("tcip");
+      let op = elm("tcop");
+      try {
+         if (b) op.value = atob(ip.value);
+         else op.value = btoa(ip.value);
+      } catch (e) {
+         op.value = "There was an error";
+         log("Error:\n" + e);
+      }
+   }
+   //Random Base64 Tect Generator rtg
+   function rtg() {
+      let ip = elm("rtgip");
+      let op = elm("rtgop");
+      let length = ip.value;
+let result = []; 
+let characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+let cLength = characters.length
+for (let i = 0; i < length; i++ ) { 
+result.push(characters.charAt(Math.floor(Math.random() * cLength))); } 
+op.value=btoa(result.join("")); 
+         
+      
+      
+   }
+</script>
+
+</html>
