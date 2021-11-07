@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+   <title>Time Tools</title>
+   <meta name="viewport" content="width=device-width, initial-scale=1" />
+   <meta name="description" content="Tools for time">
+   <meta name="author" content="bestGaming132">
+   <meta name="keywords" content="time" />
+   <meta charset="UTF-8">
+   <link rel="stylesheet" href="toolstyle.css">
+</head>
+
+<body align="center">
+<p style="font-size: 25px">Time Tools</p>
+<p>Time to MS</p>
+<input id="ttmsIp" class="txt" style="height:25px" placeholder="Time in days" oninput="ttms()"><br>
+<select id="ttmsS" onchange="elm('ttmsIp').placeholder='Time in '+this.value">
+   <option value="days">Days to MS</option>
+   <option value="hours">Hours to MS</option>
+   <option value="minutes">Minutes to MS</option>
+</select>
+<input id="ttmsOp" readonly class="txt2" style="height:25px">
+</body>
+<script>
+   //days to ms=days*1000(ms)*60(min)*60(h)*24(d)
+   function toMs(str,val) {
+      switch (str) {
+         case "days":
+            return val*1000*60*60*24;
+            break;
+         case "hours":
+            return val*1000*60*60;
+            break;
+         case "minutes":
+            return val*1000*60;
+            break;
+      }
+   }
+   function elm(id) {
+      return document.getElementById(id);
+   }
+   //time to ms
+   function ttms() {
+      elm("ttmsOp").value=toMs(elm("ttmsS").value,parseFloat(elm("ttmsIp").value))
+      //console.log(elm("ttmsS").value)
+   }
+</script>
+</html>
