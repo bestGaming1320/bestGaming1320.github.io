@@ -6,12 +6,14 @@
 <meta name="description" content="A basic Clicker Game">
 <meta name="author" content="bestGaming132">
 <meta name="keywords" content="clicker, game, clickergame"/>
+<meta name="ver" content="0.4">
 </head>
 <b><h1 class="txt">Clicker Game</h1></b>
-<body>
+<body align="center">
+<p id="ver" style="font-size:14px">Version: x</p>
 <p class="txt" style="text-align:center"  id="cashT">Cash: 0</p>
-<p class="txt""  id="costT">Upgrade Cost: 5</p>
-<p class="txt" id="level">Level: 1</p>
+<p class="txt"  id="costT">Upgrade Cost: 5</p>
+<p class="txt" id="lvl">Level: 1</p>
 
 <!-- Click Me Button -->
 <p id="dd"></p>
@@ -34,11 +36,12 @@ onclick="save()">Save</button>
 onclick="load()">Load</button> 
 
 <script>
+document.getElementById("ver").innerHTML="Version "+document.querySelector('meta[name="ver"]').content;
 //variables cash, plusCash, upgradeCash
 var ch = 0
 var pCh = 0.5
 var ugC = 5
-
+var lvl = 1
 //clickEvent
 function clicc(){
 ch = ch + pCh
@@ -50,8 +53,10 @@ if (ch > ugC-0.01) {
 ch = ch-ugC
 pCh = pCh*1.32
 ugC = ugC*1.45
+lvl++
 document.getElementById("costT").innerHTML = "Upgrade Cost: " + ro(ugC, 1e2) 
 document.getElementById("cashT").innerHTML ="Cash: " + ro(ch, 1e2)
+document.getElementById("lvl").innerHTML= "Level: "+lvl
 }else {
 alert("You dont have enough money!")}}
 
