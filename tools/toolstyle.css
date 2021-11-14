@@ -8,7 +8,7 @@ body {
    font-family: Arial;
 }
 
-.txt {
+textarea {
    color: #fff;
    background: #555;
    width: 70%;

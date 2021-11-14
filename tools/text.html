@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+   <title>Text Tools</title>
+   <meta name="viewport" content="width=device-width, initial-scale=1" />
+   <meta name="description" content="Tools for text modification">
+   <meta name="author" content="bestGaming132">
+   <meta name="keywords" content="base64" />
+   <meta charset="UTF-8">
+   <link rel="stylesheet" href="toolstyle.css">
+</head>
+
+<body align="center">
+   <p style="font-size:25px">Text Tools</p>
+   <p>Text Randomizer</p>
+   <p style="font-weight:400 ">Entered text will be randomized</p>
+   <textarea id="ip" placeholder="Input"></textarea><br>
+   <button class="btn" onclick="rnn()">Randomize</button><br>
+   <textarea class="txt2" id="op" readonly></textarea>
+   <hr>
+   <p>---</p>
+</body>
+<script>
+   function rint(min, max) { return Math.round(Math.random() * (max - min) + min); }
+
+   function log(s) { console.log(s) }
+
+   function rn(str) {
+      let ip = str.split("");
+      let nArr = [];
+      let res = "";
+      for (i = 0; i < ip.length; i++) {
+         let rnd = rint(0, str.length - 1)
+         //log(rnd)
+         if (nArr.includes(rnd)) --i
+         else { res += ip[rnd], nArr.push(rnd) }
+      }
+      return res
+   }
+
+   function rnn() {
+      document.getElementById("op").value = rn(document.getElementById("ip").value)
+   }
+</script>
+
+</html>
