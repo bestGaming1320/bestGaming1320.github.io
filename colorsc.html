@@ -7,12 +7,15 @@
 	<meta name="author" content="bestGaming132">
 	<meta name="keywords" content="color" />
 	<meta name="theme-color" content="#000">
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="default.css">
 	<style>
-		body {
-			color: #fff;
-			background: #000;
-			font-size: 16px;
-		}
+        body {
+            color: #fff;
+            background: #000;
+            font-size: 16px;
+            text-align: center;
+        }
 
 		button {
 			width: 35vw;
@@ -25,33 +28,43 @@
 			margin: 5px;
 		}
 
-		input {
-			color: #fff;
-			background: #333;
-			border: 1px solid #666;
-			font-size: 16px;
-			margin: 5px;
-		}
-
-		div {
-			min-height: 60px;
-		}
+        input {
+            color: #fff;
+            background: #333;
+            border: 1px solid #666;
+            font-size: 16px;
+            margin: 5px;
+        }
 	</style>
 </head>
 <body align="center">
 	<p style="font-size:25px">Color Screen</p>
-	<input style="display:none" type="color" value="#777777" id="col" onchange="cc()" />
 	<!--<input id="hex" value="#333333"><br>-->
-	<div style="height:8vh;width:35vw;margin: 0 auto;background:#777;border: 2px solid #666;text-align: center" id="cdiv" onclick="col.click()"><p>Click to<br>change color</p></div>
-	<input name="fss" type="checkbox" id="fss">
-	<label for="fss">Fullscreen support with tap/click on screen</label><br>
+	<p>Click an option to change it<br><br></p>
+	<div style="height:8vh;min-height:60px;width:35vw;margin: 0 auto;background:#777;border: 2px solid #666;text-align: center" id="cdiv" onclick="col.click()"><p>color</p><input style="visibility:hidden" type="color" value="#777777" id="col" onchange="cc()"></div>
+	<p onclick="opt('fss')">Fullscreen support with tap/click on screen&nbsp;<span style="color:#f00" id="fss">&#10008;</span></p>
 	<!--<input name="sc" type="checkbox" id="sc">
 	<label for="sc">Show clock</label><br>-->
-	<input name="kso" type="checkbox" id="kso">
-	<label for="kso">Keep screen on</label><br>
+	<p onclick="opt('kso')">Keep screen on&nbsp;<span style="color:#f00" id="kso">&#10008;</span></p>
 	<button onclick="openW()">Open Window</button>
 </body>
 <script>
+	init();
+	var fss = false;
+	var kso = false;
+	var sc = false;
+	function opt(e) {
+		if (window[e]) {
+			elm(e).innerHTML = "&#10008;";
+			elm(e).style.color = "#f00";
+		}
+		else {
+			elm(e).innerHTML = "&#10003;";
+			elm(e).style.color = "#0f0";
+		}
+		window[e] = !window[e];
+	}
+
 	function elm(e) {
 		return document.getElementById(e);
 	}
@@ -60,25 +73,26 @@
 	}
 	var html = "";
 	var fullsc = '<div onclick=" if (!document.fullscreenElement) { document.documentElement.requestFullscreen(); } else if (document.exitFullscreen) { document.exitFullscreen(); } " style="height: 100vh; width: 100vw; margin: 0; "></div>';
-	var clock = '';
-    var ksco = '<video style="visibility:hidden;width:1px;height:1px" autoplay muted loop><source src="b.mp4" type="video/mp4"></video>';
+	var clock = '<p id="cl" onload="setInterval(function(){var t = new Date().toLocaleTimeString(\'en-GB\');document.getElementById(\'cl\').innerHTML = t.bold();},1000)"></p>';
+	var ksco = '<video style="visibility:hidden;width:1px;height:1px" autoplay muted loop><source src="b.mp4" type="video/mp4"></video>';
 
 	var win = "";
 	function openW() {
 		win = window.open("", "_blank");
 		win.document.body.style.background = elm("col").value;
 		html = "";
-        //if (elm("sc").checked) html += clock;
-		if (elm("fss").checked) html += fullsc;
-		if (elm("kso").checked) html += ksco;
+		if (sc) { html +=  clock; win.document.body.onload ="setInterval(function(){var t = new Date().toLocaleTimeString('en-GB');document.getElementById('cl').innerHTML = t.bold();},1000)"}
+		if (fss) html += fullsc;
+		if (kso) html += ksco;
 		win.document.body.style.overflow = "hidden";
 		win.document.body.innerHTML = html;
+		win.document.title = "Color Screen: "+elm("col").value;
 	}
 //ideas
 ///fullscreen support for mobile DONE
 ///display clock
 ///keep screen on DONE
-///color with input type text 
+///color with input type text
 ///color with input type color DONE
 ///predefined colors
 </script>
