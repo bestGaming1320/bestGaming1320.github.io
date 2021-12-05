@@ -2,48 +2,279 @@
 <html>
 
 <head>
-   <title>Time Tools</title>
-   <meta name="viewport" content="width=device-width, initial-scale=1" />
-   <meta name="description" content="Tools for time">
-   <meta name="author" content="bestGaming132">
-   <meta name="keywords" content="time" />
-   <meta charset="UTF-8">
-   <link rel="stylesheet" href="toolstyle.css">
+    <title>Time Tools</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Tools for time">
+    <meta name="author" content="bestGaming132">
+    <meta name="keywords" content="time" />
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="toolstyle.css">
 </head>
 
-<body align="center">
-<p style="font-size: 25px">Time Tools</p>
-<p>Time to MS</p>
-<input id="ttmsIp" class="txt" style="height:25px" placeholder="Time in days" oninput="ttms()"><br>
-<select id="ttmsS" onchange="elm('ttmsIp').placeholder='Time in '+this.value">
-   <option value="days">Days to MS</option>
-   <option value="hours">Hours to MS</option>
-   <option value="minutes">Minutes to MS</option>
-</select>
-<input id="ttmsOp" readonly class="txt2" style="height:25px">
+<body align="center" style="min-height:1500px">
+    <p style="font-size: 25px">Time Tools</p>
+    <p>Time to MS</p>
+    <input id="MsIp" class="txt" style="height:25px" placeholder="Time in days" oninput="time('Ms')" type="number"><br>
+    <select id="MsS" onchange="elm('MsIp').placeholder='Time in '+this.value;time('Ms')">
+        <option value="months">Months to MS</option>
+        <option value="weeks">Weeks to MS</option>
+        <option value="days">Days to MS</option>
+        <option value="hours" selected="selected">Hours to MS</option>
+        <option value="minutes">Minutes to MS</option>
+        <option value="seconds">Seconds to MS</option>
+    </select>
+    <input id="MsOp" readonly class="txt2" style="height:25px" value="0">
+    <hr>
+    <p>Time to SEC</p>
+    <input id="SecIp" class="txt" style="height:25px" placeholder="Time in days" oninput="time('Sec')" type="number"><br>
+    <select id="SecS" onchange="elm('SecIp').placeholder='Time in '+this.value;time('Sec')">
+        <option value="months">Months to SEC</option>
+        <option value="weeks">Weeks to SEC</option>
+        <option value="days">Days to SEC</option>
+        <option value="hours" selected="selected">Hours to SEC</option>
+        <option value="minutes">Minutes to SEC</option>
+        <option value="miliseconds">Miliseconds to SEC</option>
+    </select>
+    <input id="SecOp" readonly class="txt2" style="height:25px" value="0">
+    <hr>
+    <p>Time to MIN</p>
+    <input id="MinIp" class="txt" style="height:25px" placeholder="Time in hours" oninput="time('Min')" type="number"><br>
+    <select id="MinS" onchange="elm('MinIp').placeholder='Time in '+this.value;time('Min')">
+        <option value="months">Months to MIN</option>
+        <option value="weeks">Weeks to MIN</option>
+        <option value="days">Days to MIN</option>
+        <option value="hours" selected="selected">Hours to MIN</option>
+        <option value="seconds">Seconds to MIN</option>
+        <option value="miliseconds">Miliseconds to MIN</option>
+    </select>
+    <input id="MinOp" readonly class="txt2" style="height:25px" value="0">
+    <hr>
+    <p>Time to HRS</p>
+    <input id="HrsIp" class="txt" style="height:25px" placeholder="Time in Minutes" oninput="time('Hrs')" type="number"><br>
+    <select id="HrsS" onchange="elm('HrsIp').placeholder='Time in '+this.value;time('Hrs')">
+        <option value="months">Months to HRS</option>
+        <option value="weeks">Weeks to HRS</option>
+        <option value="days">Days to HRS</option>
+        <option value="minutes" selected="selected">Minutes to HRS</option>
+        <option value="seconds">Seconds to HRS</option>
+        <option value="miliseconds">Miliseconds to HRS</option>
+    </select>
+    <input id="HrsOp" readonly class="txt2" style="height:25px" value="0">
+    <hr>
+    <p>Time to DAYS</p>
+    <input id="DayIp" class="txt" style="height:25px" placeholder="Time in hours" oninput="time('Day')" type="number"><br>
+    <select id="DayS" onchange="elm('DayIp').placeholder='Time in '+this.value;time('Day')">
+        <option value="months">Months to DAYS</option>
+        <option value="weeks">Weeks to DAYS</option>
+        <option value="hours" selected="selected">Hours to DAYS</option>
+        <option value="minutes">Minutes to DAYS</option>
+        <option value="seconds">Seconds to DAYS</option>
+        <option value="miliseconds">Miliseconds to DAYS</option>
+    </select>
+    <input id="DayOp" readonly class="txt2" style="height:25px" value="0">
+    <hr>
+    <p>Time to WEEKS</p>
+    <input id="WeekIp" class="txt" style="height:25px" placeholder="Time in hours" oninput="time('Week')" type="number"><br>
+    <select id="WeekS" onchange="elm('WeekIp').placeholder='Time in '+this.value;time('Week')">
+        <option value="months">Months to WEEKS</option>
+        <option value="days">Days to WEEKS</option>
+        <option value="hours" selected="selected">Hours to WEEKS</option>
+        <option value="minutes">Minutes to WEEKS</option>
+        <option value="seconds">Seconds to WEEKS</option>
+        <option value="miliseconds">Miliseconds to WEEKS</option>
+    </select>
+    <input id="WeekOp" readonly class="txt2" style="height:25px" value="0">
+    <hr>
+    <p>Time to MONTHS</p>
+    <input id="MonIp" class="txt" style="height:25px" placeholder="Time in hours" oninput="time('Mon')" type="number"><br>
+    <select id="MonS" onchange="elm('MonIp').placeholder='Time in '+this.value;time('Mon')">
+        <option value="weeks">Weeks to MONTHS</option>
+        <option value="days">Days to MONTHS</option>
+        <option value="hours" selected="selected">Hours to MONTHS</option>
+        <option value="minutes">Minutes to MONTHS</option>
+        <option value="seconds">Seconds to MONTHS</option>
+        <option value="miliseconds">Miliseconds to MONTHS</option>
+    </select>
+    <input id="MonOp" readonly class="txt2" style="height:25px" value="0">
 </body>
 <script>
-   //days to ms=days*1000(ms)*60(min)*60(h)*24(d)
-   function toMs(str,val) {
-      switch (str) {
-         case "days":
-            return val*1000*60*60*24;
-            break;
-         case "hours":
-            return val*1000*60*60;
-            break;
-         case "minutes":
-            return val*1000*60;
-            break;
-      }
-   }
-   function elm(id) {
-      return document.getElementById(id);
-   }
-   //time to ms
-   function ttms() {
-      elm("ttmsOp").value=toMs(elm("ttmsS").value,parseFloat(elm("ttmsIp").value))
-      //console.log(elm("ttmsS").value)
-   }
+    function elm(id) {
+        return document.getElementById(id);
+    }
+
+    function toMs(str, val) {
+        switch (str) {
+            case "months":
+                return val * 1000 * 60 * 60 * 24 * 30.436875;
+                break;
+            case "weeks":
+                return val * 1000 * 60 * 60 * 24 * 7;
+                break;
+            case "days":
+                return val * 1000 * 60 * 60 * 24;
+                break;
+            case "hours":
+                return val * 1000 * 60 * 60;
+                break;
+            case "minutes":
+                return val * 1000 * 60;
+                break;
+            case "seconds":
+                return val * 1000;
+                break;
+        }
+    }
+
+    function toSec(str, val) {
+        switch (str) {
+            case "months":
+                return val * 60 * 60 * 24 * 30.436875;
+                break;
+            case "weeks":
+                return val * 60 * 60 * 24 * 7;
+                break;
+            case "days":
+                return val * 60 * 60 * 24;
+                break;
+            case "hours":
+                return val * 60 * 60;
+                break;
+            case "minutes":
+                return val * 60;
+                break;
+            case "miliseconds":
+                return val / 1000;
+                break;
+        }
+    }
+
+    function toMin(str, val) {
+        switch (str) {
+            case "months":
+                return val * 60 * 24 * 30.436875;
+                break;
+            case "weeks":
+                return val * 60 * 24 * 7;
+                break;
+            case "days":
+                return val * 60 * 24;
+                break;
+            case "hours":
+                return val * 60;
+                break;
+            case "seconds":
+                return val / 60;
+                break;
+            case "miliseconds":
+                return val / 1000 / 60;
+                break;
+        }
+    }
+
+    function toHrs(str, val) {
+        switch (str) {
+            case "months":
+                return val * 24 * 30.436875;
+                break;
+            case "weeks":
+                return val * 24 * 7;
+                break;
+            case "days":
+                return val * 24;
+                break;
+            case "minutes":
+                return val / 60;
+                break;
+            case "seconds":
+                return val / 60 / 60;
+                break;
+            case "miliseconds":
+                return val / 1000 / 60 / 60;
+                break;
+        }
+    }
+
+    function toDay(str, val) {
+        switch (str) {
+            case "months":
+                return val * 30.436875;
+                break;
+            case "weeks":
+                return val * 7;
+                break;
+            case "hours":
+                return val / 24;
+                break;
+            case "minutes":
+                return val / 60 / 24;
+                break;
+            case "seconds":
+                return val / 60 / 60 / 24;
+                break;
+            case "miliseconds":
+                return val / 1000 / 60 / 60 / 24;
+                break;
+        }
+    }
+
+    function toWeek(str, val) {
+        switch (str) {
+            case "months":
+                return val * 4.3481;
+                break;
+            case "days":
+                return val / 7;
+                break;
+            case "hours":
+                return val / 24 / 7;
+                break;
+            case "minutes":
+                return val / 60 / 24 / 7;
+                break;
+            case "seconds":
+                return val / 60 / 60 / 24 / 7;
+                break;
+            case "miliseconds":
+                return val / 1000 / 60 / 60 / 24 / 7;
+                break;
+        }
+    }
+
+    function toMon(str, val) {
+        switch (str) {
+            case "weeks":
+                return val / 4.3481;
+                break;
+            case "days":
+                return val / 30.436875;
+                break;
+            case "hours":
+                return val / 24 / 30.436875;
+                break;
+            case "minutes":
+                return val / 60 / 24 / 30.436875;
+                break;
+            case "seconds":
+                return val / 60 / 60 / 24 / 30.436875;
+                break;
+            case "miliseconds":
+                return val / 1000 / 60 / 60 / 24 / 30.436875;
+                break;
+        }
+    }
+
+    //time to ms
+    function ttms() {
+        if (elm("ttmsIp").value == "") {
+            elm("ttmsOp").value = "0";
+            return;
+        };
+        elm("ttmsOp").value = toMs(elm("ttmsS").value, parseFloat(elm("ttmsIp").value));
+        //console.log(elm("ttmsS").value)
+    }
+
+    function time(mode) {
+        elm(mode+"Op").value = window["to"+mode](elm(mode+"S").value, parseFloat(elm(mode+"Ip").value));
+    }
 </script>
 </html>
