@@ -4,17 +4,25 @@ body {
    font-size: 18px;
    margin: 5px;
    /*min-height:3400px*/
-   ;
    font-family: Arial;
 }
 
 textarea {
    color: #fff;
-   background: #555;
+   background: #444;
    width: 70%;
    height: 60px;
    text-align: center;
    border: 1px solid #888;
+}
+input {
+    height: 25px;
+    width: 70%;
+    color: #fff;
+    background: #444;
+    text-align: center;
+    border: 1px solid #888;
+    margin-bottom: 2.5px
 }
 
 .txt2 {
@@ -59,13 +67,7 @@ select {
 p {
    font-weight: 700
 }
-
-input {
-   height:25px;
-   width:70%;
-   color: #fff;
-   background: #555;
-   text-align: center;
-   border: 1px solid #888;
-   margin-bottom: 2.5px
+.pn {
+    font-weight: normal;
+    margin: 2px;
 }
