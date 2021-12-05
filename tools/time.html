@@ -96,12 +96,21 @@
         <option value="miliseconds">Miliseconds to MONTHS</option>
     </select>
     <input id="MonOp" readonly class="txt2" style="height:25px" value="0">
+    <hr>
+    <p>Unix timestamp converter</p>
+    <p class="pn">Time to Unix milliseconds</p>
+    <input type="datetime-local" onchange='elm("unixres").value=new Date(this.value).getTime()'>
+    <p class="pn">Unix milliseconds to time</p>
+    <input placeholder="Time in milliseconds" type="number" onchange='elm("unixres").value = new Date(parseFloat(this.value)).toLocaleDateString(undefined,options)'>
+    <p class="pn">Result</p>
+    <input placeholder="result" readonly class="txt2" style="height:25px" id="unixres">
 </body>
 <script>
     function elm(id) {
         return document.getElementById(id);
     }
 
+    //start of time converters
     function toMs(str, val) {
         switch (str) {
             case "months":
@@ -263,18 +272,15 @@
         }
     }
 
-    //time to ms
-    function ttms() {
-        if (elm("ttmsIp").value == "") {
-            elm("ttmsOp").value = "0";
-            return;
-        };
-        elm("ttmsOp").value = toMs(elm("ttmsS").value, parseFloat(elm("ttmsIp").value));
-        //console.log(elm("ttmsS").value)
+    function time(mode) {
+        elm(mode + "Op").value = window["to" + mode](elm(mode + "S").value, parseFloat(elm(mode + "Ip").value));
     }
 
-    function time(mode) {
-        elm(mode+"Op").value = window["to"+mode](elm(mode+"S").value, parseFloat(elm(mode+"Ip").value));
-    }
+    //end of time converters
+    //start of unix converter
+    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric'};
+    //end of unix converter
+
+
 </script>
 </html>
