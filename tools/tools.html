@@ -134,8 +134,7 @@
 //clock
 var cl = setInterval(clo, 1000);
 function clo() {
- var d = new Date();
- var t = d.toLocaleTimeString('en-GB');
+ var t = new Date().toLocaleTimeString('en-GB');
  document.getElementById("clock").innerHTML = t.bold();}
 
 
