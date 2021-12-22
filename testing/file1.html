@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="elcr.js"></script>
+  <link rel="stylesheet" href="../default.css">
+  <title></title>
+</head>
+
+<body>
+
+</body>
+<style>
+  body {
+    min-height: 1000px;
+  }
+  button {
+    border: 2px solid #999;
+  }
+</style>
+<script>
+  setInterval(function() { log(scr()) }, 1000);
+
+  function scr() { return (window.pageYOffset !== undefined) ? window.pageYOffset : (document.documentElement || document.body.parentNode || document.body).scrollTop }
+
+  /*document.body.onscroll = function() {
+    if (scr() >= document.body.clientHeight / 5) {
+      bu()
+      br()
+    }
+  } */
+  setInterval(function(){
+    if(scr()>=document.body.clientHeight/5){
+      bu(Math.round(Math.random()*10));br()
+    }
+  },500)
+</script>
+
+</html>
