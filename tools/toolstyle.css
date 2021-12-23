@@ -1,20 +1,22 @@
 body {
-   color: #fff;
-   background: #000;
-   font-size: 18px;
-   margin: 5px;
-   /*min-height:3400px*/
-   font-family: Arial;
+    color: #fff;
+    background: #000;
+    font-size: 18px;
+    margin: 5px;
+    /*min-height:3400px*/
+    font-family: Arial;
 }
 
 textarea {
-   color: #fff;
-   background: #444;
-   width: 70%;
-   height: 60px;
-   text-align: center;
-   border: 1px solid #888;
+    color: #fff;
+    background: #444;
+    width: 70%;
+    height: 60px;
+    text-align: center;
+    border: 1px solid #888;
+    border-radius: 5px;
 }
+
 input {
     height: 25px;
     width: 70%;
@@ -22,51 +24,63 @@ input {
     background: #444;
     text-align: center;
     border: 1px solid #888;
-    margin-bottom: 2.5px
+    margin-bottom: 2.5px;
+    border-radius: 5px;
 }
 
 .txt2 {
-   color: #fff;
-   background: #222;
-   width: 70%;
-   height: 70px;
-   text-align: center;
-   border: 1px solid #aaa;
-   margin: 3px;
+    background: #222;
+    height: 70px;
+    border: 1px solid #aaa;
+    margin: 3px;
 }
 
 button {
-   color: #fff;
-   background: #333;
-   width: 35%;
-   margin: 4px;
-   border: 2px solid #444;
-   font-size: 15px;
-   border-radius: 5px;
+    color: #fff;
+    background: #333;
+    width: 35%;
+    margin: 4px;
+    border: 2px solid #777;
+    font-size: 15px;
+    border-radius: 5px;
 }
+
+    button:hover {
+        background: #444
+    }
+
+    button:focus {
+        background: #444;
+        outline: none;
+    }
+
 .btn {
-   width: 72%;
-   
+    width: 71%;
 }
 
 hr {
-   background: #333;
-   border: none;
-   height: 0.5px;
+    background: #333;
+    border: none;
+    height: 0.5px;
 }
 
 select {
-   text-align-last: center;
-   color: #fff;
-   background: #333;
-   height: 30px;
-   width: 70%;
-   margin-bottom: 5px;
+    text-align-last: center;
+    color: #fff;
+    background: #333;
+    height: 30px;
+    width: 70%;
+    margin-bottom: 5px;
 }
 
 p {
-   font-weight: 700
+    font-weight: 400
 }
+
+.pt {
+    font-weight: 700;
+}
+
 .pn {
     font-weight: normal;
     margin: 2px;
