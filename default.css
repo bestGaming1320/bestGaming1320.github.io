@@ -3,6 +3,7 @@ body {
     color: #fff;
     text-align: center;
     font-family: Arial;
+    font-size: 18px;
 }
 
 button {
@@ -27,4 +28,22 @@ button {
 
 p {
     margin: 3px;
+}
+.pt {
+    font-weight: 700;
+    font-size: 25px;
+    margin-bottom: 10px;
+}
+.pb {
+    font-weight: 700;
+}
+select {
+    text-align: center;
+    text-align-last: center;
+    color: #fff;
+    background: #333;
+    height: 30px;
+    width: 70%;
+    margin-bottom: 5px;
+    border-radius: 10px
 }

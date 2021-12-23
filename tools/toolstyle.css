@@ -65,6 +65,7 @@ hr {
 }
 
 select {
+    text-align: center;
     text-align-last: center;
     color: #fff;
     background: #333;
