@@ -44,6 +44,7 @@
     elm("langSel").value = language[cl].langSel;
     elm("infoP").innerHTML = language[cl].infoP;
     */
+    if (!localStorage.getItem("lang")) localStorage.setItem("lang","en")
     setL(["langSel","settP","langP","infoP"],"settings")
     function lng(elm) {
         localStorage.setItem("lang", elm.value);
