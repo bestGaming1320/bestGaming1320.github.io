@@ -8,7 +8,7 @@
     <meta name="author" content="bestGaming132">
     <meta name="keywords" content="settings" />
     <link rel="stylesheet" href="default.css">
-    
+    <script src="/testing/language/lang.js"></script>
 </head>
 <body align="center">
     <p class="pt" id="settP">Settings</p>
@@ -21,7 +21,8 @@
     <!--<p>This option will not work on every page</p>-->
 </body>
 <script>
-    var cl = localStorage.getItem("lang"); //current language
+    /*
+     var cl = localStorage.getItem("lang"); //current language
     var language = {
         "en": {
             "langSel": "en",
@@ -42,7 +43,8 @@
     elm("langP").innerHTML = language[cl].langP;
     elm("langSel").value = language[cl].langSel;
     elm("infoP").innerHTML = language[cl].infoP;
-
+    */
+    setL(["langSel","settP","langP","infoP"],"settings")
     function lng(elm) {
         localStorage.setItem("lang", elm.value);
         location.reload();
