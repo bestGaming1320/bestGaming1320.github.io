@@ -1,22 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Homepage</title>
-<meta name="viewport" content="width=device-width, initial-scale=1"/>
-<meta name="description" content="Links to all my pages">
-<meta name="author" content="bestGaming132">
-<meta name="keywords" content="index"/>
-<script src="animcol.js"></script>
-<link rel="stylesheet" href="default.css">
+    <title>Homepage</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Links to all my pages">
+    <meta name="author" content="bestGaming132">
+    <meta name="keywords" content="index" />
+    <script src="lang.js"></script>
+    <link rel="stylesheet" href="default.css">
 </head>
 <body align="center">
-<p class="pt">Select a page</p>
-<button style="border: 2px solid #0f0;" onclick="location.href='tools/index.html'">Tools</button><br>
-<button style="border: 2px solid #f00;" onclick="location.href='games/index.html'" >Games</button><br>
-<button onclick="location.href='colorsc.html'" style="border: 2px solid #0af;" >Color Screen</button><br>
-<button onclick="location.href='clock.html'" class="btn" style="border: 2px solid #ff0;" >Clock</button><br>
-<button onclick="location.href='book/index.html'" style="border: 2px solid #f90">Book</button><br>
-<button onclick="location.href='docs/index.html'" style="border: 2px solid #90f">Documentations</button><br>
-<!--<button onclick="location.href='tba.html'" style="border: 2px solid #f0f;">tba</button>-->
+    <p id="title" class="pt">Select a page</p>
+    <button id="tool" style="border: 2px solid #0f0;" onclick="location.href='tools/index.html'">Tools</button><br>
+    <button id="game" style="border: 2px solid #f00;" onclick="location.href='games/index.html'">Games</button><br>
+    <button id="colSc" onclick="location.href='colorsc.html'" style="border: 2px solid #0af;">Color Screen</button><br>
+    <button id="clock" onclick="location.href='clock.html'" class="btn" style="border: 2px solid #ff0;">Clock</button><br>
+    <button id="book" onclick="location.href='book/index.html'" style="border: 2px solid #f90">Book</button><br>
+    <button id="docs" onclick="location.href='docs/index.html'" style="border: 2px solid #90f">Documentations</button><br>
+    <!--<button onclick="location.href='tba.html'" style="border: 2px solid #f0f;">tba</button>-->
 </body>
+<script>
+    setL(["title","tool", "game", "colSc", "clock", "book", "docs"], "mIndex")
+</script>
 </html>
