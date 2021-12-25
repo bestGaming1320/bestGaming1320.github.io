@@ -35,6 +35,7 @@ function setL(inp,pg) {
         let val = langs[pg][cl][inp[i]]
         let tN = elm(inp[i]).tagName
         if (tN == "P") elm(inp[i]).innerHTML = val;
-        else if (tN == "SELECT") elm(inp[i]).value = val
+        else if (tN == "SELECT") elm(inp[i]).value = val;
+        else alert("Unsupported Element: "+tN)
     }
 }
