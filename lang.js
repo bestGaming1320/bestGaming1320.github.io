@@ -4,13 +4,13 @@
             "langSel": "en",
             "settP": "Settings",
             "langP": "Language",
-            "infoP": "Currently only works on this page"
+            "infoP": "Currently only works on these pages:<br>Settings<br>Homepage"
         },
         "de": {
             "langSel": "de",
             "settP": "Einstellungen",
             "langP": "Sprache",
-            "infoP": "Funktioniert aktuell nur auf dieser Seite"
+            "infoP": "Funktioniert aktuell nur auf diesen Seiten:<br>Einstellungen<br>Homepage"
         }
     },
     "mIndex": {
