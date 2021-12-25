@@ -34,15 +34,17 @@
         }
     }
 }
+function hasV(el) {
+    if (elm(el).value == undefined) return false
+    else return true
+}
 if (localStorage.getItem("lang") == null) localStorage.setItem("lang", "en")
 var cl = localStorage.getItem("lang")
 function elm(n) { return document.getElementById(n) }
 function setL(inp, pg) {
     for (i = 0; i < inp.length; i++) {
-        let val = langs[pg][cl][inp[i]]
-        let tN = elm(inp[i]).tagName
-        if (tN == "P" || tN == "BUTTON") elm(inp[i]).innerHTML = val;
-        else if (tN == "SELECT") elm(inp[i]).value = val;
-        else alert("Unsupported Element: " + tN)
+        let val = langs[pg][cl][inp[i]];
+        if (hasV(inp[i])) elm(inp[i]).value = val;
+        else elm(inp[i]).innerHTML = val;
     }
 }
