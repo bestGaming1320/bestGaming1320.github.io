@@ -13,149 +13,149 @@
     <h2 id="h2">Fonake</h2>
     <canvas style="border:2px solid #999;width:400px;height:200px;image-rendering:pixelated" id="cvs"></canvas>
     <p id="score">Score: 0</p>
-    <p id="pos" style="opacity:1" onclick="chv(this)"><p>
-        <div style=";width:100%;position:fixed;bottom:0;">
-            <div>
-                <button style="width:203px" onclick="mu()">W</button><br>
-                <button onclick="ml()">A</button>
-                <button onclick="mr()">D</button><br>
-                <button style="width:203px" onclick="md()">S</button>
-                <!--&#8592; 8593 8594 8595-->
-            </div>
+    <p id="pos" style="opacity:1" onclick="chv(this)"></p>
+    <div style=";width:100%;position:fixed;bottom:0;">
+        <div>
+            <button style="width:203px" onclick="mu()">W</button><br>
+            <button onclick="ml()">A</button>
+            <button onclick="mr()">D</button><br>
+            <button style="width:203px" onclick="md()">S</button>
+            <!--&#8592; 8593 8594 8595-->
         </div>
-        <script>
-            document.getElementById("h2").innerHTML = "Fonake V" + document.querySelector('meta[name="ver"]').content;
-            function log(x) { console.log(x) }
-            var x = 5; //posX
-            var y = 5; //posY
-            var sX = 10; //sizeX
-            var sY = 10; //sizeY
-            var score = 0;
-            var cv = document.getElementById("cvs");
-            var c = cv.getContext("2d");
+    </div>
+    <script>
+        document.getElementById("h2").innerHTML = "Fonake V" + document.querySelector('meta[name="ver"]').content;
+        function log(x) { console.log(x) }
+        var x = 5; //posX
+        var y = 5; //posY
+        var sX = 10; //sizeX
+        var sY = 10; //sizeY
+        var score = 0;
+        var cv = document.getElementById("cvs");
+        var c = cv.getContext("2d");
+        c.fillStyle = "#0f0";
+        c.fillRect(x, y, sX, sY);
+
+        //move functions
+        function mr() { //right d
+            fop();
+            if (x != 285) {
+                c.fillRect(x += 10, y, sX, sY);
+            }
+            else {
+                c.fillRect(x = 5, y, sX, sY);
+            }
+            uPos();
+        }
+
+        function ml() { //left a
+            fop();
+            if (x != 5) {
+                c.fillRect(x -= 10, y, sX, sY);
+            }
+            else {
+                c.fillRect(x = 285, y, sX, sY);
+            }
+            uPos();
+        }
+
+        function mu() { //up w
+            fop();
+            if (y != 5) {
+                c.fillRect(x, y -= 10, sX, sY);
+            }
+            else {
+                c.fillRect(x, y = 135, sX, sY);
+            }
+            uPos();
+        }
+
+        function md() { //down s
+            fop();
+            if (y != 135) {
+                c.fillRect(x, y += 10, sX, sY);
+            }
+            else {
+                c.fillRect(x, y = 5, sX, sY);
+            }
+            uPos();
+        }
+
+        //keyboard controls
+        document.onkeypress = function (e) {
+            e = e || window.event;
+            console.log(e.code)
+            switch (e.code) {
+                case "KeyW":
+                    mu();
+                    break;
+                case "KeyA":
+                    ml();
+                    break;
+                case "KeyS":
+                    md();
+                    break;
+                case "KeyD":
+                    mr();
+            }
+        }
+
+
+        let fX; //foodX
+        let fY; //foodY
+        function nfp() { //newFoodPos
+            fX = rint(15, 275);
+            fY = rint(15, 115);
+            c.fillStyle = "#f0f";
+            c.fillRect(fX, fY, sX, sY);
+            document.getElementById("score").innerHTML = "Score: " + score;
+            uPos();
+        }
+
+        function fop() { //fill old ops
+            c.fillStyle = "#000";
+            c.fillRect(x - 0.2, y - 0.2, sX + 0.3, sY + 0.3);
             c.fillStyle = "#0f0";
-            c.fillRect(x, y, sX, sY);
+        }
 
-            //move functions
-            function mr() { //right d
-                fop();
-                if (x != 285) {
-                    c.fillRect(x += 10, y, sX, sY);
-                }
-                else {
-                    c.fillRect(x = 5, y, sX, sY);
-                }
-                uPos();
+        function uPos() { //updatePos
+            document.getElementById("pos").innerHTML = "Your Position: " + x + "," + y + "<br>Food Position: " + fX + "," + fY + "<br><span style='font-size:10px'>Click to hide, click again to show</span>";
+            if (x == fX && y == fY) { //is player on food pos
+                score++;
+                nfp()
             }
+        }
 
-            function ml() { //left a
-                fop();
-                if (x != 5) {
-                    c.fillRect(x -= 10, y, sX, sY);
-                }
-                else {
-                    c.fillRect(x = 285, y, sX, sY);
-                }
-                uPos();
+        function rint(min, max) { //random int, always ends with 5
+            var v1 = Math.round((Math.random() * (max - min) + min) / 5) * 5;
+            if (v1 % 10 == 0) { v1 += 5; }
+            return v1;
+        }
+
+        function chv(e) {
+            switch (e.style.opacity) {
+                case "1":
+                    e.style.opacity = "0";
+                    break;
+                case "0":
+                    e.style.opacity = "1"
+                    break;
+                default:
+                    console.warn("Could not change value! Opacity: " + e.style.opacity);
             }
+        }
 
-            function mu() { //up w
-                fop();
-                if (y != 5) {
-                    c.fillRect(x, y -= 10, sX, sY);
-                }
-                else {
-                    c.fillRect(x, y = 135, sX, sY);
-                }
-                uPos();
-            }
-
-            function md() { //down s
-                fop();
-                if (y != 135) {
-                    c.fillRect(x, y += 10, sX, sY);
-                }
-                else {
-                    c.fillRect(x, y = 5, sX, sY);
-                }
-                uPos();
-            }
-
-            //keyboard controls
-            document.onkeypress = function (e) {
-                e = e || window.event;
-                console.log(e.code)
-                switch (e.code) {
-                    case "KeyW":
-                        mu();
-                        break;
-                    case "KeyA":
-                        ml();
-                        break;
-                    case "KeyS":
-                        md();
-                        break;
-                    case "KeyD":
-                        mr();
-                }
-            }
-
-
-            let fX; //foodX
-            let fY; //foodY
-            function nfp() { //newFoodPos
-                fX = rint(15, 275);
-                fY = rint(15, 115);
-                c.fillStyle = "#f0f";
-                c.fillRect(fX, fY, sX, sY);
-                document.getElementById("score").innerHTML = "Score: " + score;
-                uPos();
-            }
-
-            function fop() { //fill old ops
-                c.fillStyle = "#000";
-                c.fillRect(x - 0.2, y - 0.2, sX + 0.3, sY + 0.3);
-                c.fillStyle = "#0f0";
-            }
-
-            function uPos() { //updatePos
-                document.getElementById("pos").innerHTML = "Your Position: " + x + "," + y + "<br>Food Position: " + fX + "," + fY + "<br><span style='font-size:10px'>Click to hide, click again to show</span>";
-                if (x == fX && y == fY) { //is player on food pos
-                    score++;
-                    nfp()
-                }
-            }
-
-            function rint(min, max) { //random int, always ends with 5
-                var v1 = Math.round((Math.random() * (max - min) + min) / 5) * 5;
-                if (v1 % 10 == 0) { v1 += 5; }
-                return v1;
-            }
-
-            function chv(e) {
-                switch (e.style.opacity) {
-                    case "1":
-                        e.style.opacity = "0";
-                        break;
-                    case "0":
-                        e.style.opacity = "1"
-                        break;
-                    default:
-                        console.warn("Could not change value! Opacity: " + e.style.opacity);
-                }
-            }
-
-            nfp()
+        nfp()
 //setInterval(function() {if(x==fX&&y==fY){score++;nfp()}}, 50) //check if player is on food position
-        </script>
-        <style>
-            button {
-                width: 100px;
-                height: 55px;
-                font-size: 20px;
-                font-weight: 800;
-            }
-        </style>
+    </script>
+    <style>
+        button {
+            width: 100px;
+            height: 55px;
+            font-size: 20px;
+            font-weight: 800;
+        }
+    </style>
 </body>
 
 </html>
