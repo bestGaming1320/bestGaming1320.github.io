@@ -43,6 +43,7 @@
     }
 }
 function hasV(el) {
+    if (elm(el).tagName == "BUTTON") return false
     if (elm(el).value == undefined) return false
     else return true
 }
