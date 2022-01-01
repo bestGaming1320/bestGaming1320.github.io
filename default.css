@@ -29,14 +29,28 @@ button {
 p {
     margin: 3px;
 }
+
+a {
+    color: #0af
+}
+
+    a:visited {
+        color: #f06
+    }
+    a:hover {
+        color: #0fa;
+    }
+
 .pt {
     font-weight: 700;
     font-size: 32px;
     margin-bottom: 10px;
 }
+
 .pb {
     font-weight: 700;
 }
+
 select {
     text-align: center;
     text-align-last: center;
