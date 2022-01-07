@@ -73,35 +73,35 @@
     </select>
     <input id="DayOp" readonly class="txt2" style="height:25px" value="0">
     <hr>
-    <p>Time to WEEKS</p>
+    <p>Time to WK</p>
     <input id="WeekIp" class="txt" style="height:25px" placeholder="Time in hours" oninput="time('Week')" type="number"><br>
     <select id="WeekS" onchange="elm('WeekIp').placeholder='Time in '+this.value;time('Week')">
-        <option value="months">Months to WEEKS</option>
-        <option value="days">Days to WEEKS</option>
-        <option value="hours" selected="selected">Hours to WEEKS</option>
-        <option value="minutes">Minutes to WEEKS</option>
-        <option value="seconds">Seconds to WEEKS</option>
-        <option value="miliseconds">Miliseconds to WEEKS</option>
+        <option value="months">Months to WK</option>
+        <option value="days">Days to WK</option>
+        <option value="hours" selected="selected">Hours to WK</option>
+        <option value="minutes">Minutes to WK</option>
+        <option value="seconds">Seconds to WK</option>
+        <option value="miliseconds">Miliseconds to WK</option>
     </select>
     <input id="WeekOp" readonly class="txt2" style="height:25px" value="0">
     <hr>
-    <p>Time to MONTHS</p>
+    <p>Time to MON</p>
     <input id="MonIp" class="txt" style="height:25px" placeholder="Time in hours" oninput="time('Mon')" type="number"><br>
     <select id="MonS" onchange="elm('MonIp').placeholder='Time in '+this.value;time('Mon')">
-        <option value="weeks">Weeks to MONTHS</option>
-        <option value="days">Days to MONTHS</option>
-        <option value="hours" selected="selected">Hours to MONTHS</option>
-        <option value="minutes">Minutes to MONTHS</option>
-        <option value="seconds">Seconds to MONTHS</option>
-        <option value="miliseconds">Miliseconds to MONTHS</option>
+        <option value="weeks">Weeks to MON</option>
+        <option value="days">Days to MON</option>
+        <option value="hours" selected="selected">Hours to MON</option>
+        <option value="minutes">Minutes to MON</option>
+        <option value="seconds">Seconds to MON</option>
+        <option value="miliseconds">Miliseconds to MON</option>
     </select>
     <input id="MonOp" readonly class="txt2" style="height:25px" value="0">
     <hr>
     <p>Unix timestamp converter</p>
     <p class="pn">Time to Unix milliseconds</p>
-    <input type="datetime-local" onchange='elm("unixres").value=new Date(this.value).getTime()'>
+    <input type="datetime-local" oninput='elm("unixres").value=new Date(this.value).getTime()'>
     <p class="pn">Unix milliseconds to time</p>
-    <input placeholder="Time in milliseconds" type="number" onchange='elm("unixres").value = new Date(parseFloat(this.value)).toLocaleDateString(undefined,options)'>
+    <input placeholder="Time in milliseconds" type="number" oninput='elm("unixres").value = new Date(parseFloat(this.value)).toLocaleDateString(undefined,options)'>
     <p class="pn">Result</p>
     <input placeholder="result" readonly class="txt2" style="height:25px" id="unixres">
 </body>
