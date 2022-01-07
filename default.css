@@ -61,3 +61,24 @@ select {
     margin-bottom: 5px;
     border-radius: 10px
 }
+/* width */
+::-webkit-scrollbar {
+  width: 5px;
+  height:5px;
+  background:#666
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #333;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #aaa;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #888;
+}
