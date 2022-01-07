@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>canvas game</title>
+    <meta name="description" content="Testing canvas games">
+    <meta name="author" content="bestGaming132">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <meta charset="UTF-8">
+    <meta name="ver" content="0.1.0">
+    <link rel="stylesheet" href="../../default.css" />
+</head>
+<body align="center">
+    <h2 id="h2" onclick="if (confirm('View history of ' + gameName + '?')) location.href = 'https://github.com/bestGaming1320/bestGaming1320.github.io/commits/main/games/' + gameName.toLowerCase() + '.html'"></h2>
+    <canvas style="border:2px solid #999;height:200px;image-rendering:pixelated" id="cvs"></canvas>
+    <p id="score">Score: 0</p>
+    <p id="pos" style="opacity:1" onclick="chv(this)"></p>
+    <div id="dialog" style="margin:0 auto;max-width:400px;width:95%;border:2px solid #999;width:400px;height:200px;overflow-y:scroll">
+        <p>You can press the interact button if you are below a yellow position</p><br>
+    </div>
+    <div style="width:100%;position:fixed;bottom:0;">
+        <div>
+            <button id="jump" style="width:253px" onclick="jump()">Jump</button><br>
+            <button id="a" onclick="ml()">A</button>
+            <button id="d" onclick="mr()">D</button><br>
+            <button id="inter" style="width:253px" onclick="inter()">Interact</button>
+            <!--&#8592; 8593 8594 8595-->
+        </div>
+    </div>
+    <script>
+        var gameName = "CanvasGame"
+        document.getElementById("h2").innerHTML = gameName + " V" + document.querySelector('meta[name="ver"]').content;
+        function log(x) { console.log(x) }
+        function elm(e) { return document.getElementById(e) }
+        var x = 5; //posX
+        var y = 135; //posY
+        var sX = 10; //sizeX
+        var sY = 10; //sizeY
+        var cv = document.getElementById("cvs");
+        var c = cv.getContext("2d");
+        c.fillStyle = "#0f0";
+        c.fillRect(x, y, sX, sY);
+
+        var devM = false
+        function dev() { log("DevMode set to " + (devM = !devM)) }
+
+        //move functions
+        function mr() { //right d
+            fop();
+            if (x != 285) {
+                c.fillRect(x += 10, y, sX, sY);
+            }
+            else {
+                c.fillRect(x = 5, y, sX, sY);
+            }
+            uPos();
+        }
+
+        function ml() { //left a
+            fop();
+            if (x != 5) {
+                c.fillRect(x -= 10, y, sX, sY);
+            }
+            else {
+                c.fillRect(x = 285, y, sX, sY);
+            }
+            uPos();
+        }
+
+        function mu() { //up w
+            fop();
+            if (y != 5) {
+                c.fillRect(x, y -= 10, sX, sY);
+            }
+            else {
+                c.fillRect(x, y = 135, sX, sY);
+            }
+            uPos();
+        }
+
+        function md() { //down s
+            fop();
+            if (y != 135) {
+                c.fillRect(x, y += 10, sX, sY);
+            }
+            else {
+                c.fillRect(x, y = 5, sX, sY);
+            }
+            uPos();
+        }
+
+        //keyboard controls
+        document.onkeypress = function (e) {
+            e = e || window.event;
+            if (devM) log(e.code)
+            switch (e.code) {
+                case "KeyW":
+                    elm("jump").click()
+                    break;
+                case "KeyA":
+                    elm("a").click();
+                    break;
+                case "KeyS":
+                    elm("inter").click();
+                    break;
+                case "KeyD":
+                    elm("d").click();
+                    break;
+                case "KeyP":
+                    dev()
+            }
+        }
+
+        function fop() { //fill old pos
+            c.fillStyle = "#000";
+            c.fillRect(x, y, sX, sY);
+            c.fillStyle = "#0f0";
+        }
+
+        function uPos() { //updatePos
+            document.getElementById("pos").innerHTML = "Your Position: " + x + "," + y + "<br><span style='font-size:10px'>Click to hide, click again to show</span>";
+        }
+
+        function rint(min, max) { //random int, always ends with 5
+            var v1 = Math.round((Math.random() * (max - min) + min) / 5) * 5;
+            if (v1 % 10 == 0) { v1 += 5; }
+            return v1;
+        }
+
+        function chv(e) {
+            switch (e.style.opacity) {
+                case "1":
+                    e.style.opacity = "0";
+                    break;
+                case "0":
+                    e.style.opacity = "1"
+                    break;
+                default:
+                    console.warn("Could not change value! Opacity: " + e.style.opacity);
+            }
+        }
+
+        var cl = null
+        function jump() {
+            if (cl == null) {
+                mu()
+                cl = setTimeout(function () {
+                    cl = null
+                    md()
+                }, 500)
+            }
+        }
+
+        var interV = {
+            "coords": [25, 55],
+            "actions": [
+                [
+                    "addp('Hello and welcome to '+gameName)",
+                    "addp('Press the interact button until the yellow sign moves to a new location')",
+                    "addp('By doing so you forward the story')",
+                    "addp('Go to the new position',1);interSig(55)"
+                ], [
+                    "addp('If you press A or D while you are at the start or the end of the screen you will get to the other side')",
+                    "addp('Congratulations, you have completed the tutorial!',1);interSig(0,0,false)"
+                    //"addp('If you are under a magenta square you can press interact to collect it')",
+                    //"addp('Collect the two squares to continue',1)"
+                ]
+            ]
+        }
+        var tmp = 0;
+        function inter() {
+            if (interV.coords.includes(x) && interV.coords.indexOf(x) == prog) {
+                if (tmp < interV.actions[prog].length) {
+                    eval(interV.actions[prog][tmp++])
+                    //if (tmp == interV.actions[prog].length) tmp = 0;
+                }
+            }
+            devM ? log(tmp + n + prog + n) : 0
+        }
+        var n = "\n"
+
+        var xYel
+        var yYel
+
+        var prog = -1
+
+        function prg() {
+            prog++
+            tmp = 0
+        }
+
+        function interSig(xi, yi = 100, keep = true) { //interact sign
+            c.fillStyle = "#000"
+            c.fillRect(xYel, yYel, 10, 20)
+            xYel = xi; yYel = yi
+            if (keep) {
+                c.fillStyle = "#ff0"
+                c.fillRect(xi, yi, 10, 20)
+            }
+            prg()
+        }
+        uPos()
+        interSig(25, 100)
+        var tmpID = 0;
+
+        const dialog = elm("dialog")
+        function addp(con, t) {
+            var p = document.createElement("p")
+            p.appendChild(document.createTextNode(con))
+            p.id = tmpID++
+            dialog.appendChild(p)
+            if(t)dialog.appendChild(document.createElement("br"))
+            dialog.scrollTop = dialog.scrollHeight
+        }
+    </script>
+    <style>
+        button {
+            width: 125px;
+            height: 55px;
+            font-size: 20px;
+            font-weight: 800;
+        }
+
+        body {
+            margin: 2px;
+        }
+
+        ::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+</body>
+</html>
