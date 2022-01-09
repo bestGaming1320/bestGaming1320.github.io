@@ -1,0 +1,63 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>HTML Editor</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="HTML editor meant for mobile users. Console included">
+    <meta name="author" content="bestGaming132">
+    <meta name="keywords" content="edit" />
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="toolstyle.css">
+</head>
+<body align="center">
+    <p class="pt">HTML Editor</p>
+    <textarea id="code" style="text-align:left;height:20vh;min-height:100px"></textarea><br>
+    <button onclick="rhtml()" class="btn">Run HTML</button><br>
+    <button onclick="save()">Save HTML</button>
+    <button onclick="load()">Load HTML</button>
+    <input type="number" id="wid" placeholder="Width of iframe">
+    <input type="number" id="hei" placeholder="Height of iframe"><br>
+    <button onclick="cs()" class="btn">Change size</button><br>
+    <p>Known bug: content of iframe is not replaced, it gets added to it</p>
+    <iframe id="frame" style="border:2px solid #333;width:70%;height:400px" src="about:blank"></iframe>
+    <script>
+        //
+        var defCode = "<body><style>body{background:#fff}</style></body>"
+        window.addEventListener("load", function () { elm("frame").contentWindow.document.write(defCode) })
+        
+        function cs() {
+            elm("frame").style.width = elm("wid").value + "px"
+            elm("frame").style.height = elm("hei").value + "px"
+        }
+        function rhtml() {
+            //elm("frame").contentWindow.document.write(defCode)
+            elm("frame").contentWindow.document.write(elm('code').value)
+        }
+        function save() {
+            if (confirm("Do you want to save the HTML code to localstorage? It will be available next time you press the load button. Thid won't work if you are using incognito mode. Saving will overwrite your old save.")) {
+                localStorage.setItem("code", elm("code").value)
+            }
+        }
+        function load() {
+            if (!localStorage.getItem("code")) {
+                alert("No saved code found!")
+                return
+            }
+            if (confirm("Do you want to load the HTML code from localstorage? This will replace the code inside the text field.")) {
+                elm("code").value = localStorage.getItem("code")
+            }
+        }
+        function elm(e) {
+            return document.getElementById(e)
+        }
+        function log(l) {
+            console.log(l)
+        }
+    </script>
+    <style>
+        input {
+            width: 34.5%
+        }
+    </style>
+</body>
+</html>
