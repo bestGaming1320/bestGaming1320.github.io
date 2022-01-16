@@ -104,7 +104,12 @@ p {
     background: #aaa;
 }
 
-    /* Handle on hover */
-    ::-webkit-scrollbar-thumb:hover {
-        background: #888;
-    }
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #888;
+}    
+
+/* bottom right square */
+::-webkit-scrollbar-corner {
+    background: #333;
+}
