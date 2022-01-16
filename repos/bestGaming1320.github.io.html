@@ -12,8 +12,13 @@
 <body align="center">
     <p class="pt" id="t">bestGaming1320.github.io</p>
     <script>
+        var req = new XMLHttpRequest();
+        req.open('GET', "https://bestGaming1320.github.io/", false);
+        req.send(null);
+
         init("This is my website and the place I publish things I make in html, css and js")
-        btn("Main Page","../index.html")
+        p("Last Update: " + (new Date(req["getResponseHeader"]("last-modified"))).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric', hour: "numeric", minute: "numeric" }))
+        btn("Main Page", "../index.html")
     </script>
 </body>
 </html>
