@@ -1,0 +1,31 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Custom Element Testing</title>
+    <link rel="stylesheet" href="../default.css">
+</head>
+<body>
+    <h2>Custom Element Testing</h2>
+    <button is="cust-btn" pic="example.png" txt="tests"></button>
+</body>
+<script>
+
+    class custBtn extends HTMLButtonElement {
+        constructor() {
+            // Always call super first in constructor
+            super();
+
+            // write element functionality in here
+
+            var img = document.createElement("img")
+            img.src = this.getAttribute("pic")
+            img.width = 20
+            img.height = 20
+            this.innerHTML = this.getAttribute("txt")
+            this.appendChild(img)
+        }
+    }
+    customElements.define('cust-btn', custBtn, { extends: 'button' })
+</script>
+</html>
