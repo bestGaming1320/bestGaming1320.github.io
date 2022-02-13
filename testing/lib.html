@@ -60,15 +60,15 @@
     function genJson(length = 10) {
         let output = ""
         for (i = 0; i < length; i++) {
-            output += '{"title": "Title' + i +'","desc":"Lorem ipsum dolor sit amet","img": "https://bestgaming1320.github.io/placeholder.png"},'
+            output += '{"title": "Title' + i + '","desc":"Lorem ipsum dolor sit amet","img": "https://bestgaming1320.github.io/placeholder.png"},'
         }
-        return "["+(output)+"]"
+        return "[" + output.slice(0, -1) + "]"
     }
 
     function p(txt,tit) {
         let p = document.createElement("p")
         p.innerHTML = txt
-        if(tit) p.classList.add("t")
+        if (tit) p.classList.add("t")
         return p
     }
     function img(url) {
@@ -79,7 +79,7 @@
     var sw
     if (screen.width <= 350) sw = 1
     else if (screen.width <= 500) sw = 2
-    else if(screen.width <=700) sw = 3
+    else if (screen.width <= 700) sw = 3
     else sw = 4
     function genLib(input = defJson) {
         var tb = elm("tb")
@@ -94,33 +94,39 @@
             td.appendChild(div)
             tr.appendChild(td)
 
-            if (i % sw == 0 || i==input.length) {
+            if (i % sw == 0 || i == input.length) {
                 tb.appendChild(tr)
-                tr=document.createElement("tr")
+                tr = document.createElement("tr")
             }
         }
     }
-    genLib()
+    let ce = location.search.slice(1)
+    ce = ce ? ce : 17
+    genLib(JSON.parse(genJson(ce)))
 </script>
 <style>
     table {
         margin: 0 auto
     }
+
     div {
         width: 17vw;
         min-width: 160px;
         height: 15vh;
         min-height: 260px;
-        border: 1px solid #aaa;
+        border: 2px solid #999;
         overflow-y: scroll
     }
+
     .t {
         font-size: 22px;
         font-weight: 700
     }
+
     img {
         width: 60%
     }
+
     p {
         font-size: 16px
     }
