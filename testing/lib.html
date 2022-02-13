@@ -1,0 +1,124 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Library</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Visual library test (not js library) with json">
+    <meta name="author" content="bestGaming132">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../default.css">
+    <link rel="stylesheet" href="../scroll.css">
+</head>
+
+<body align="center">
+    <h2>Library</h2>
+    <table id="t">
+        <tbody id="tb">
+        </tbody>
+    </table>
+</body>
+<script>
+    //useful functions
+    function log(str) {
+        console.log(str);
+    }
+
+    function elm(id) {
+        return document.getElementById(id);
+    }
+
+    //start
+    var defJson = [
+        {
+            "title": "Title1",
+            "desc": "Description for item1",
+            "img": "https://bestgaming1320.github.io/placeholder.png"
+        },
+        {
+            "title": "Title2",
+            "desc": "Description for item2",
+            "img": "https://bestgaming1320.github.io/placeholder.png"
+        },
+        {
+            "title": "Title3",
+            "desc": "Description for item3",
+            "img": "https://bestgaming1320.github.io/placeholder.png"
+        },
+        {
+            "title": "Title4",
+            "desc": "Description for item4",
+            "img": "https://bestgaming1320.github.io/placeholder.png"
+        },
+        {
+            "title": "Title5",
+            "desc": "Lorem ipsum dolor sit amet",
+            "img": "https://bestgaming1320.github.io/placeholder.png"
+        }
+    ]
+
+    function genJson(length = 10) {
+        let output = ""
+        for (i = 0; i < length; i++) {
+            output += '{"title": "Title' + i +'","desc":"Lorem ipsum dolor sit amet","img": "https://bestgaming1320.github.io/placeholder.png"},'
+        }
+        return "["+(output)+"]"
+    }
+
+    function p(txt,tit) {
+        let p = document.createElement("p")
+        p.innerHTML = txt
+        if(tit) p.classList.add("t")
+        return p
+    }
+    function img(url) {
+        let img = document.createElement("img")
+        img.src = url
+        return img
+    }
+
+    function genLib(input = defJson) {
+        var tb = elm("tb")
+        var tr = document.createElement("tr")
+        for (i = 1; i < input.length + 1; i++) {
+            let td = document.createElement("td")
+            let div = document.createElement("div")
+            div.appendChild(p(input[i - 1].title, 1))
+            div.appendChild(img(input[i - 1].img))
+            div.appendChild(p(input[i - 1].desc))
+            div.classList.add("nobar")
+            td.appendChild(div)
+            tr.appendChild(td)
+
+            if (i % 4 == 0 || i==input.length) {
+                tb.appendChild(tr)
+                tr=document.createElement("tr")
+            }
+        }
+    }
+    genLib()
+</script>
+<style>
+    table {
+        margin: 0 auto
+    }
+    div {
+        width: 17vw;
+        min-width: 170px;
+        height: 15vh;
+        min-height: 260px;
+        border: 1px solid #aaa;
+        overflow-y: scroll
+    }
+    .t {
+        font-size: 22px;
+        font-weight: 700
+    }
+    img {
+        width: 60%
+    }
+    p {
+        font-size: 16px
+    }
+</style>
+</html>
