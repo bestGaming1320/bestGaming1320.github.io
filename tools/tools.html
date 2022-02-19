@@ -14,335 +14,373 @@
 </style>
 </head>
 <body align="center">
-<h2 style="margin-bottom:1px">Tools</h2>
-<p id="clock" style="margin:1px">&nbsp;</p>
-<!-- Get Length -->
-<p style="margin-top:2px"><b>Length Calculator</b></p>
+	<h2 style="margin-bottom:1px">Tools</h2>
+	<p id="clock" style="margin:1px">&nbsp;</p>
+	<p style="margin:1px">This page will no longer receive updates<br>Use <a href="spt/index.html">this page</a> instead</p>
+	<!-- Get Length -->
+	<p style="margin-top:2px"><b>Length Calculator</b></p>
 <textarea class="txt" oninput="getL()" id="txt" style="height:45px"></textarea>
-<p style="margin:3px" id="leng">Length: 0</p>
-<p style="margin:3px" id="wordL">Words: 0</p>
-<hr>
-<!-- Random Selector -->
-<p><b>Random Selector</b></p>
-<input class="txt" type="text" id="txtt"><br>
-<button onClick="addItem()" style="width:71%">Add Item</button><br>
-<button onClick="rando(1)">Pick Random</button>
-<button onClick="rando(5)">Pick 5 Random</button><br>
-<button onClick="removeLast()">Remove last item</button>
-<button onClick="resetL()">Remove all items</button>
-<p style="margin:4px">Current Items:</p>
+	<p style="margin:3px" id="leng">Length: 0</p>
+	<p style="margin:3px" id="wordL">Words: 0</p>
+	<hr>
+	<!-- Random Selector -->
+	<p><b>Random Selector</b></p>
+	<input class="txt" type="text" id="txtt"><br>
+	<button onClick="addItem()" style="width:71%">Add Item</button><br>
+	<button onClick="rando(1)">Pick Random</button>
+	<button onClick="rando(5)">Pick 5 Random</button><br>
+	<button onClick="removeLast()">Remove last item</button>
+	<button onClick="resetL()">Remove all items</button>
+	<p style="margin:4px">Current Items:</p>
 <textarea class="txt2" readonly id="txt2">None</textarea>
-<hr>
-<!-- Replacer -->
-<p><b>Text Replacer</b></p>
+	<hr>
+	<!-- Replacer -->
+	<p><b>Text Replacer</b></p>
 <textarea placeholder="Text" id="te1" oninput="repl()"></textarea><br>
 <textarea placeholder="Word to replace" class="txt" id="te2" oninput="repl()"></textarea><br>
 <textarea placeholder="Replace word with" class="txt" id="te3" oninput="repl()"></textarea><br>
-<p style="margin:3px">Output:</p>
+	<p style="margin:3px">Output:</p>
 <textarea class="txt2" id="opt" readonly></textarea>
-<hr>
-<!-- TextRepeater -->
-<p><b>Text Repeater</b></p>
+	<hr>
+	<!-- TextRepeater -->
+	<p><b>Text Repeater</b></p>
 <textarea class="txt" placeholder="Text" id="tx1"></textarea><br>
-<input style="height:20px;" class="txt" placeholder="Number" type="number" id="tx2"><br>
-<p style="margin:5px">Select a mode</p>
-<select id="sel" style="color:#fff;background:#333;height:30px; width:60%;margin-bottom:5px">
-<option value="sp">Space after each item</option>
-<option value="n">Nothing between each item</option>
-<option value="nl">Newline after each item</option>
-<!--<option value="nnl">Numbered newlines after each item</option>
-<option value="dnl">Dotted newlines after each item</option>-->
-</select><br>
-<button onclick="fun()">Repeat</button><br>
+	<input style="height:20px;" class="txt" placeholder="Number" type="number" id="tx2"><br>
+	<p style="margin:5px">Select a mode</p>
+	<select id="sel" style="color:#fff;background:#333;height:30px; width:60%;margin-bottom:5px">
+		<option value="sp">Space after each item</option>
+		<option value="n">Nothing between each item</option>
+		<option value="nl">Newline after each item</option>
+		<!--<option value="nnl">Numbered newlines after each item</option>
+		<option value="dnl">Dotted newlines after each item</option>-->
+	</select><br>
+	<button onclick="fun()">Repeat</button><br>
 <textarea class="txt2" readonly id="txop"></textarea>
-<hr>
-<!-- RandomTxtGen -->
-<p><b>Random Text Generator</b></p>
-<input style="height:20px;" class="txt" placeholder="Characters (number)" type="number" id="txtN"><br>
-<button onclick="rTxt()">Generate</button><br>
-<p style="margin:5px">Select a mode</p>
-<select id="sel2" style="color:#fff;background:#333;height:30px; width:60%;margin-bottom:5px">
-<option value="l">Only Letters</option>
-<option value="ln">Letters and Numbers</option>
-<option value="lns">Letters, Numbers and Special Characters</option>
-<!--<option value="cus">Custom Characters</option>-->
-</select>
+	<hr>
+	<!-- RandomTxtGen -->
+	<p><b>Random Text Generator</b></p>
+	<input style="height:20px;" class="txt" placeholder="Characters (number)" type="number" id="txtN"><br>
+	<button onclick="rTxt()">Generate</button><br>
+	<p style="margin:5px">Select a mode</p>
+	<select id="sel2" style="color:#fff;background:#333;height:30px; width:60%;margin-bottom:5px">
+		<option value="l">Only Letters</option>
+		<option value="ln">Letters and Numbers</option>
+		<option value="lns">Letters, Numbers and Special Characters</option>
+		<!--<option value="cus">Custom Characters</option>-->
+	</select>
 <textarea class="txt2" readonly id="rTxtOp"></textarea>
-<hr>
-<!-- Finder -->
-<p style="margin-bottom:3px"><b>Finder</b></p>
-<p onclick="cCol()" id="cC" style="margin:1px">Click here to change <span style="color:#ff3e3e">highlight color</span></p>
-<input style="height:20px;margin-bottom:3px" class="txt" placeholder="Word to find" id="fW" oninput="find()"><br>
+	<hr>
+	<!-- Finder -->
+	<p style="margin-bottom:3px"><b>Finder</b></p>
+	<p onclick="cCol()" id="cC" style="margin:1px">Click here to change <span style="color:#ff3e3e">highlight color</span></p>
+	<input style="height:20px;margin-bottom:3px" class="txt" placeholder="Word to find" id="fW" oninput="find()"><br>
 <textarea style="height:40px" placeholder="Text" class="txt" id="fT" oninput="find()"></textarea><br>
-<p style="margin:auto;color:#fff;background:#222;width:70%;height:65px;overflow-y:scroll;word-wrap: break-word;outline:1px solid #9e9e9e" id="findOp"></p>
-<hr>
-<!-- Base64 -->
-<p style="margin-bottom:3px"><b>Base 64</b></p>
+	<p style="margin:auto;color:#fff;background:#222;width:70%;height:65px;overflow-y:scroll;word-wrap: break-word;outline:1px solid #9e9e9e" id="findOp"></p>
+	<hr>
+	<!-- Base64 -->
+	<p style="margin-bottom:3px"><b>Base 64</b></p>
 <textarea style="height:40px" class="txt" id="b64ip" placeholder="Text"></textarea><br>
-<button style="margin:2px;width:24%" onclick="b64('ec')">Encode</button>
-<button style="margin:2px;width:24%" onclick="b64('dc')">Decode</button> <br>
+	<button style="margin:2px;width:24%" onclick="b64('ec')">Encode</button>
+	<button style="margin:2px;width:24%" onclick="b64('dc')">Decode</button> <br>
 <textarea class="txt2" readonly id="b64op"></textarea>
-<hr>
-<!-- Line Number -->
-<p style="margin-bottom:3px"><b>Line Number Adder</b></p>
+	<hr>
+	<!-- Line Number -->
+	<p style="margin-bottom:3px"><b>Line Number Adder</b></p>
 <textarea style="height:40px" class="txt" placeholder="Text" id="lnip"></textarea><br>
-<button onclick="addn()">Add Numbers</button><br>
-<select id="lnum">
-<option value="num">Numbers only</option>
-<option value="nwd">Numbers with dots</option>
-<option value="pnu">Numbers with parenthesis</option>
-<option value="dot">Dots / Bullets</option>
-<option value="cus">Custom character</option>
-</select>
+	<button onclick="addn()">Add Numbers</button><br>
+	<select id="lnum">
+		<option value="num">Numbers only</option>
+		<option value="nwd">Numbers with dots</option>
+		<option value="pnu">Numbers with parenthesis</option>
+		<option value="dot">Dots / Bullets</option>
+		<option value="cus">Custom character</option>
+	</select>
 <textarea readonly class="txt2" id="lnop"></textarea>
-<hr>
-<!-- Sorter -->
-<p style="margin-bottom:3px"><b>Sorter</b></p>
-<p style="margin:0px">Items are seperated with newlines</p>
+	<hr>
+	<!-- Sorter -->
+	<p style="margin-bottom:3px"><b>Sorter</b></p>
+	<p style="margin:0px">Items are separated with newlines</p>
 <textarea class="txt" type="text" id="sip" placeholder="Input" style="height:40px"></textarea><br>
-<button onClick="sortf()">Sort</button><br>
+	<button onClick="sortf()">Sort</button><br>
 <textarea class="txt2" readonly id="sop"></textarea>
-<hr>
-<!-- Random Hex Generator -->
-<p style="margin-bottom:3px"><b>Random Hex Generator</b></p>
-<button style="width:50%" onclick="genHex(1)">Generate 1 Hex Code</button><br>
-<button style="width:50%" onclick="genHex(5)">Generate 5 Hex Codes</button><br>
-<button style="width:50%" onclick="genHex('c')">Generate  custom Hex Codes</button><br>
+	<hr>
+	<!-- Random Hex Generator -->
+	<p style="margin-bottom:3px"><b>Random Hex Generator</b></p>
+	<button style="width:50%" onclick="genHex(1)">Generate 1 Hex Code</button><br>
+	<button style="width:50%" onclick="genHex(5)">Generate 5 Hex Codes</button><br>
+	<button style="width:50%" onclick="genHex('c')">Generate  custom Hex Codes</button><br>
 <textarea class="txt2" id="hop" style="height:70px" readonly></textarea>
-<hr>
-<!-- Color Converter -->
-<p style="margin-bottom:3px"><b>Color Converter</b></p>
-<p style="font-weight:400">If you input a hex code you don't need the #<br>Hex codes need to be 6 or 7 characters long and RGB codes need to be 3 characters long for each color (add zeros if it is shorter) and need to be seperated by commas or spaces</p>
-<input placeholder="Hex / RGB Code" id="colcip"><br>
-<button style="width:24%" onclick="convCol('hex')">To Hex</button>
-<button style="width:24%" onclick="convCol('rgb')">To RGB</button><br>
+	<hr>
+	<!-- Color Converter -->
+	<p style="margin-bottom:3px"><b>Color Converter</b></p>
+	<p style="font-weight:400">If you input a hex code you don't need the #<br>Hex codes need to be 6 or 7 characters long and RGB codes need to be 3 characters long for each color (add zeros if it is shorter) and need to be separated by commas or spaces</p>
+	<input placeholder="Hex / RGB Code" id="colcip"><br>
+	<button style="width:24%" onclick="convCol('hex')">To Hex</button>
+	<button style="width:24%" onclick="convCol('rgb')">To RGB</button><br>
 <textarea class="txt2" id="colcop" readonly></textarea>
-<hr>
-<!-- Y or N -->
-<p style="margin-bottom:3px"><b>Yes or No picker</b></p>
-<button onclick="yon(1)">Pick One</button><br>
-<button onclick="yon(5)">Pick Five</button><br>
-<button onclick="yon('c')">Pick Custom</button>
-<hr>
-<!-- Rnd Coord Generator-->
-<p style="margin-bottom:3px"><b>Random Coordinate Generator</b></p>
-<button onclick="genCoord(1)">Generate One</button><br>
-<button onclick="genCoord(5)">Generate Five</button><br>
-<button onclick="genCoord('c')">Generate Custom</button><br>
+	<hr>
+	<!-- Y or N -->
+	<p style="margin-bottom:3px"><b>Yes or No picker</b></p>
+	<button onclick="yon(1)">Pick One</button><br>
+	<button onclick="yon(5)">Pick Five</button><br>
+	<button onclick="yon('c')">Pick Custom</button>
+	<hr>
+	<!-- Rnd Coord Generator-->
+	<p style="margin-bottom:3px"><b>Random Coordinate Generator</b></p>
+	<button onclick="genCoord(1)">Generate One</button><br>
+	<button onclick="genCoord(5)">Generate Five</button><br>
+	<button onclick="genCoord('c')">Generate Custom</button><br>
 <textarea class="txt2" id="rcgop" style="height:70px" readonly></textarea>
-<script>
-//clock
-var cl = setInterval(clo, 1000);
-function clo() {
- var t = new Date().toLocaleTimeString('en-GB');
- document.getElementById("clock").innerHTML = t.bold();}
+	<script>
+		//clock
+		var cl = setInterval(clo, 1000);
+		function clo() {
+			var t = new Date().toLocaleTimeString('en-GB');
+			document.getElementById("clock").innerHTML = t.bold();
+		}
 
 
-//get length
-var result =""
-function getL() {
-resultL = document.getElementById("txt").value.length;
-document.getElementById("leng").innerHTML = "Length: " + resultL;
-try{
-var resultW = document.getElementById("txt").value.match(/\S+/g).length;
-document.getElementById("wordL").innerHTML = "Words: " + resultW;} catch(e) {
-document.getElementById("wordL").innerHTML= "Words: 0"}
+		//get length
+		var result = ""
+		function getL() {
+			resultL = document.getElementById("txt").value.length;
+			document.getElementById("leng").innerHTML = "Length: " + resultL;
+			try {
+				var resultW = document.getElementById("txt").value.match(/\S+/g).length;
+				document.getElementById("wordL").innerHTML = "Words: " + resultW;
+			} catch (e) {
+				document.getElementById("wordL").innerHTML = "Words: 0"
+			}
+		}
+
+		//random selector
+		var items = [];
+		function addItem() {
+			if (/\S/.test(document.getElementById("txtt").value)) {
+				items.push(document.getElementById("txtt").value);
+				console.log("Added " + items[items.length - 1]);
+				var text = ""
+				for (i = 0; i < items.length; i++) {
+					text += items[i] + "\n";
+					document.getElementById("txt2").value = text
+				}
+			} else {
+				console.log("Input is empty")
+			}
+		}
+
+		function rando(num) {
+			if (!items.length == 0) {
+				let output = "";
+				for (ii = 0; ii < num; ii++) {
+					let rnd = Math.floor(Math.random() * items.length);
+					output += items[rnd] + "\n";
+				}
+				alert(output)
+			} else {
+				console.log("Items is empty")
+			}
+		}
+
+		function resetL() {
+			var conf = confirm("Are you sure you want to remove all items?")
+			if (conf == true) {
+				console.log("Removed " + items.length + " items")
+				items.splice(0, items.length)
+				document.getElementById("txt2").value = "None"
+			}
+			else {
+				console.log("Canceled")
+			}
+		}
+
+		function removeLast() {/*
+				if (!items.length<=0){
+								items.splice(-1,1) */
+			var text = ""
+			items.pop()
+			for (i = 0; i < items.length; i++) {
+				text += items[i] + "\n";
+				document.getElementById("txt2").value = text
+			}
+			/*	}*/
 }
+		//replacer
+		function repl() {
+			var replTxt = document.getElementById("te1").value
+			var repl1 = document.getElementById("te2").value
+			var repl2 = document.getElementById("te3").value
+			var result = replTxt.replaceAll(repl1, repl2)
+			document.getElementById("opt").innerHTML = result
+		}
 
-//random selector
-  var items = [];
-  function addItem() {
-  if (/\S/.test(document.getElementById("txtt").value)) {
-    items.push(document.getElementById("txtt").value);
-    console.log("Added " + items[items.length - 1]);
-    var text = ""    
-    for (i = 0; i < items.length; i++) {
-	text += items[i] + "\n";
-    document.getElementById("txt2").value = text}
-   } else {
-   console.log("Input is empty")} 
-  }
- 
-function rando(num) {
-  if (!items.length == 0) {
-       let output = "";
-       for (ii=0;ii<num;ii++) {
-       let rnd = Math.floor(Math.random() * items.length);
-       output += items[rnd] +"\n";}
-alert(output)
-   } else {
- console.log("Items is empty")}
- }
-  
-function resetL() {
-  	var conf = confirm("Are you sure you want to remove all items?")
-  	if (conf == true) {
-  	console.log("Removed " + items.length + " items") 
-  	items.splice(0, items.length)
-      document.getElementById("txt2").value = "None"}
-	  else {
-	 console.log("Canceled")}} 
-	 
-function removeLast() {/*
-			if (!items.length<=0){
-							items.splice(-1,1) */
-							var text = ""
-							items.pop()
-							for (i = 0; i < items.length; i++) {
-	       text += items[i] + "\n";
-        document.getElementById("txt2").value = text}
-		/*	}*/}
-//replacer
-function repl() {
-var replTxt = document.getElementById("te1").value
-var repl1 = document.getElementById("te2").value
-var repl2 = document.getElementById("te3").value
-var result = replTxt.replaceAll(repl1, repl2) 
-document.getElementById("opt").innerHTML = result}
+		//TextRepeater
+		function fun() {
+			var userText = document.getElementById("tx1").value
+			var userNum = document.getElementById("tx2").value
+			var mode = document.getElementById("sel").value
+			var output = ""
+			for (i = 0; i < userNum; i++) {
+				var nu = i + 1
+				if (mode == "sp") {
+					output += userText + " "
+				}
+				if (mode == "nl") {
+					output += userText + "\n"
+				}
+				if (mode == "nnl") {
+					output += nu + " " + userText + "\n"
+				}
+				if (mode == "dnl") {
+					output += "&#8226;" + userText + "\n"
+				}
+				if (mode == "n") {
+					output += userText
+				}
+			}
+			document.getElementById("txop").innerHTML = output
+		}
 
-//TextRepeater
-function fun() {
-var userText = document.getElementById("tx1").value
-var userNum = document.getElementById("tx2").value
-var mode = document.getElementById("sel").value
-var output = ""
-for (i=0;i < userNum; i++) {
-var nu = i +1
-if(mode=="sp"){
-output += userText + " "}
-if(mode=="nl"){
-output += userText + "\n"}
-if(mode=="nnl") {
-output += nu + " " + userText + "\n"}
-if(mode=="dnl") {
-output += "&#8226;" + userText + "\n"}
-if(mode=="n") {
-output += userText}
-}
-document.getElementById("txop").innerHTML = output}
+		//TextGenerator
+		function rTxt() {
+			mode2 = document.getElementById("sel2").value;
+			let num = document.getElementById("txtN").value;
+			document.getElementById("rTxtOp").innerHTML = rndT(num);
+		}
 
-//TextGenerator
-function rTxt() {
-mode2 = document.getElementById("sel2").value;
-let num = document.getElementById("txtN").value;
-document.getElementById("rTxtOp").innerHTML= rndT(num);}
-
-function rndT(length) {
-var result = []; 
-var characters;
-//var cusCharacters
-if(mode2=="l") {
-characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";} else if(mode2=="ln") {
-characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";} else if(mode2=="lns") {
-characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz;!\"#$%&\'()*+,-.\/:;<=>?@[\\]^_`{|}~"} /*else if(mode2=="cus") {
+		function rndT(length) {
+			var result = [];
+			var characters;
+			//var cusCharacters
+			if (mode2 == "l") {
+				characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+			} else if (mode2 == "ln") {
+				characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+			} else if (mode2 == "lns") {
+				characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz;!\"#$%&\'()*+,-.\/:;<=>?@[\\]^_`{|}~"
+			} /*else if(mode2=="cus") {
 cusCharacters = prompt("Enter every character you want to use", cusCharacters);}  */
-var cLength = characters.length
-for ( var i = 0; i < length; i++ ) { 
-result.push(characters.charAt(Math.floor(Math.random() * cLength))); } 
-return result.join(""); }
+			var cLength = characters.length
+			for (var i = 0; i < length; i++) {
+				result.push(characters.charAt(Math.floor(Math.random() * cLength)));
+			}
+			return result.join("");
+		}
 
-//finder
-var color = "#ff3e3e"
-function find() {
-var findTxt = document.getElementById("fT").value
-var findWord = document.getElementById("fW").value
-var findResult = findTxt.replaceAll(findWord, "<span style=\"color:" + color +"\"><b>" + findWord + "</b></span>") 
-document.getElementById("findOp").innerHTML = findResult}
-function cCol() {
-color = prompt("Choose a color in HEX format", color)
-if (color==null||!/^#([0-9A-F]{3}){1,2}$/i.test(color)) {
-color = "#ff3e3e"}
-document.getElementById("cC").innerHTML="Click here to change <span style='color:"+color+"'>highlight color</span>"} 
+		//finder
+		var color = "#ff3e3e"
+		function find() {
+			var findTxt = document.getElementById("fT").value
+			var findWord = document.getElementById("fW").value
+			var findResult = findTxt.replaceAll(findWord, "<span style=\"color:" + color + "\"><b>" + findWord + "</b></span>")
+			document.getElementById("findOp").innerHTML = findResult
+		}
+		function cCol() {
+			color = prompt("Choose a color in HEX format", color)
+			if (color == null || !/^#([0-9A-F]{3}){1,2}$/i.test(color)) {
+				color = "#ff3e3e"
+			}
+			document.getElementById("cC").innerHTML = "Click here to change <span style='color:" + color + "'>highlight color</span>"
+		}
 
-//Base64
-function b64(v) {
-var result64;
-let input = document.getElementById("b64ip").value;
-try{
-if (v=='ec') {
-result64 = btoa(input);} else {
-result64 = atob(input);}
-} catch(e) {
-result64 = "Cannot decode input"}
-document.getElementById("b64op").innerHTML = result64;
-} 
+		//Base64
+		function b64(v) {
+			var result64;
+			let input = document.getElementById("b64ip").value;
+			try {
+				if (v == 'ec') {
+					result64 = btoa(input);
+				} else {
+					result64 = atob(input);
+				}
+			} catch (e) {
+				result64 = "Cannot decode input"
+			}
+			document.getElementById("b64op").innerHTML = result64;
+		}
 
-//Line Number
-function addn() {
-let mode = document.getElementById("lnum").value
-let input = document.getElementById("lnip").value.split("\n")
-let output ="" 
-if(mode=="num") {for(n=0;n<input.length;n++){output+=(n+1)+" "+input[n]+"\n"}}
-else if(mode=="nwd") {for(n=0;n<input.length;n++){output+=(n+1)+". "+input[n]+"\n"}}
-else if(mode=="pnu") {for(n=0;n<input.length;n++){output+=(n+1)+") "+input[n]+"\n"}} 
-else if(mode=="dot") {for(n=0;n<input.length;n++){output+="\u2022 "+input[n]+"\n"}} 
-else if(mode=="cus") {var cus=prompt("Type one or more characters"); for(n=0;n<input.length;n++){output+=cus+input[n]+"\n"}}
-document.getElementById("lnop").innerHTML= output
-} 
+		//Line Number
+		function addn() {
+			let mode = document.getElementById("lnum").value
+			let input = document.getElementById("lnip").value.split("\n")
+			let output = ""
+			if (mode == "num") { for (n = 0; n < input.length; n++) { output += (n + 1) + " " + input[n] + "\n" } }
+			else if (mode == "nwd") { for (n = 0; n < input.length; n++) { output += (n + 1) + ". " + input[n] + "\n" } }
+			else if (mode == "pnu") { for (n = 0; n < input.length; n++) { output += (n + 1) + ") " + input[n] + "\n" } }
+			else if (mode == "dot") { for (n = 0; n < input.length; n++) { output += "\u2022 " + input[n] + "\n" } }
+			else if (mode == "cus") { var cus = prompt("Type one or more characters"); for (n = 0; n < input.length; n++) { output += cus + input[n] + "\n" } }
+			document.getElementById("lnop").innerHTML = output
+		}
 
-//Sorter
-function sortf() {
-var input = document.getElementById("sip").value.split("\n")
-var sorted = input.sort()
-var output = ""
-for(i=0;i<input.length;i++) {
-output += sorted[i]+"\n"}
-document.getElementById("sop").innerHTML = output
-}
+		//Sorter
+		function sortf() {
+			var input = document.getElementById("sip").value.split("\n")
+			var sorted = input.sort()
+			var output = ""
+			for (i = 0; i < input.length; i++) {
+				output += sorted[i] + "\n"
+			}
+			document.getElementById("sop").innerHTML = output
+		}
 
-//random hex
-function gen() {
-var rndCol = '#'+(Math.random() * 0xFFFFFF << 0).toString(16).padStart(6, '0');
-return rndCol;}
-function genHex(x) {
-if(x=="c") {x=prompt("Enter a number")} 
-let output = ""
-for(i=0;i<x;i++){
-output += gen() + "\n"}
-document.getElementById("hop").innerHTML = output
-}
+		//random hex
+		function gen() {
+			var rndCol = '#' + (Math.random() * 0xFFFFFF << 0).toString(16).padStart(6, '0');
+			return rndCol;
+		}
+		function genHex(x) {
+			if (x == "c") { x = prompt("Enter a number") }
+			let output = ""
+			for (i = 0; i < x; i++) {
+				output += gen() + "\n"
+			}
+			document.getElementById("hop").innerHTML = output
+		}
 
-//Color Converter
-function convCol(x) {
-let input = document.getElementById("colcip").value.replace("#","")
-let arr = []
-let output = ""
-if(x=="hex") {
-arr[0]=(+input.substr(0,3)).toString(16).padStart(2,0)
-arr[1]=(+input.substr(4,3)).toString(16).padStart(2,0)
-arr[2]=(+input.substr(8,3)).toString(16).padStart(2,0)
-output = "#" + arr.join("")}
-else if(x=="rgb") {
-arr[0]=parseInt("0x"+input.substr(0,2), 16);
-arr[1]=parseInt("0x"+input.substr(2,2), 16);
-arr[2]=parseInt("0x"+input.substr(4,2), 16);
-output= "rgb("+arr[0]+","+arr[1]+","+arr[2]+")"} 
+		//Color Converter
+		function convCol(x) {
+			let input = document.getElementById("colcip").value.replace("#", "")
+			let arr = []
+			let output = ""
+			if (x == "hex") {
+				arr[0] = (+input.substr(0, 3)).toString(16).padStart(2, 0)
+				arr[1] = (+input.substr(4, 3)).toString(16).padStart(2, 0)
+				arr[2] = (+input.substr(8, 3)).toString(16).padStart(2, 0)
+				output = "#" + arr.join("")
+			}
+			else if (x == "rgb") {
+				arr[0] = parseInt("0x" + input.substr(0, 2), 16);
+				arr[1] = parseInt("0x" + input.substr(2, 2), 16);
+				arr[2] = parseInt("0x" + input.substr(4, 2), 16);
+				output = "rgb(" + arr[0] + "," + arr[1] + "," + arr[2] + ")"
+			}
 
-document.getElementById("colcop").innerHTML=output
-} 
+			document.getElementById("colcop").innerHTML = output
+		}
 
-//Y or N
-function yon(x) {
-let yonArr = []
-if(x=="c") {x=prompt("Enter a number");if(x==null||x==""){x=1}}
-for(i=0;i<x;i++){
-if(parseInt(Math.round(Math.random())) == 0) {yonArr[i]="Yes\n"} else {yonArr[i] ="No\n"} 
-}
-alert(yonArr.join("")) 
-}
+		//Y or N
+		function yon(x) {
+			let yonArr = []
+			if (x == "c") { x = prompt("Enter a number"); if (x == null || x == "") { x = 1 } }
+			for (i = 0; i < x; i++) {
+				if (parseInt(Math.round(Math.random())) == 0) { yonArr[i] = "Yes\n" } else { yonArr[i] = "No\n" }
+			}
+			alert(yonArr.join(""))
+		}
 
-//Random Coordinate Generator
-function rint(min, max) { return Math.random() * (max - min) + min; }
+		//Random Coordinate Generator
+		function rint(min, max) { return Math.random() * (max - min) + min; }
 
-function genCoord(x) {
-	var output = "" 
-	if(x=="c") {x=prompt("Enter a number");if(x==null||x==""){x=1}}
-	for(i=0;i<x;i++) {
-	var hori = rint(-90,90).toFixed(5)
-	var verti = rint(-180,180).toFixed(5)
-	output += hori+", "+verti+"\n" } 
-	document.getElementById("rcgop").innerHTML = output
-} 
-</script>
+		function genCoord(x) {
+			var output = ""
+			if (x == "c") { x = prompt("Enter a number"); if (x == null || x == "") { x = 1 } }
+			for (i = 0; i < x; i++) {
+				var hori = rint(-90, 90).toFixed(5)
+				var verti = rint(-180, 180).toFixed(5)
+				output += hori + ", " + verti + "\n"
+			}
+			document.getElementById("rcgop").innerHTML = output
+		}
+	</script>
 </body>
 </html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Random Selector</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Tool to select a random item from given list">
+    <meta name="author" content="bestGaming132">
+    <meta name="keywords" content="tool, tools, random" />
+    <link rel="stylesheet" href="../toolstyle.css">
+</head>
+<body align="center">
+    <h2 style="margin-bottom:1px">Random Selector</h2><br>
+    <input class="txt" type="text" id="txtt"><br>
+    <button onClick="addItem()" class="btn">Add Item</button><br>
+    <button onClick="rando(1)">Pick Random</button>
+    <button onClick="rando(5)">Pick 5 Random</button><br>
+    <button onClick="removeLast()">Remove last item</button>
+    <button onClick="resetL()">Remove all items</button>
+    <p style="margin:4px">Current Items:</p>
+<textarea class="txt2" readonly id="txt2">None</textarea>
+    <script>
+        var items = [];
+        function addItem() {
+            if (/\S/.test(document.getElementById("txtt").value)) {
+                items.push(document.getElementById("txtt").value);
+                console.log("Added " + items[items.length - 1]);
+                var text = ""
+                for (i = 0; i < items.length; i++) {
+                    text += items[i] + "\n";
+                    document.getElementById("txt2").value = text
+                }
+            } else {
+                console.log("Input is empty")
+            }
+        }
+
+        function rando(num) {
+            if (!items.length == 0) {
+                let output = "";
+                for (ii = 0; ii < num; ii++) {
+                    let rnd = Math.floor(Math.random() * items.length);
+                    output += items[rnd] + "\n";
+                }
+                alert(output)
+            } else {
+                console.log("Items is empty")
+            }
+        }
+
+        function resetL() {
+            var conf = confirm("Are you sure you want to remove all items?")
+            if (conf == true) {
+                console.log("Removed " + items.length + " items")
+                items.splice(0, items.length)
+                document.getElementById("txt2").value = "None"
+            }
+            else {
+                console.log("Canceled")
+            }
+        }
+
+        function removeLast() {
+            var text = ""
+            items.pop()
+            for (i = 0; i < items.length; i++) {
+                text += items[i] + "\n";
+                document.getElementById("txt2").value = text
+            }
+        }
+    </script>
+</body>
+</html>

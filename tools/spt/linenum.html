@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Line Number Adder</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Tool to add line numbers to texts">
+    <meta name="author" content="bestGaming132">
+    <meta name="keywords" content="tool, tools, line number" />
+    <link rel="stylesheet" href="../toolstyle.css">
+</head>
+<body align="center">
+    <h2 style="margin-bottom:1px">Line Number Adder</h2>
+<textarea style="height:20vh" class="txt" placeholder="Text" id="lnip"></textarea><br>
+
+    <select id="lnum">
+        <option value="num">Numbers only</option>
+        <option value="nwd">Numbers with dots</option>
+        <option value="pnu">Numbers with parenthesis</option>
+        <option value="dot">Dots / Bullets</option>
+        <option value="cus">Custom character</option>
+    </select>
+    <button class="btn" onclick="addn()">Add Numbers</button><br>
+<textarea style="height:20vh" readonly class="txt2" id="lnop"></textarea>
+    <script>
+        //Line Number
+        function addn() {
+            let mode = document.getElementById("lnum").value
+            let input = document.getElementById("lnip").value.split("\n")
+            let output = ""
+            if (mode == "num") { for (n = 0; n < input.length; n++) { output += (n + 1) + " " + input[n] + "\n" } }
+            else if (mode == "nwd") { for (n = 0; n < input.length; n++) { output += (n + 1) + ". " + input[n] + "\n" } }
+            else if (mode == "pnu") { for (n = 0; n < input.length; n++) { output += (n + 1) + ") " + input[n] + "\n" } }
+            else if (mode == "dot") { for (n = 0; n < input.length; n++) { output += "\u2022 " + input[n] + "\n" } }
+            else if (mode == "cus") { var cus = prompt("Type one or more characters"); for (n = 0; n < input.length; n++) { output += cus + input[n] + "\n" } }
+            document.getElementById("lnop").innerHTML = output
+        }
+    </script>
+</body>
+</html>

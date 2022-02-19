@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Random Text Generator</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Tool to generate random text">
+    <meta name="author" content="bestGaming132">
+    <meta name="keywords" content="tool, tools, generator" />
+    <link rel="stylesheet" href="../toolstyle.css">
+</head>
+<body align="center">
+    <h2 style="margin-bottom:1px">Random Text Generator</h2><br>
+    <input style="height:20px;" class="txt" placeholder="Characters (number)" type="number" id="txtN"><br>
+    <button class="btn" onclick="rTxt()">Generate</button><br>
+    <p style="margin:5px">Select a mode</p>
+    <select id="sel2">
+        <option value="l">Only Letters</option>
+        <option value="ln">Letters and Numbers</option>
+        <option value="lns">Letters, Numbers and Special Characters</option>
+    </select>
+<textarea class="txt2" readonly id="rTxtOp"></textarea>
+    <script>
+        function rTxt() {
+            mode2 = document.getElementById("sel2").value;
+            let num = document.getElementById("txtN").value;
+            document.getElementById("rTxtOp").innerHTML = rndT(num);
+        }
+
+        function rndT(length) {
+            var result = [];
+            var characters;
+            //var cusCharacters
+            if (mode2 == "l") {
+                characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+            } else if (mode2 == "ln") {
+                characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+            } else if (mode2 == "lns") {
+                characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz;!\"#$%&\'()*+,-.\/:;<=>?@[\\]^_`{|}~"
+            } /*else if(mode2=="cus") {
+cusCharacters = prompt("Enter every character you want to use", cusCharacters);}  */
+            var cLength = characters.length
+            for (var i = 0; i < length; i++) {
+                result.push(characters.charAt(Math.floor(Math.random() * cLength)));
+            }
+            return result.join("");
+        }
+    </script>
+</body>
+</html>

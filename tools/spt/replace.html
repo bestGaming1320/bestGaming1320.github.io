@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Text Replacer</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Tool for text replacement">
+    <meta name="author" content="bestGaming132">
+    <meta name="keywords" content="tool, tools, replacer" />
+    <link rel="stylesheet" href="../toolstyle.css">
+</head>
+<body align="center">
+    <h2 style="margin-bottom:1px">Text Replacer</h2><br>
+<textarea style="height:20vh" placeholder="Text" id="te1" oninput="repl()"></textarea><br>
+<textarea placeholder="Word to replace" class="txt" id="te2" oninput="repl()"></textarea><br>
+<textarea placeholder="Replace word with" class="txt" id="te3" oninput="repl()"></textarea><br>
+    <p style="margin:3px">Output:</p>
+<textarea style="height:20vh" class="txt2" id="opt" readonly></textarea>
+    <script>
+        function repl() {
+            var replTxt = document.getElementById("te1").value
+            var repl1 = document.getElementById("te2").value
+            var repl2 = document.getElementById("te3").value
+            var result = replTxt.replaceAll(repl1, repl2)
+            document.getElementById("opt").innerHTML = result
+        }
+    </script>
+</body>
+</html>

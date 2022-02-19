@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Random Coordinate Generator</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Some basic tools">
+    <meta name="author" content="bestGaming132">
+    <meta name="keywords" content="tool, tools" />
+    <link rel="stylesheet" href="../toolstyle.css">
+</head>
+<body align="center">
+    <h2 style="margin-bottom:1px">Random Coordinate Generator</h2>
+    <button onclick="genCoord(1)" class="btn">Generate 1</button><br>
+    <button onclick="genCoord(5)" class="btn">Generate 5</button><br>
+    <button onclick="genCoord(10)" class="btn">Generate 10</button><br>
+    <button onclick="genCoord(25)" class="btn">Generate 25</button><br>
+    <button onclick="genCoord('c')" class="btn">Generate Custom Amount</button><br>
+<textarea class="txt2" id="rcgop" style="height:20vh" readonly></textarea>
+    <script>
+        function rint(min, max) { return Math.random() * (max - min) + min; }
+
+        function genCoord(x) {
+            var output = ""
+            if (x == "c") { x = prompt("Enter a number"); if (x == null || x == "") { x = 1 } }
+            for (i = 0; i < x; i++) {
+                var hori = rint(-90, 90).toFixed(5)
+                var verti = rint(-180, 180).toFixed(5)
+                output += hori + ", " + verti + "\n"
+            }
+            document.getElementById("rcgop").innerHTML = output
+        }
+    </script>
+</body>
+</html>

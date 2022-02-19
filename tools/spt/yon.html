@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Yes or No picker</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Tool that says yes or no">
+    <meta name="author" content="bestGaming132">
+    <meta name="keywords" content="tool, tools" />
+    <link rel="stylesheet" href="../toolstyle.css">
+</head>
+<body align="center">
+    <h2 style="margin-bottom:1px">Yes or No picker</h2>
+    <button onclick="yon(1)" class="btn">Pick 1</button><br>
+    <button onclick="yon(5)" class="btn">Pick 5</button><br>
+    <button onclick="yon(10)" class="btn">Pick 10</button><br>
+    <button onclick="yon(25)" class="btn">Pick 25</button><br>
+    <button onclick="yon('c')" class="btn">Pick Custom Amount</button><br>
+    <textarea id="out" style="height:20vh" class="txt2" readonly></textarea>
+    <p id="amnt"></p>
+    <script>
+        function yon(x) {
+            let res = ""
+            if (x == "c") { x = prompt("Enter a number"); if (x == null || x == "") { x = 1 } }
+            for (i = 0; i < x; i++) {
+                if (Math.round(Math.random()) == 0) {res += "yes\n" } else { res += "no\n" }
+            }
+            document.getElementById("out").value=res
+            document.getElementById("amnt").innerHTML="Occurences of yes: "+(res.split("yes").length-1)+"<br>Occurences of no: "+(res.split("no").length-1)
+        }
+    </script>
+</body>
+</html>

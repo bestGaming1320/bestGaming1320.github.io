@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Base64</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Tool to convert from or to base64">
+    <meta name="author" content="bestGaming132">
+    <meta name="keywords" content="tool, tools, base64" />
+    <link rel="stylesheet" href="../toolstyle.css">
+</head>
+<body align="center">
+    <h2 style="margin-bottom:1px">Base 64</h2><br>
+<textarea style="height:20vh" class="txt" id="b64ip" placeholder="Text"></textarea><br>
+    <button style="margin:2px" onclick="b64('ec')">Encode</button>
+    <button style="margin:2px" onclick="b64('dc')">Decode</button> <br>
+<textarea style="height:20vh" class="txt2" readonly id="b64op"></textarea>
+    <script>
+        function b64(v) {
+            var result64;
+            let input = document.getElementById("b64ip").value;
+            try {
+                if (v == 'ec') {
+                    result64 = btoa(input);
+                } else {
+                    result64 = atob(input);
+                }
+            } catch (e) {
+                result64 = "Cannot decode input"
+            }
+            document.getElementById("b64op").innerHTML = result64;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Text Repeater</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Tool to repeate text">
+    <meta name="author" content="bestGaming132">
+    <meta name="keywords" content="tool, tools, repeater" />
+    <link rel="stylesheet" href="../toolstyle.css">
+</head>
+<body align="center">
+    <h2 style="margin-bottom:1px">Text Repeater</h2><br>
+<textarea style="height: 20vh" placeholder="Text" id="tx1"></textarea><br>
+    <input style="height:20px;" class="txt" placeholder="Number" type="number" id="tx2"><br>
+    <p style="margin:5px">Select a mode</p>
+    <select id="sel">
+        <option value="sp">Space after each item</option>
+        <option value="n">Nothing between each item</option>
+        <option value="nl">Newline after each item</option>
+    </select><br>
+    <button onclick="fun()" class="btn">Repeat</button><br>
+    <p style="margin:3px">Output:</p>
+<textarea style="height:20vh" class="txt2" readonly id="txop"></textarea>
+    <script>
+        function fun() {
+            var userText = document.getElementById("tx1").value
+            var userNum = document.getElementById("tx2").value
+            var mode = document.getElementById("sel").value
+            var output = ""
+            for (i = 0; i < userNum; i++) {
+                var nu = i + 1
+                if (mode == "sp") {
+                    output += userText + " "
+                }
+                if (mode == "nl") {
+                    output += userText + "\n"
+                }
+                if (mode == "nnl") {
+                    output += nu + " " + userText + "\n"
+                }
+                if (mode == "dnl") {
+                    output += "&#8226;" + userText + "\n"
+                }
+                if (mode == "n") {
+                    output += userText
+                }
+            }
+            document.getElementById("txop").innerHTML = output
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Sorter</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Tool to sort a list alphabetically">
+    <meta name="author" content="bestGaming132">
+    <meta name="keywords" content="tool, tools, sorter" />
+    <link rel="stylesheet" href="../toolstyle.css">
+</head>
+<body align="center">
+    <h2 style="margin-bottom:1px">Sorter</h2>
+    <p style="margin:0px">Things that should be sorted have to be separated with newlines</p>
+<textarea id="sip" placeholder="Input" style="height:20vh"></textarea><br>
+    <button onClick="sortf()" class="btn">Sort</button><br>
+<textarea class="txt2" readonly id="sop" style="height:20vh"></textarea>
+    <script>
+        function sortf() {
+            var input = document.getElementById("sip").value.split("\n")
+            var sorted = input.sort()
+            var output = ""
+            for (i = 0; i < input.length; i++) {
+                output += sorted[i] + "\n"
+            }
+            document.getElementById("sop").innerHTML = output
+        }
+    </script>
+</body>
+</html>
