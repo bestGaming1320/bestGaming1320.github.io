@@ -72,6 +72,7 @@ select {
     height: 30px;
     width: 70%;
     margin-bottom: 5px;
+    border-radius: 5px;
 }
 
 p {
@@ -80,12 +81,25 @@ p {
 
 .pt {
     font-weight: 700;
+    font-size: 25px
 }
 
 .pn {
     font-weight: normal;
     margin: 2px;
 }
+
+a {
+    color: #0af
+}
+
+    a:visited {
+        color: #f06
+    }
+
+    a:hover {
+        color: #0fa;
+    }
 /* width */
 ::-webkit-scrollbar {
     width: 5px;
@@ -103,10 +117,10 @@ p {
     background: #aaa;
 }
 
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-    background: #888;
-}    
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+        background: #888;
+    }
 
 /* bottom right square */
 ::-webkit-scrollbar-corner {
