@@ -74,7 +74,8 @@
     }
     let ce = location.search.slice(1)
     ce = ce ? ce : 17
-    genLib(JSON.parse(genJson(ce)))
+    let json = parseInt(ce) ? genJson(ce) : decodeURIComponent(ce)
+    genLib(JSON.parse(json))
 </script>
 <style>
     table {
