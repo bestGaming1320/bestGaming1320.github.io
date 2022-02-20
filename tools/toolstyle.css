@@ -34,6 +34,34 @@ input {
     margin: 3px;
 }
 
+div.txt2 {
+    height: 30vh;
+    width: 70%;
+    overflow: scroll;
+    margin: 0 auto;
+    margin-top: 10px;
+    border: 1px solid #aaa;
+    border-radius: 5px;
+}
+
+.dc {
+    margin: 0px;
+    padding: 4px;
+    text-align: center;
+}
+
+    .dc:hover {
+        background: #444 !important
+    }
+
+    .dc:nth-child(odd) {
+        background: #252525
+    }
+
+    .dc:nth-child(even) {
+        background: #303030
+    }
+
 button {
     color: #fff;
     background: #333;

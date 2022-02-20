@@ -6,16 +6,18 @@
     <meta name="description" content="Tool for generating random hex color codes">
     <meta name="author" content="bestGaming132">
     <meta name="keywords" content="tool, tools, hex, generator" />
-    <link rel="stylesheet" href="../toolstyle.css">
+    <link rel="stylesheet" href="../toolstyle.css?0">
+    <link rel="stylesheet" href="../../scroll.css?0">
 </head>
 <body align="center">
     <h2 style="margin-bottom:1px">Random Hex Generator</h2>
+    <p>Click on a hex code to copy it</p>
     <button class="btn" onclick="genHex(1)">Generate 1 Hex Code</button><br>
     <button class="btn" onclick="genHex(5)">Generate 5 Hex Codes</button><br>
     <button class="btn" onclick="genHex(10)">Generate 10 Hex Codes</button><br>
     <button class="btn" onclick="genHex(25)">Generate 25 Hex Codes</button><br>
-    <button class="btn" onclick="genHex('c')">Generate custom amount of hex Codes</button><br>
-<textarea class="txt2" id="hop" style="height:20vh" readonly></textarea>
+    <button class="btn" onclick="genHex('c')">Generate custom amount of hex codes</button><br>
+    <div class="nobar txt2" id="hop"></div>
     <script>
         function gen() {
             var rndCol = '#' + (Math.random() * 0xFFFFFF << 0).toString(16).padStart(6, '0');
@@ -24,10 +26,14 @@
         function genHex(x) {
             if (x == "c") { x = prompt("Enter a number") }
             let output = ""
+            document.getElementById("hop").innerHTML = ""
             for (i = 0; i < x; i++) {
-                output += gen() + "\n"
+                output = gen() + "\n"
+                document.getElementById("hop").innerHTML += '<p class="dc" onclick="copy(this.innerHTML)">' + output + '</p>'
             }
-            document.getElementById("hop").innerHTML = output
+        }
+        function copy(cont) {
+            navigator.clipboard.writeText(cont)
         }
     </script>
 </body>

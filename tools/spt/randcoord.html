@@ -3,31 +3,38 @@
 <head>
     <title>Random Coordinate Generator</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="Some basic tools">
+    <meta name="description" content="Tool to generate random coordinates">
     <meta name="author" content="bestGaming132">
-    <meta name="keywords" content="tool, tools" />
-    <link rel="stylesheet" href="../toolstyle.css">
+    <meta name="keywords" content="tool, tools, coord" />
+    <link rel="stylesheet" href="../toolstyle.css?0">
+    <link rel="stylesheet" href="../../scroll.css?0">
 </head>
 <body align="center">
     <h2 style="margin-bottom:1px">Random Coordinate Generator</h2>
-    <button onclick="genCoord(1)" class="btn">Generate 1</button><br>
-    <button onclick="genCoord(5)" class="btn">Generate 5</button><br>
-    <button onclick="genCoord(10)" class="btn">Generate 10</button><br>
-    <button onclick="genCoord(25)" class="btn">Generate 25</button><br>
-    <button onclick="genCoord('c')" class="btn">Generate Custom Amount</button><br>
-<textarea class="txt2" id="rcgop" style="height:20vh" readonly></textarea>
+    <p>Click on a coordinate to copy it</p>
+    <button onclick="genCoord(1)" class="btn">Generate 1 Coordinate</button><br>
+    <button onclick="genCoord(5)" class="btn">Generate 5 Coordinates</button><br>
+    <button onclick="genCoord(10)" class="btn">Generate 10 Coordinates</button><br>
+    <button onclick="genCoord(25)" class="btn">Generate 25 Coordinates</button><br>
+    <button onclick="genCoord('c')" class="btn">Generate custom amount of coordinates</button><br>
+    <div class="nobar txt2" id="rcgop"></div>
     <script>
         function rint(min, max) { return Math.random() * (max - min) + min; }
 
         function genCoord(x) {
-            var output = ""
+            document.getElementById("rcgop").innerHTML = ""
             if (x == "c") { x = prompt("Enter a number"); if (x == null || x == "") { x = 1 } }
             for (i = 0; i < x; i++) {
-                var hori = rint(-90, 90).toFixed(5)
-                var verti = rint(-180, 180).toFixed(5)
-                output += hori + ", " + verti + "\n"
+                let hori = rint(-90, 90).toFixed(5)
+                let verti = rint(-180, 180).toFixed(5)
+                let output
+                output = hori + ", " + verti + "\n"
+                document.getElementById("rcgop").innerHTML += '<p class="dc" onclick="copy(this.innerHTML)">' + output + '</p>'
             }
-            document.getElementById("rcgop").innerHTML = output
+
+        }
+        function copy(cont) {
+            navigator.clipboard.writeText(cont)
         }
     </script>
 </body>
