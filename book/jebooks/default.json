@@ -8,8 +8,8 @@
     "btntxtN": "<b>&#8594;</b>",
     "btntxtP": "<b>&#8592;</b>"
   },
-  "title": "Default Json",
+  "title": "Default Book",
   "pages": 2,
-  "page1": "Load a Json file or text to start. You can do that by clicking \"Load Json\" and change the page with the arrow buttons below or by clicking on the page number if you want a specific page.",
+  "page1": "Load a Json file or text to start. You can do that by clicking \"Load Json\" or by selecting in a book the <a href='booklib.html'>library</a> and change the page with the arrow buttons below or by clicking on the page number if you want a specific page.",
   "page2": "To create a book take a look at the <a href='../docs/book.html'>documentation</a> and write the json by hand or use <a onclick='alert(\"Comming Soon\")'><u>Book Creator</u></a>(comming soon)"
 }

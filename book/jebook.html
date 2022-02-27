@@ -1,22 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Json Bookloader</title>
+    <title>jeBook Loader</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="A website to load books with json">
+    <meta name="description" content="jeBook Loader can load eBooks written in json format">
     <meta name="author" content="bestGaming132">
     <meta name="keywords" content="book, eBook, json" />
-    <link rel="stylesheet" href="../default.css"/>
+    <link rel="stylesheet" href="../default.css" />
+    <link rel="stylesheet" href="../scroll.css" />
     <meta charset="UTF-8">
 </head>
 <body align="center">
     <div style="height:75vh;">
-        <p id="cont" style="height:90%;outline:2px solid #333"></p>
+        <p id="cont" style="height:90%;outline:2px solid #333;overflow-y:scroll;overflow-wrap:break-word" class="">Your book is loading</p>
         <p id="pageP" onclick="cPag()">0</p>
     </div>
     <button class="bt" style="margin-right:30%" onclick="cPage('p')"><b>&#8592;</b></button>
     <button class="bt" style="margin-left:30%" onclick="cPage('n')"><b>&#8594;</b></button><br><br>
-    <button onclick="load()">Load Json</button>
+    <button class="bt2" onclick="location.href='booklib.html'">Select jeBook from library</button>
+    <button class="bt2" onclick="load()">Load jeBook as code</button>
 </body>
 <script>
     var con = document.getElementById("cont")
@@ -25,11 +27,25 @@
     var pages = 2
     var page = 0
     var defJson = { "style": { "txtcol": "#fff", "bgcol": "#000", "btncol": "#fff", "btnbg": "#333", "btnotl": "2px solid #666", "btntxtN": "<b>&#8594;</b>", "btntxtP": "<b>&#8592;</b>" }, "title": "Default Json", "pages": 2, "page1": "Load a Json file or text to start. You can do that by clicking \"Load Json\" and change the page with the arrow buttons below or by clicking on the page number if you want a specific page.", "page2": "To create a book take a look at the <a href='../docs/book.html'>documentation</a> and write the json by hand or use <a onclick='alert(\"Comming Soon\")'><u>Book Creator</u></a>(comming soon)" }
-    var input = defJson
-    cPage("n")
 
-    function load() {
-        input = JSON.parse(prompt("Enter your Json here"))
+    var input = defJson
+    var selBook = localStorage.getItem("selBook")
+    if (selBook) {
+        let req = new XMLHttpRequest()
+        req.open("GET", JSON.parse(selBook).filen)
+        req.send()
+        req.onload = function () {
+            if (this.status != 200) {
+                con.innerHTML = "There was an error loading your jeBook!<br>Error code: "+this.status+"<br>The Default jeBook was loaded instead. "
+                return
+            }
+            input = JSON.parse(this.responseText)
+            load(true)
+        }
+    } else cPage("n")
+
+    function load(x) {
+        if (!x) input = JSON.parse(prompt("Enter your Json here"))
         if (!input) { input = defJson }
         pages = input.pages
         page = 0
@@ -38,12 +54,12 @@
         for (i = 0; i < 3; i++) {
             btn[i].style.color = input.style.btncol
             btn[i].style.background = input.style.btnbg
-            btn[i].style.outline = input.style.btnotl
+            btn[i].style.border = input.style.btnotl
         }
         btn[0].innerHTML = input.style.btntxtP
         btn[1].innerHTML = input.style.btntxtN
 
-        document.title = "Json Book Loader | " + input.title
+        document.title = input.title + " | jeBook Loader"
         cPage("n")
     }
     function cPage(x) {
@@ -64,12 +80,16 @@
             pag.innerHTML = nP
         }
     }
-//use <br> for newlines. All html styling tags (like <b> or <span>) work
 </script>
 <style>
     body {
-        text-align:center;
-        margin:10px
+        text-align: center;
+        margin: 10px;
+        margin:0
+    }
+
+    button {
+        border: 2px solid #666;
     }
 
     .bt {
@@ -77,5 +97,11 @@
         min-width: 70px;
         width: 70px;
     }
+    .bt2 {
+        height: 40px;
+        min-width: 120px;
+        width: 120px;
+    }
+    
 </style>
 </html>
