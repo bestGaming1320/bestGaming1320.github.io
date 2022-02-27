@@ -14,32 +14,34 @@
     <h3>Full sample Json</h3>
     <div>
         <pre>{
- "style" : {
-  "txtcol" : "#fff", 
-  "bgcol": "#000" ,
-  "btncol" : "#fff", 
-  "btnbg" : "#333", 
-  "btnotl" : "2px solid #666", 
-  "btntxtN" : "&amp#8592;", 
-  "btntxtP" : "&amp#8594;" 
- }, 
- "title" : "Example Json", 
- "pages" : 3,
- "page1" : "This is the content of page 1",
- "page2" : "Lorem ipsum dolor sit amet",
- "page3" : "&#60span style='color:#9f0'&#62Stylized text &#60b&#62works&#60b&#62 too&#60/span&#62" 
+  "style": {
+    "txtcol": "#fff",
+    "bgcol": "#000",
+    "btncol": "#fff",
+    "btnbg": "#333",
+    "btnotl": "2px solid #666",
+    "btntxtN": "&lt;b>&amp#8594;&lt;/b>",
+    "btntxtP": "&lt;b>&amp#8592;&lt;/b>",
+    "hideotl":  true
+  },
+  "title": "Example Book",
+  "pages": 3,
+  "page1": "This is the content of page 1",
+  "page2": "Lorem ipsum dolor sit amet",
+  "page3": "&lt;span style='color:#9f0'>Stylized text &lt;b>works&lt;/b> too&lt;/span>"
 }</pre>
     </div>
     <h3>Style</h3>
     <div>
         <pre>"style" : {
-  "txtcol" : "#fff", 
-  "bgcol": "#000" , 
-  "btncol" : "#fff", 
-  "btnbg" : "#333", 
-  "btnotl" : "2px solid #666", 
-  "btntxtN" : "&amp#8592;", 
-  "btntxtP" : "&amp#8594;" 
+  "txtcol": "#fff", 
+  "bgcol":"#000" , 
+  "btncol": "#fff", 
+  "btnbg": "#333", 
+  "btnotl": "2px solid #666", 
+  "btntxtN": "&lt;b>&amp#8594;&lt;/b>", 
+  "btntxtP": "&lt;b>&amp#8592;&lt;/b>",
+  "hideotl": true
 }</pre>
     </div><br>
     <p>
@@ -51,15 +53,16 @@ btnbg: The background color of buttons
 btnoutl: The border of buttons
 btntxtN: The text of the next page button
 btntxtP: The text of the previous page button
+hideotl: Hides or shows outline of content box. The default value is false
 </pre>
     </p>
     <h3>Pages</h3>
-    <div style="height:80px">
+    <div style="height:80px" class="nobar">
         <pre>
- "pages" : 3,
- "page1" : "This is the content of page 1",
- "page2" : "Lorem ipsum dolor sit amet",
- "page3" : "&#60span style='color:#9f0'&#62Stylized text &#60b&#62works&#60b&#62 too&#60/span&#62"
+ "pages": 3,
+ "page1": "This is the content of page 1",
+ "page2": "Lorem ipsum dolor sit amet",
+ "page3": "page3": "&lt;span style='color:#9f0'>Stylized text &lt;b>works&lt;/b> too&lt;/span>"
 </pre>
     </div><br>
     <p>

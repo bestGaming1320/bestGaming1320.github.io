@@ -6,11 +6,12 @@
     "btnbg": "#333",
     "btnotl": "2px solid #666",
     "btntxtN": "<b>&#8594;</b>",
-    "btntxtP": "<b>&#8592;</b>"
+    "btntxtP": "<b>&#8592;</b>",
+    "hideotl":  true
   },
   "title": "Example Book",
   "pages": 3,
   "page1": "This is the content of page 1",
   "page2": "Lorem ipsum dolor sit amet",
-  "page3": "<span style='color:#9f0'>Stylized text <b>works<b> too</span>"
+  "page3": "<span style='color:#9f0'>Stylized text <b>works</b> too</span>"
 }
