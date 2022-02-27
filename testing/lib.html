@@ -32,9 +32,10 @@
     function genJson(length = 10) {
         let output = ""
         for (i = 0; i < length; i++) {
-            output += '{"title": "Title' + i + '","desc":"Lorem ipsum dolor sit amet","img": "https://bestgaming1320.github.io/placeholder.png"},'
+            let plcurl = Math.round(Math.random()) ? 'https://bestgaming1320.github.io/placeholder.png' : 'none'
+            output += '{"title": "Title' + i + '","desc":"Lorem ipsum dolor sit amet","img": "'+plcurl+'"},'
         }
-        return "[" + output.slice(0, -1) + "]"
+        return '{"boloc":"","list":[' + output.slice(0, -1) + ']}'
     }
 
     function p(txt,tit) {
@@ -53,20 +54,20 @@
     else if (screen.width <= 500) sw = 2
     else if (screen.width <= 700) sw = 3
     else sw = 4
-    function genLib(input = defJson) {
+    function genLib(input) {
         var tb = elm("tb")
         var tr = document.createElement("tr")
-        for (i = 1; i < input.length + 1; i++) {
+        for (i = 1; i < input.list.length + 1; i++) {
             let td = document.createElement("td")
             let div = document.createElement("div")
-            div.appendChild(p(input[i - 1].title, 1))
-            div.appendChild(img(input[i - 1].img))
-            div.appendChild(p(input[i - 1].desc))
+            div.appendChild(p(input.list[i - 1].title, 1))
+            if(input.list[i-1].img!="none") div.appendChild(img(input.list[i - 1].img))
+            div.appendChild(p(input.list[i - 1].desc))
             div.classList.add("nobar")
             td.appendChild(div)
             tr.appendChild(td)
 
-            if (i % sw == 0 || i == input.length) {
+            if (i % sw == 0 || i == input.list.length) {
                 tb.appendChild(tr)
                 tr = document.createElement("tr")
             }
