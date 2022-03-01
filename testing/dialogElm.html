@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Dialog Element Testing</title>
+    <link rel="stylesheet" href="../default.css">
+    <style>
+        :root {
+            --col: #fff
+        }
+        body {
+            color: var(--col);
+        }
+        dialog {
+            color: var(--col);
+            width: 70%;
+            background: #222;
+            border: 2px solid var(--col);
+            border-radius: 25px;
+            box-shadow: 0 0 7px var(--col)
+        }
+
+            dialog::backdrop {
+                background: #111a
+            }
+    </style>
+</head>
+
+<body align="center">
+    <h2>Dialog Element Testing</h2>
+    <button onclick="toggleDialog()">Show Dialog</button>
+    <dialog id="dia">
+        <h2>Select a new color</h2>
+        <input type="color" oninput="col(this.value)" list="col">
+        <datalist id="col">
+            <option value="#ffffff">White</option>
+            <option value="#ff0000">Red</option>
+            <option value="#00ff00">Green</option>
+            <option value="#0000ff">Blue</option>
+        </datalist>
+        <br><br><br>
+        <button onclick="toggleDialog()">Close Dialog</button>
+    </dialog>
+    <script>
+        var vars = (va, val) => {
+            document.querySelector(":root").style.setProperty(va, val)
+        }
+        var dia = document.getElementById("dia")
+        function toggleDialog() {
+            if (dia.open) dia.close()
+            else dia.showModal()
+        }
+        function col(x) {
+            vars("--col",x)
+        }
+    </script>
+</body>
+</html>
