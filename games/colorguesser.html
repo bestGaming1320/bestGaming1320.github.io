@@ -37,9 +37,10 @@
 
   var awnser = ""
   var score = 0
-  var high = 0
+  var high = localStorage.getItem("high") ? localStorage.getItem("high") : 0
 
   function start() {
+    scorev.innerHTML = "Score: " + score+"<br>Highscore: "+high
     for (let i = 0; i < ccols.length; i++) {
       let col = rgb()
       ccols[i].style.background = "rgb(" + col + ")"
@@ -55,13 +56,15 @@
     if (awnser == val) {
       score++
       aw = "correct"
-      if(score>high) high=score
+      if(score>high) {
+        high=score
+        localStorage.setItem("high",high)
+      }
     }
     else {
       score = 0
       aw = "wrong"
     }
-    scorev.innerHTML = "Score: " + score+"<br>Highscore: "+high
     feed.innerHTML = aw + " awnser"
     start()
   }
