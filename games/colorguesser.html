@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Color Guesser</title>
+  <meta name="description" content="Coöor guessing game. There is a hex and rgb code with three color options. Choose the right one to win!">
+  <meta name="author" content="bestGaming132">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+  <meta charset="UTF-8">
+  <meta name="ver" content="1.0">
+  <link rel="stylesheet" href="../default.css" />
+</head>
+
+<body>
+  <p id="tit" class="pt">Color Guesser</p>
+  <p id="score">Score: 0<br>Highscore: 0</p><br>
+  <p id="color"></p>
+  <div style="width:100%;height:70vh;overflow:scroll;display:flex;flex-flow:row wrap">
+    <div id="c1" class="dv"></div>
+    <div id="c2" class="dv"></div>
+    <div id="c3" class="dv"></div>
+  </div>
+  <p id="feed"></p>
+  <br>
+</body>
+<script>
+  "use strict"
+  document.getElementById("tit").innerHTML = "Color Guesser V" + document.querySelector('meta[name="ver"]').content;
+  const ccols = document.getElementsByClassName("dv")
+  const col = document.getElementById("color")
+  const scorev = document.getElementById("score")
+  const feed = document.getElementById("feed")
+
+  for (let i = 0; i < ccols.length; i++) {
+    ccols[i].addEventListener("click", function() { guess(this.style.background) })
+  }
+
+  var awnser = ""
+  var score = 0
+  var high = 0
+
+  function start() {
+    for (let i = 0; i < ccols.length; i++) {
+      let col = rgb()
+      ccols[i].style.background = "rgb(" + col + ")"
+      //ccols[i].style.borderColor = opposite(col)
+    }
+    awnser = rgb(1)
+    col.innerHTML = awnser+"<br>"+awnser.toHex()
+    ccols[rnd()].style.background = awnser
+  }
+
+  function guess(val) {
+    let aw
+    if (awnser == val) {
+      score++
+      aw = "correct"
+      if(score>high) high=score
+    }
+    else {
+      score = 0
+      aw = "wrong"
+    }
+    scorev.innerHTML = "Score: " + score+"<br>Highscore: "+high
+    feed.innerHTML = aw + " awnser"
+    start()
+  }
+
+  function rgb(st) {
+    return (st ? "rgb(" : "") + rnd(255) + ", " + rnd(255) + ", " + rnd(255) + (st ? ")" : "");
+  }
+
+  function rnd(max, min = 0) {
+    if (!max) return Math.floor(Math.random() * 3)
+    else return Math.floor(Math.random() * (max - min) + min) + 1
+  }
+
+  function opposite(col) {
+    let c = col.split(", ")
+    for (let i = 0; i < c.length; i++) {
+      c[i] = 255 - c[i]
+    }
+    return "rgb(" + c[0] + ", " + c[1] + ", " + c[2] + ")"
+  }
+  String.prototype.toHex = function() {
+    let res = this.replace("rgb(","").replace(")").split(", ")
+    return "#"
+    + parseInt(res[0]).toString(16).padStart(2,"0")
+    + parseInt(res[1]).toString(16).padStart(2,"0")
+    + parseInt(res[2]).toString(16).padStart(2,"0")
+  }
+  start()
+</script>
+<style>
+  .dv {
+    width: 31%;
+    height: 95%;
+    background: #333;
+    border: 2px solid #999;
+    margin: 0 auto;
+    padding: 0;
+  }
+</style>
+
+</html>
