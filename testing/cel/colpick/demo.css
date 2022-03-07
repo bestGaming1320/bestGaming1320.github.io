@@ -1,0 +1,8 @@
+:root {
+    --txtc:#fff;
+    --bgc:#000
+}
+body {
+    color:var(--txtc);
+    background:var(--bgc)
+}

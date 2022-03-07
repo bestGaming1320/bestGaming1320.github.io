@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Custom Color Picker Element</title>
+    <link rel="stylesheet" href="demo.css">
+    <script src="colpick.js?t=1646643600000"></script>
+</head>
+
+<body align="center">
+    <h2>Custom Color Picker Element</h2>
+    <p>Change Text Color</p>
+    <col-sel id="txtc" data-def="#ffffff" data-center="true" style="width:200px;height:50px"></col-sel>
+    <p>Change Background Color</p>
+    <col-sel txt="Select a color by clicking here" id="bgc" data-cols='["#000000","#ffffff","#ff0000","#00ff00","#0000ff"]' data-def="#000000" data-center="true" style="width:200px;height:50px"></col-sel>
+</body>
+<script>
+    function elm(e) {
+        return document.getElementById(e)
+    }
+    function setCol(type, col) {
+        document.querySelector(":root").style.setProperty("--" + type, col)
+    }
+
+    elm("txtc").addEventListener("colchange", (e) => {
+        setCol("txtc",e.target.getAttribute("value"))
+    })
+    elm("bgc").addEventListener("colchange", (e) => {
+        setCol("bgc",e.target.getAttribute("value"))
+    })
+</script>
+
+</html>
