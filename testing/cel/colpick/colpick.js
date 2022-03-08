@@ -24,7 +24,7 @@ class colSel extends HTMLElement {
             inp.setAttribute("list", "dat");
         }
 
-        p.innerHTML = this.getAttribute("txt");
+        p.innerHTML = this.getAttribute("data-txt");
         p.style.color = parseInt(inp.value.replace("#", ""), 16) > 8388607 ? "#000" : "#fff";
         div.appendChild(p);
         div.appendChild(inp);
