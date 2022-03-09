@@ -8,7 +8,14 @@
     <meta name="keywords" content="tool, tools, hex, generator" />
     <link rel="stylesheet" href="../toolstyle.css?0">
     <link rel="stylesheet" href="../../scroll.css?0">
+    <style>
+        p {
+            margin: 0;
+            padding: 4px;
+        }
+    </style>
 </head>
+
 <body align="center">
     <h2 style="margin-bottom:1px">Random Hex Generator</h2>
     <p>Click on a hex code to copy it</p>
@@ -17,24 +24,46 @@
     <button class="btn" onclick="genHex(10)">Generate 10 Hex Codes</button><br>
     <button class="btn" onclick="genHex(25)">Generate 25 Hex Codes</button><br>
     <button class="btn" onclick="genHex('c')">Generate custom amount of hex codes</button><br>
-    <div class="nobar txt2" id="hop"></div>
+    <div class="nobar txt2" id="hop"></div><br>
+    <p id="copyinfo"></p>
+    <!--<div id="colview" style="height:70px;width:70%;margin:0 auto;border-radius:5px"><br>Click here to copy</div>-->
     <script>
         function gen() {
             var rndCol = '#' + (Math.random() * 0xFFFFFF << 0).toString(16).padStart(6, '0');
             return rndCol;
         }
+
         function genHex(x) {
-            if (x == "c") { x = prompt("Enter a number") }
-            let output = ""
+            if (x == "c") {
+                x = parseInt(prompt("Enter a number"))
+                if (isNaN(x)) x = 5
+            }
+            let output = []
             document.getElementById("hop").innerHTML = ""
             for (i = 0; i < x; i++) {
-                output = gen() + "\n"
-                document.getElementById("hop").innerHTML += '<p class="dc" onclick="copy(this.innerHTML)">' + output + '</p>'
+                output[i] = gen()
+                document.getElementById("hop").innerHTML += '<p onclick="copy(this.innerHTML)" style="background:' + output[i] + ';color:' + (parseInt(output[i].replace("#", ""), 16) > 8388607 ? "#000" : "#fff") + '" tabindex="0">' + output[i] + '</p>'
             }
+            //set(output[0])
         }
+
         function copy(cont) {
             navigator.clipboard.writeText(cont)
+            let ci = document.getElementById("copyinfo")
+            ci.innerHTML = "Copied " + cont
+            ci.style.color = cont
         }
+
+        function set(cont) {
+            let cv = document.getElementById("colview")
+            cv.style.background = cont
+            cv.setAttribute("data-col", cont)
+            cv.innerHTML = "<br>click to copy " + cont
+            cv.style.color = parseInt(cont.replace("#", ""), 16) > 8388607 ? "#000" : "#fff";
+        }
+        let amnt = location.search.slice(1)
+        genHex(amnt ? amnt : 5)
+                        //document.getElementById("colview").addEventListener("click", function () { copy(this.getAttribute("data-col")) })
     </script>
 </body>
 </html>
