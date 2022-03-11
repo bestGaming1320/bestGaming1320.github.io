@@ -2,108 +2,175 @@
 <html>
 
 <head>
-  <title>Color Guesser</title>
-  <meta name="description" content="Coöor guessing game. There is a hex and rgb code with three color options. Choose the right one to win!">
-  <meta name="author" content="bestGaming132">
-  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-  <meta charset="UTF-8">
-  <meta name="ver" content="1.0">
-  <link rel="stylesheet" href="../default.css" />
-  <link rel="stylesheet" href="../scroll.css" />
+    <title>Color Guesser</title>
+    <meta name="description" content="Color guessing game. There is a hex and rgb code with three color options. Choose the right one to win!">
+    <meta name="author" content="bestGaming132">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <meta charset="UTF-8">
+    <meta name="ver" content="1.1">
+    <link rel="stylesheet" href="https://bestgaming1320.github.io/default.css" />
+    <link rel="stylesheet" href="../scroll.css" />
 </head>
 
 <body>
-  <p id="tit" class="pt">Color Guesser</p>
-  <p id="score">Score: 0<br>Highscore: 0</p><br>
-  <p id="color"></p>
-  <div class="nobar" style="width:100%;height:55vh;overflow:scroll;display:flex;flex-flow:row wrap">
-    <div id="c1" class="dv"></div>
-    <div id="c2" class="dv"></div>
-    <div id="c3" class="dv"></div>
-  </div>
-  <p id="feed"></p>
-  <br>
+    <p id="tit" class="pt">Color Guesser</p>
+    <p id="score">Score: 0<br>Highscore: 0</p>
+    <br>
+    <p id="timer">&nbsp;</p>
+    <p id="color"><br><br></p>
+    <div class="nobar" style="width:100%;height:55vh;overflow:scroll;display:flex;flex-flow:row wrap">
+        <div id="c1" class="dv"></div>
+        <div id="c2" class="dv"></div>
+        <div id="c3" class="dv"></div>
+    </div>
+    <p id="feed"></p>
+    <br>
+    <dialog id="dia">
+        <p class="pt">Choose a Timer</p>
+        <br>
+        <button value="u">Unlimited</button>
+        <br>
+        <button value="10">10 Seconds</button>
+        <br>
+        <button value="7.5">7.5 Seconds</button>
+        <br>
+        <button value="5">5 Seconds</button>
+        <br>
+        <button value="2.5">2.5 Seconds</button>
+        <br>
+        <p>The timer is currently not displayed in highscores</p>
+    </dialog>
 </body>
 <script>
-  "use strict"
-  document.getElementById("tit").innerHTML = "Color Guesser V" + document.querySelector('meta[name="ver"]').content;
-  const ccols = document.getElementsByClassName("dv")
-  const col = document.getElementById("color")
-  const scorev = document.getElementById("score")
-  const feed = document.getElementById("feed")
+    "use strict"
+    document.getElementById("tit").innerHTML = "Color Guesser V" + document.querySelector('meta[name="ver"]').content;
+    const ccols = document.getElementsByClassName("dv")
+    const col = document.getElementById("color")
+    const scorev = document.getElementById("score")
+    const feed = document.getElementById("feed")
+    const dia = document.getElementById("dia")
+    var sec = "u"
 
-  for (let i = 0; i < ccols.length; i++) {
-    ccols[i].addEventListener("click", function() { guess(this.style.background) })
-  }
+    var awnser = ""
+    var score = 0
+    var high = localStorage.getItem("high") ? localStorage.getItem("high") : 0
 
-  var awnser = ""
-  var score = 0
-  var high = localStorage.getItem("high") ? localStorage.getItem("high") : 0
+    String.prototype.toHex = function () {
+        let res = this.replace("rgb(", "").replace(")").split(", ")
+        return "#" +
+            parseInt(res[0]).toString(16).padStart(2, "0") +
+            parseInt(res[1]).toString(16).padStart(2, "0") +
+            parseInt(res[2]).toString(16).padStart(2, "0")
+    }
+    if (typeof HTMLDialogElement == "undefined") {
+        alert("You are using an unsupported browser. Some features will not be available")
+        start()
+    } else {
+        dia.showModal()
+    }
 
-  function start() {
-    scorev.innerHTML = "Score: " + score+"<br>Highscore: "+high
     for (let i = 0; i < ccols.length; i++) {
-      let col = rgb()
-      ccols[i].style.background = "rgb(" + col + ")"
-      //ccols[i].style.borderColor = opposite(col)
+        ccols[i].addEventListener("click", function () { guess(this.style.background) })
     }
-    awnser = rgb(1)
-    col.innerHTML = awnser+"<br>"+awnser.toHex()
-    ccols[rnd()].style.background = awnser
-  }
-
-  function guess(val) {
-    let aw
-    if (awnser == val) {
-      score++
-      aw = "correct"
-      if(score>high) {
-        high=score
-        localStorage.setItem("high",high)
-      }
+    var modes = document.getElementsByTagName("button")
+    for (let i = 0; i < modes.length; i++) {
+        modes[i].addEventListener("click", () => {
+            sec = modes[i].getAttribute("value");
+            dia.close()
+            start()
+        })
     }
-    else {
-      score = 0
-      aw = "wrong"
+
+
+    function start() {
+        scorev.innerHTML = "Score: " + score + "<br>Highscore: " + high
+        for (let i = 0; i < ccols.length; i++) {
+            let col = rgb()
+            ccols[i].style.background = "rgb(" + col + ")"
+            //ccols[i].style.borderColor = opposite(col)
+        }
+        awnser = rgb(1)
+        col.innerHTML = awnser + "<br>" + awnser.toHex()
+        ccols[rnd()].style.background = awnser
+        timer()
     }
-    feed.innerHTML = aw + " awnser"
-    start()
-  }
 
-  function rgb(st) {
-    return (st ? "rgb(" : "") + rnd(255) + ", " + rnd(255) + ", " + rnd(255) + (st ? ")" : "");
-  }
-
-  function rnd(max, min = 0) {
-    if (!max) return Math.floor(Math.random() * 3)
-    else return Math.floor(Math.random() * (max - min) + min) + 1
-  }
-
-  function opposite(col) {
-    let c = col.split(", ")
-    for (let i = 0; i < c.length; i++) {
-      c[i] = 255 - c[i]
+    function guess(val) {
+        clearInterval(tim)
+        let aw
+        if (val == -1) {
+            aw = "you took too long to "
+            score = 0
+        }
+        else if (awnser == val.split(")")[0] + ")") {
+            score++
+            aw = "correct"
+            if (score > high) {
+                high = score
+                localStorage.setItem("high", high)
+            }
+        }
+        else {
+            score = 0
+            aw = "wrong"
+        }
+        feed.innerHTML = aw + " awnser"
+        start()
     }
-    return "rgb(" + c[0] + ", " + c[1] + ", " + c[2] + ")"
-  }
-  String.prototype.toHex = function() {
-    let res = this.replace("rgb(","").replace(")").split(", ")
-    return "#"
-    + parseInt(res[0]).toString(16).padStart(2,"0")
-    + parseInt(res[1]).toString(16).padStart(2,"0")
-    + parseInt(res[2]).toString(16).padStart(2,"0")
-  }
-  start()
+
+    function rgb(st) {
+        return (st ? "rgb(" : "") + rnd(255) + ", " + rnd(255) + ", " + rnd(255) + (st ? ")" : "");
+    }
+
+    function rnd(max, min = 0) {
+        if (!max) return Math.floor(Math.random() * 3)
+        else return Math.floor(Math.random() * (max - min) + min) + 1
+    }
+
+    function opposite(col) {
+        let c = col.split(", ")
+        for (let i = 0; i < c.length; i++) {
+            c[i] = 255 - c[i]
+        }
+        return "rgb(" + c[0] + ", " + c[1] + ", " + c[2] + ")"
+    }
+    var tim = null
+    function timer() {
+        if (sec == "u") return 0
+        let t = parseFloat(sec)
+        tim = setInterval(() => {
+            document.getElementById("timer").innerHTML = t.toFixed(2);
+            t -= 0.1
+            if (t <= 0) {
+                clearInterval(tim)
+                guess(-1)
+            }
+        }, 100)
+    }
 </script>
 <style>
-  .dv {
-    width: 31%;
-    height: 95%;
-    background: #333;
-    border: 2px solid #999;
-    margin: 0 auto;
-    padding: 0;
-  }
+    .dv {
+        width: 31%;
+        height: 95%;
+        background: #333;
+        border: 2px solid #999;
+        margin: 0 auto;
+        padding: 0;
+    }
+
+    dialog {
+        width: 70%;
+        height: 300px;
+        color: #fff;
+        background: #111;
+        border: 2px solid #666;
+        border-radius: 5px;
+        box-shadow: 0 2px 7px #666
+    }
+
+        dialog::backdrop {
+            background: rgba(22, 22, 22,.4)
+        }
 </style>
 
 </html>
