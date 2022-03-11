@@ -3,7 +3,7 @@
 <head>
     <title>Random Hex Generator</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="Tool for generating random hex color codes">
+    <meta name="description" content="Tool for generating random hex color codes. Include a question mark with a number at the end of the URL if you want to generate hex codes directly after the page loads">
     <meta name="author" content="bestGaming132">
     <meta name="keywords" content="tool, tools, hex, generator" />
     <link rel="stylesheet" href="../toolstyle.css?0">
@@ -63,7 +63,7 @@
         }
         let amnt = location.search.slice(1)
         genHex(amnt ? amnt : 5)
-                        //document.getElementById("colview").addEventListener("click", function () { copy(this.getAttribute("data-col")) })
+        //document.getElementById("colview").addEventListener("click", function () { copy(this.getAttribute("data-col")) })
     </script>
 </body>
 </html>

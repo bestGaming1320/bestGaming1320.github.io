@@ -3,44 +3,64 @@
 <head>
     <title>Random Text Generator</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="Tool to generate random text">
+    <meta name="description" content="Tool to generate random text. Include a question mark with a number at the end of the URL if you want to generate text directly after the page loads">
     <meta name="author" content="bestGaming132">
     <meta name="keywords" content="tool, tools, generator" />
     <link rel="stylesheet" href="../toolstyle.css">
 </head>
 <body align="center">
     <h2 style="margin-bottom:1px">Random Text Generator</h2><br>
-    <input style="height:20px;" class="txt" placeholder="Characters (number)" type="number" id="txtN"><br>
-    <button class="btn" onclick="rTxt()">Generate</button><br>
+    <input style="height:20px;" class="txt" placeholder="Amount of characters to generate" type="number" id="amount"><br>
+    <button class="btn" id="gen">Generate</button><br>
     <p style="margin:5px">Select a mode</p>
-    <select id="sel2">
+    <select id="mode">
         <option value="l">Only Letters</option>
         <option value="ln">Letters and Numbers</option>
         <option value="lns">Letters, Numbers and Special Characters</option>
-    </select>
-<textarea class="txt2" readonly id="rTxtOp"></textarea>
+    </select><br>
+<textarea style="height:55vh" class="txt2" readonly id="output"></textarea>
     <script>
-        function rTxt() {
-            mode2 = document.getElementById("sel2").value;
-            let num = document.getElementById("txtN").value;
-            document.getElementById("rTxtOp").innerHTML = rndT(num);
+        let ls = location.search.slice(1).split("&");
+        var amnt = ls[0]
+        var mode = ls[1]
+        var chars = ["ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz", "0123456789", ";!\"#$%&\'()*+,-.\/:;<=>?@[\\]^_`{|}~"];
+        var characters = chars[0];
+        var cusCharacters = null; //comming soon maybe
+        mode = mode ? mode : "l";
+        amnt = amnt ? amnt : 0;
+        if (amnt != 0) document.getElementById("amount").value = amnt;
+        if (mode != "l") {
+            document.getElementById("mode").value = mode;
+            cm();
+            console.log()
         }
 
-        function rndT(length) {
+        document.getElementById("mode").addEventListener("input", function () { mode = this.value; cm() })
+        document.getElementById("amount").addEventListener("input", function () { amnt = this.value });
+        document.getElementById("gen").addEventListener("click", function () { document.getElementById("output").innerHTML = gen(amnt) });
+
+        document.getElementById("gen").click();
+
+        function cm() {
+            switch (mode) {
+                case "l":
+                    characters = chars[0];
+                    break;
+                case "ln":
+                    characters = chars[0] + chars[1];
+                    break;
+                case "lns":
+                    characters = chars[0] + chars[1] + chars[2];
+                    break;
+                case "cus":
+                    alert("not implemented yet");
+                    break;
+            }
+        }
+        function gen(length) {
             var result = [];
-            var characters;
-            //var cusCharacters
-            if (mode2 == "l") {
-                characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-            } else if (mode2 == "ln") {
-                characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-            } else if (mode2 == "lns") {
-                characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz;!\"#$%&\'()*+,-.\/:;<=>?@[\\]^_`{|}~"
-            } /*else if(mode2=="cus") {
-cusCharacters = prompt("Enter every character you want to use", cusCharacters);}  */
-            var cLength = characters.length
             for (var i = 0; i < length; i++) {
-                result.push(characters.charAt(Math.floor(Math.random() * cLength)));
+                result.push(characters.charAt(Math.floor(Math.random() * characters.length)));
             }
             return result.join("");
         }
