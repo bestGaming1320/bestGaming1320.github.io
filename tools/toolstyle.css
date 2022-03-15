@@ -16,7 +16,7 @@ textarea {
     border-radius: 5px;
 }
 
-input {
+input:not([type=checkbox]):not([type=range]):not([type=radio]):not([type=color]):not([type=file]):not([type=color]) {
     height: 25px;
     width: 70%;
     color: #fff;
