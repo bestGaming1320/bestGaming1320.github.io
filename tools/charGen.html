@@ -1,0 +1,154 @@
+<html>
+<head>
+    <title>Character Generator</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Generate a 16x16 pixel art character">
+    <meta name="author" content="bestGaming132">
+    <meta name="keywords" content="generator" />
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="toolstyle.css">
+</head>
+<body>
+    <p class="pt">Character Generator</p>
+    <img id="image1">
+    <br><br>
+    <input type="checkbox" oninput="oppo= !oppo" id="check">
+    <label for="check">Enable opposite color for face</label><br>
+    <button class="btn">Generate</button><br>
+    <button class="btn">Download Image (16x16)</button><br>
+    <button class="btn">Download Enlarged Image (256x256)</button><br>
+    <button class="btn">Download Enlarged Image (custom size)</button><br>
+    <style>
+        body {
+            background-color: #000;
+            color: #fff;
+            text-align: center;
+        }
+
+        img {
+            border: 2px solid #999;
+            image-rendering: pixelated;
+            width: 400px;
+            height: 400px;
+            object-fit: contain
+        }
+    </style>
+    <script>
+        "use strict"
+        var chars = [
+            "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsEAAA7BAbiRa+0AAAA3SURBVDhPYxj6gBFKg4GxsfF/KBMvOHv2LFwfE5QmG4waMGoACFBsAM6kjJxcQQCXHIUuYGAAALtYDBk6rhp/AAAAAElFTkSuQmCC",
+            "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsEAAA7BAbiRa+0AAABNSURBVDhPYxhwwAilUYCxsfF/KBMFnD17FkM9hgAuzTCAbggKh5BmGEA2BM4gVjMMwAxhAvMoAKMGDAYDKE5IGABkCDaDcIlT6AUGBgBuDBp2STmLcQAAAABJRU5ErkJggg==",
+            "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsAAAA7AAWrWiQkAAAA/SURBVDhPY6AUMEJpODA2Nv4PZWIFZ8+eRdHDBKXJBiimEbIdBpBdQbELRg0YNQAnAKVI5FSJzkcGA+0FBgYAgBcOe9vkIPcAAAAASUVORK5CYII=",
+            "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADr8AAA6/ATgFUyQAAABQSURBVDhPYxj6gBFKYwBjY+P/UCYYnD17FqtaDEF0jegA3SAUDiHNMIBsCJxBrGYYgBnCBOZRAEYNoGY0wgCpCQkrABmCbBA6HxlQGAYMDADTIR5zWYgNowAAAABJRU5ErkJggg==",
+            "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsAAAA7AAWrWiQkAAABQSURBVDhPY6AUMEJpFGBsbPwfykQBZ8+exVDPBKXJBhgm4rIdBtBdQV0XELIdBpBdAWcQqxkGYIZQ7IVRA6gZjTCAbAhMITYxGBjoMGBgAAAHkBwZrK+V0AAAAABJRU5ErkJggg=="
+        ]
+        var eyesL = [
+            "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADr8AAA6/ATgFUyQAAAAcSURBVDhPYxgFNAL/oQDKxQuYoPQoGAUDCRgYAIjLB/uuOKTDAAAAAElFTkSuQmCC",
+            "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADr8AAA6/ATgFUyQAAAAhSURBVDhPYxgFNAL/oQDKxQuYoDTZgGIDRsEoYGBgYAAAjV0H/f8eHJoAAAAASUVORK5CYII=",
+            "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADr8AAA6/ATgFUyQAAAAgSURBVDhPYxgFNAL/oQDKxQuYoDQcEKtxFIwCKgIGBgBdgwv3suhXbAAAAABJRU5ErkJggg==",
+            "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADr8AAA6/ATgFUyQAAAAYSURBVDhPYxgFgxX8hwIodxSMAloDBgYAfaEH+e9b5BkAAAAASUVORK5CYII=",
+            "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADr8AAA6/ATgFUyQAAAAiSURBVDhPYxgFgwAwQmk4+A8EUCYDIxBAmaNgFNASMDAAAOTxBAInV25qAAAAAElFTkSuQmCC"
+        ]
+        var eyesR = [
+            "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADr8AAA6/ATgFUyQAAAAcSURBVDhPYxgFdAL/oQDKRQFMUHoUjIKBBAwMAAlLB/uMqyxgAAAAAElFTkSuQmCC",
+            "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADr8AAA6/ATgFUyQAAAAhSURBVDhPYxgFdAL/oQDKRQFMUJpsQLEBo2AUMDAwMAAADd0H/RJVt7QAAAAASUVORK5CYII=",
+            "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADr8AAA6/ATgFUyQAAAAgSURBVDhPYxgFdAL/oQDKRQFMUJoogMuQUTAKKAQMDABuZAv3dw/fXwAAAABJRU5ErkJggg==",
+            "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADr8AAA6/ATgFUyQAAAAYSURBVDhPYxgFQwX8hwIodxSMAmoDBgYA/hIH+QAkFTcAAAAASUVORK5CYII=",
+            "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADr8AAA6/ATgFUyQAAAAiSURBVDhPYxgFgwAwQmm84D8QQJkMjEAAZY6CUUAtwMAAAJTxBAKkq7zNAAAAAElFTkSuQmCC"
+        ]
+        var mouths = [
+            "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsAAAA7AAWrWiQkAAAAoSURBVDhPYxgFo4Bm4D8QQJlwgE0MBBihNAZA18AIBFDmKKAuYGAAANswC/p9/jXlAAAAAElFTkSuQmCC",
+            "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADr8AAA6/ATgFUyQAAAApSURBVDhPYxgFo2BQAEYojQH+AwGUCQaMQABlEgbomkEAm9goAAEGBgDPBAv6TO7VhQAAAABJRU5ErkJggg==",
+            "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsAAAA7AAWrWiQkAAAAiSURBVDhPYxgFo2BQAEYojQL+AwGUiQIYgQDKHAXUAwwMAMOBBALWmeYLAAAAAElFTkSuQmCC",
+            "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADr8AAA6/ATgFUyQAAAAYSURBVDhPYxgFo2Bwg/9QAOWOAtoBBgYARWkH+bybDBYAAAAASUVORK5CYII=",
+            "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADr8AAA6/ATgFUyQAAAAYSURBVDhPYxgFo2BogP9QAOWOAuoDBgYABakH+QK9Z9UAAAAASUVORK5CYII=",
+            "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADr8AAA6/ATgFUyQAAAAYSURBVDhPYxgFo2Dwg/9QAOWOAtoABgYAJYkH+Vh54MMAAAAASUVORK5CYII="
+        ]
+        var oppo = false
+        var char = new Image();
+        var eyeL = new Image();
+        var eyeR = new Image();
+        var mouth = new Image();
+        function gen() {
+            char.src = chars[rnd(chars.length - 1)]
+        }
+        gen([chars[rnd(1)]])
+        char.onload = () => eyeL.src = eyesL[rnd(eyesL.length - 1)]
+        eyeL.onload = () => eyeR.src = eyesR[rnd(eyesR.length - 1)]
+        eyeR.onload = () => mouth.src = mouths[rnd(mouths.length - 1)]
+        mouth.onload = () => recolorImage([char, eyeL, eyeR, mouth], 51, 51, 51, rnd(255), rnd(255), rnd(255));
+
+
+        function recolorImage(img, oldRed, oldGreen, oldBlue, newRed, newGreen, newBlue) {
+            var c = document.createElement('canvas');
+            var ctx = c.getContext("2d");
+            c.width = 16;
+            c.height = 16;
+            for (var i = 0; i < img.length; i++) {
+                ctx.drawImage(img[i], 0, 0, 16, 16);
+            }
+            var imgDat = ctx.getImageData(0, 0, 16, 16);
+            let nRGB = [newRed, newGreen, newBlue]
+            let nnRGB = opos(nRGB)
+            for (var i = 0; i < imgDat.data.length; i += 4) {
+                if (imgDat.data[i] == oldRed && imgDat.data[i + 1] == oldGreen && imgDat.data[i + 2] == oldBlue) {
+                    imgDat.data[i] = newRed;
+                    imgDat.data[i + 1] = newGreen;
+                    imgDat.data[i + 2] = newBlue;
+                }
+                if (oppo && imgDat.data[i] == 255 && imgDat.data[i + 1] == 255 && imgDat.data[i + 2] == 255) {
+                    imgDat.data[i] = nnRGB[0];
+                    imgDat.data[i + 1] = nnRGB[1];
+                    imgDat.data[i + 2] = nnRGB[2];
+                }
+            }
+            ctx.putImageData(imgDat, 0, 0);
+            var img1 = document.getElementById("image1");
+            img1.src = c.toDataURL();
+
+        }
+
+        function rnd(max, min = 0) {
+            if (!max) return Math.floor(Math.random() * 3)
+            else return Math.floor(Math.random() * (max + 1 - min) + min)
+        }
+        function bow(cols) {
+            let code = ""
+            for (let i = 0; i < cols.length; i++) {
+                code += cols[i].toString(16)
+            }
+            if (parseInt(code, 16) > 0xffffff / 2) return true
+            else return false
+        }
+        function opos(cols) {
+            for (let i = 0; i < cols.length; i++) {
+                cols[i] = 255 - cols[i]
+            }
+            return cols
+        }
+        function dl(res) {
+            let a = document.createElement("a")
+            let date = new Date()
+            let dl = document.getElementById("image1").src
+            if (res) {
+                let can = document.createElement("canvas")
+                let ctx = can.getContext("2d")
+                can.width = res
+                can.height = res
+                ctx.imageSmoothingEnabled = false
+                ctx.drawImage(document.getElementById("image1"), 0, 0, res, res)
+                dl = can.toDataURL()
+            }
+            date = Math.ceil((date.getFullYear() + "" + date.getMinutes() + "" + date.getSeconds() + "" + date.getMilliseconds()) / 10)
+            a.href = dl
+            a.download = "char" + date + ".png"
+            a.click()
+        }
+        var btns = document.getElementsByTagName("button")
+        btns[0].onclick = gen
+        btns[1].onclick = dl
+        btns[2].onclick = () => dl(256)
+        btns[3].onclick = () => dl(parseInt(prompt('Enter a number')))
+    </script>
+</body>
+</html>
