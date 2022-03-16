@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -8,12 +8,12 @@
     <meta name="author" content="bestGaming132">
     <meta name="keywords" content="settings" />
     <link rel="stylesheet" href="default.css">
-    <script src="lang.js"></script>
+    <script src="scripts/lang.js"></script>
 </head>
 <body align="center">
     <p class="pt" id="settP">Settings</p>
     <p class="pb" id="langP">Language</p>
-    <select id="langSel" onchange="lng(this)">
+    <select id="langSel" onchange="lng('lang',this.value)">
         <option value="en">English (English)</option>
         <option value="de">Deutsch (German)</option>
     </select>
@@ -21,33 +21,10 @@
     <!--<p>This option will not work on every page</p>-->
 </body>
 <script>
-    /*
-     var cl = localStorage.getItem("lang"); //current language
-    var language = {
-        "en": {
-            "langSel": "en",
-            "settP": "Settings",
-            "langP": "Language",
-            "infoP": "Currently only works on this page"
-        },
-        "de": {
-            "langSel": "de",
-            "settP": "Einstellungen",
-            "langP": "Sprache",
-            "infoP": "Funktioniert aktuell nur auf dieser Seite"
-        }
-    }
-    function elm(e) { return document.getElementById(e) }
-
-    elm("settP").innerHTML = language[cl].settP;
-    elm("langP").innerHTML = language[cl].langP;
-    elm("langSel").value = language[cl].langSel;
-    elm("infoP").innerHTML = language[cl].infoP;
-    */
     if (!localStorage.getItem("lang")) localStorage.setItem("lang","en")
     setL(["langSel","settP","langP","infoP"],"settings")
-    function lng(elm) {
-        localStorage.setItem("lang", elm.value);
+    function lng(item,val) {
+        localStorage.setItem(item, val);
         location.reload();
     }
 </script>

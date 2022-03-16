@@ -1,4 +1,4 @@
-﻿var langs = {
+var langs = {
     "settings": {
         "en": {
             "metaTitle": "Settings",
