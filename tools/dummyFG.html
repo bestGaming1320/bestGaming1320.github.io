@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Dummy File Generator</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Generate dummy files. Currently text and image supported">
+    <meta name="author" content="bestGaming132">
+    <meta name="keywords" content="generator" />
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="toolstyle.css">
+</head>
+<body>
+    <p class="pt">Dummy File Generator</p>
+    <p style="margin-bottom:2px">Select the type of content to be generated</p>
+    <select id="type">
+        <option value="txt">Text File</option>
+        <option value="img">Image</option>
+    </select>
+    <input id="dat" placeholder="size in bytes"><br>
+    <button id="gen" class="btn">Generate</button><br>
+    <button id="dl" class="btn">Download</button><br>
+    <p style="margin-bottom:0">Preview (this is what you'll get)</p>
+    <div id="preview" class="txt2"></div>
+</body>
+<script>
+    const typeS = document.getElementById("type")
+    const preview = document.getElementById("preview")
+    const dat = document.getElementById("dat")
+    var a = document.createElement("a")
+    var letters = []
+    var type = "txt"
+    for (let i = 0; i < 26; i++) {
+        letters[i] = String.fromCharCode(65 + i)
+    }
+    function generate() {
+        switch (type) {
+            case "txt":
+                let tmp = ""
+                for (let i = 0; i < parseInt(dat.value); i++) {
+                    tmp += letters[rnd(letters.length - 1)]
+                }
+                preview.innerHTML = tmp
+                dl(URL.createObjectURL(new Blob([tmp], {})), ".txt")
+                break;
+
+            case "img":
+                var c = document.createElement('canvas');
+                var ctx = c.getContext("2d");
+                c.width = parseInt(dat.value);
+                c.height = parseInt(dat.value);
+                ctx.fillRect(0, 0, c.width, c.height)
+                var imgDat = ctx.getImageData(0, 0, c.width, c.height);
+                for (var i = 0; i < imgDat.data.length; i += 4) {
+                    imgDat.data[i] = rnd(255);
+                    imgDat.data[i + 1] = rnd(255);
+                    imgDat.data[i + 2] = rnd(255);
+                }
+                ctx.putImageData(imgDat, 0, 0);
+                let img = new Image()
+                img.src = c.toDataURL()
+                img.onload = function () {
+                    preview.innerHTML = ""
+                    preview.appendChild(this)
+                }
+                dl(c.toDataURL(), ".png");
+                break;
+        }
+    }
+    function rnd(max, min = 0) {
+        return Math.floor(Math.random() * (max + 1 - min) + min)
+    }
+
+    function dl(cont, ext) {
+        let date = new Date()
+        a.download = Math.ceil((date.getFullYear() + "" + date.getMinutes() + "" + date.getSeconds() + "" + date.getMilliseconds()) / 10)+ext;
+        a.href = cont;
+    }
+
+    typeS.addEventListener("change", function () {
+        switch (this.value) {
+            case "txt":
+                dat.placeholder = "size in bytes"
+                break;
+            case "img":
+                dat.placeholder = "image height and width"
+                break;
+        }
+        type = this.value
+    })
+    document.getElementById("gen").addEventListener("click", function () {
+        generate()
+    })
+    document.getElementById("dl").addEventListener("click", function () {
+        a.click()
+    })
+
+</script>
+<style>
+    img {
+        width: 100%;
+        image-rendering: pixelated;
+        object-fit: contain
+    }
+    div {
+        margin: 0 auto;
+        width: 70%;
+        height: 20vh;
+    }
+</style>
+</html>

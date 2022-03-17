@@ -4,6 +4,7 @@ body {
     font-size: 18px;
     margin: 5px;
     font-family: Arial;
+    text-align: center;
 }
 
 textarea {
@@ -37,7 +38,8 @@ input:not([type=checkbox]):not([type=range]):not([type=radio]):not([type=color])
 div.txt2 {
     height: 30vh;
     width: 70%;
-    overflow: scroll;
+    overflow-y: scroll;
+    overflow-wrap: break-word;
     margin: 0 auto;
     margin-top: 10px;
     border: 1px solid #aaa;
