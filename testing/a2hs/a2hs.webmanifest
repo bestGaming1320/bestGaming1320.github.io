@@ -1,0 +1,31 @@
+{
+  "name": "Add to home screen test",
+  "short_name": "A2HS Test",
+  "description": "Testing of progressive web apps / add to home screen feature",
+  "id": "TestA2HS",
+  "start_url": "index.html",
+  "background_color": "#000",
+  "theme_color": "#000",
+  "display": "fullscreen",
+  "icons": [
+    {
+      "src": "icon.png",
+      "sizes": "256x256",
+      "type": "image/png"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Lipsum",
+      "url": "lipsum.html",
+      "description": "Lorem ipsum dolor sit amet",
+      "icons": [
+        {
+      "src": "icon.png",
+      "sizes": "256x256",
+      "type": "image/png"
+        }
+      ]
+    }
+  ]
+}
