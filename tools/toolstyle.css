@@ -130,6 +130,10 @@ a {
     a:hover {
         color: #0fa;
     }
+
+code {
+    background: #252525
+}
 /* width */
 ::-webkit-scrollbar {
     width: 5px;
