@@ -98,12 +98,30 @@ select {
     text-align: center;
     text-align-last: center;
     color: #fff;
-    background: #333;
+    background: #333333;
     height: 30px;
     width: 70%;
     margin-bottom: 5px;
     border-radius: 5px;
 }
+
+    select:disabled {
+        filter: brightness(0.9)
+    }
+
+optgroup {
+    font-size: 16px;
+    font-style: italic;
+}
+
+
+option {
+    font-style: normal
+}
+
+    option:nth-child(odd) {
+        background: #252525
+    }
 
 p {
     font-weight: 400

@@ -14,47 +14,137 @@
     <p class="pt">Dummy File Generator</p>
     <p style="margin-bottom:2px">Select the type of content to be generated</p>
     <select id="type">
-        <option value="txt">Text File</option>
-        <option value="img">Image</option>
+        <optgroup label="Text Files">
+            <option value="txt_pt">Text File</option>
+            <option value="txt_md">Markdown File</option>
+        </optgroup>
+        <optgroup label="Image Files">
+            <option value="img_c">Colorful Image</option>
+            <option value="img_cb">Bright Colorful Image</option>
+            <option value="img_cd">Dark Colorful Image</option>
+            <option value="img_sp">Simple Colorful Image</option>
+            <option value="img_g">Grayscale Image</option>
+            <option value="img_bw">B&amp;W Image</option>
+        </optgroup>
     </select>
-    <input id="dat" placeholder="size in bytes"><br>
+    <p style="margin-bottom:2px;margin-top:2px">Select the image type</p>
+    <select id="imgtype" disabled>
+        <optgroup label="Image File Type">
+            <option value="png">png</option>
+            <option value="jpeg">jpeg</option>
+            <option value="webp">webp</option>
+        </optgroup>
+    </select>
+    <input id="dat" placeholder="size in bytes" type="number"><br>
+    <button id="gennum" class="btn">Generate Random Number</button><br>
     <button id="gen" class="btn">Generate</button><br>
     <button id="dl" class="btn">Download</button><br>
     <p style="margin-bottom:0">Preview (this is what you'll get)</p>
-    <div id="preview" class="txt2"></div>
+    <div id="preview" class="txt2" style="height:50vh"></div>
 </body>
 <script>
     const typeS = document.getElementById("type")
     const preview = document.getElementById("preview")
     const dat = document.getElementById("dat")
+    const imgtype = document.getElementById("imgtype")
     var a = document.createElement("a")
     var letters = []
-    var type = "txt"
-    for (let i = 0; i < 26; i++) {
-        letters[i] = String.fromCharCode(65 + i)
+    var type = ["txt", "pt"]
+    var imgext = "png"
+    var ls = location.search.slice(1).split("&")
+
+    dat.value = ls[0] ? ls[0] : ""
+    typeS.value = ls[1] ? ls[1] : "txt_pt"
+    imgtype.value = ls[2] ? ls[2] : "png"
+    if (ls[1]) {
+        type = ls[1].split("_")
+        if (type[0] == "img") imgtype.disabled = false
+    }
+
+    for (let i = 0; i < 58; i++) {
+        letters.push(String.fromCharCode(65 + i))
+        if (i == 25) i += 6
     }
     function generate() {
-        switch (type) {
+        let datval = parseInt(dat.value);
+        datval = datval ? datval : 30
+        imgext = imgtype.value //? imgtype.value : "png"
+        switch (type[0]) {
             case "txt":
                 let tmp = ""
-                for (let i = 0; i < parseInt(dat.value); i++) {
-                    tmp += letters[rnd(letters.length - 1)]
+                let ext = ".txt"
+                switch (type[1]) {
+                    case "pt":
+                        for (let i = 0; i < parseInt(datval); i++) {
+                            tmp += letters[rnd(letters.length - 1)]
+                            ext = ".txt"
+                        }
+                        break;
+                    case "md":
+                        for (let i = 0; i < parseInt(datval); i++) {
+                            let t = rnd(50)
+                            if (t == 0) tmp += "\n# "
+                            else if (t == 1) tmp += "\n## "
+                            else if (t == 2) tmp += "\n### "
+                            else if (t == 3) tmp += "\n#### "
+                            else if (t == 4) tmp += "\n---\n"
+                            else if (t == 5) tmp += "\n>"
+                            else if (t > 48) tmp += "\n"
+                            tmp += letters[rnd(letters.length - 1)]
+                        }
+                        ext = ".md"
+                        break;
                 }
-                preview.innerHTML = tmp
-                dl(URL.createObjectURL(new Blob([tmp], {})), ".txt")
+                preview.innerHTML = tmp.replaceAll("\n", "<br>")
+                dl(URL.createObjectURL(new Blob([tmp], {})), ext)
                 break;
 
             case "img":
                 var c = document.createElement('canvas');
                 var ctx = c.getContext("2d");
-                c.width = parseInt(dat.value);
-                c.height = parseInt(dat.value);
+                c.width = parseInt(datval);
+                c.height = parseInt(datval);
                 ctx.fillRect(0, 0, c.width, c.height)
                 var imgDat = ctx.getImageData(0, 0, c.width, c.height);
-                for (var i = 0; i < imgDat.data.length; i += 4) {
-                    imgDat.data[i] = rnd(255);
-                    imgDat.data[i + 1] = rnd(255);
-                    imgDat.data[i + 2] = rnd(255);
+                switch (type[1]) {
+                    case "c":
+                        for (var i = 0; i < imgDat.data.length; i += 4) {
+                            imgDat.data[i] = rnd(255);
+                            imgDat.data[i + 1] = rnd(255);
+                            imgDat.data[i + 2] = rnd(255);
+                        }
+                        break;
+                    case "cb":
+                        for (var i = 0; i < imgDat.data.length; i += 4) {
+                            imgDat.data[i] = rnd(205) + 50;
+                            imgDat.data[i + 1] = rnd(205) + 50;
+                            imgDat.data[i + 2] = rnd(205) + 50;
+                        }
+                        break;
+                    case "cd":
+                        for (var i = 0; i < imgDat.data.length; i += 4) {
+                            imgDat.data[i] = rnd(145);
+                            imgDat.data[i + 1] = rnd(145);
+                            imgDat.data[i + 2] = rnd(145);
+                        }
+                        break;
+                    case "sp":
+                        for (var i = 0; i < imgDat.data.length; i += 4) {
+                            imgDat.data[i] = rnd(1) ? 255 : 0;
+                            imgDat.data[i + 1] = rnd(1) ? 255 : 0;
+                            imgDat.data[i + 2] = rnd(1) ? 255 : 0;
+                        }
+                        break;
+                    case "g":
+                        for (var i = 0; i < imgDat.data.length; i += 4) {
+                            imgDat.data[i] = imgDat.data[i + 1] = imgDat.data[i + 2] = rnd(255);
+                        }
+                        break;
+                    case "bw":
+                        for (var i = 0; i < imgDat.data.length; i += 4) {
+                            imgDat.data[i] = imgDat.data[i + 1] = imgDat.data[i + 2] = rnd(1) ? "255" : "0";
+                        }
+                        break;
                 }
                 ctx.putImageData(imgDat, 0, 0);
                 let img = new Image()
@@ -63,7 +153,7 @@
                     preview.innerHTML = ""
                     preview.appendChild(this)
                 }
-                dl(c.toDataURL(), ".png");
+                dl(c.toDataURL("image/" + imgext), "." + imgext);
                 break;
         }
     }
@@ -73,23 +163,29 @@
 
     function dl(cont, ext) {
         let date = new Date()
-        a.download = Math.ceil((date.getFullYear() + "" + date.getMinutes() + "" + date.getSeconds() + "" + date.getMilliseconds()) / 10)+ext;
+        a.download = Math.ceil((date.getFullYear() + "" + date.getMinutes() + "" + date.getSeconds() + "" + date.getMilliseconds()) / 10) + ext;
         a.href = cont;
     }
 
     typeS.addEventListener("change", function () {
-        switch (this.value) {
+        type = this.value.split("_")
+        switch (type[0]) {
             case "txt":
-                dat.placeholder = "size in bytes"
+                if (type[1] == "pt") dat.placeholder = "size in bytes";
+                else if (type[1] == "md") dat.placeholder = "approximate size in bytes";
+                imgtype.disabled = true;
                 break;
             case "img":
-                dat.placeholder = "image height and width"
+                dat.placeholder = "image height and width";
+                imgtype.disabled = false;
                 break;
         }
-        type = this.value
     })
     document.getElementById("gen").addEventListener("click", function () {
         generate()
+    })
+    document.getElementById("gennum").addEventListener("click", function () {
+        dat.value = rnd(2048)
     })
     document.getElementById("dl").addEventListener("click", function () {
         a.click()
@@ -102,6 +198,7 @@
         image-rendering: pixelated;
         object-fit: contain
     }
+
     div {
         margin: 0 auto;
         width: 70%;
