@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Base Converter</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Convert from one base to another">
+    <meta name="author" content="bestGaming132">
+    <meta name="keywords" content="base64, base16, base10, base8, base2, base" />
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="toolstyle.css">
+    <style>
+        body {
+            min-height: 1500px
+        }
+    </style>
+</head>
+
+<body align="center">
+    <p style="font-size:25px"><b>Base Converter</b></p>
+    <p><b>Base64 Converter</b></p>
+    <textarea id="b64tcip" class="txt" placeholder="Input"></textarea><br>
+    <button onclick="tconv(false)">To Base64</button><button onclick="tconv(true)">To Text</button><br>
+    <textarea id="b64tcop" class="txt2" placeholder="Output" readonly></textarea>
+    <hr>
+    <p><b>Base16 / Hexadecimal Converter</b></p>
+    <textarea placeholder="Input" id="hexip"></textarea>
+    <select id="hexMode">
+        <optgroup label="Encode">
+            <option value="n2b_16">Number to Hex</option>
+            <option value="s2b_16">String (text) to Hex</option>
+        </optgroup>
+        <optgroup label="Decode">
+            <option value="b2n_16">Hex to Number</option>
+            <option value="b2s_16">Hex to String (text)</option>
+        </optgroup>
+    </select>
+    <textarea placeholder="Output" id="hexop" readonly></textarea>
+    <hr>
+    <p><b>Base8 / Octal Converter</b></p>
+    <textarea placeholder="Input" id="octip"></textarea>
+    <select id="octMode">
+        <optgroup label="Encode">
+            <option value="n2b_8">Number to Octal</option>
+            <option value="s2b_8">String (text) to Octal</option>
+        </optgroup>
+        <optgroup label="Decode">
+            <option value="b2n_8">Octal to Number</option>
+            <option value="b2s_8">Octal to String (text)</option>
+        </optgroup>
+    </select>
+    <textarea placeholder="Output" id="octop" readonly></textarea>
+    <hr>
+    <p><b>Base2 / Binary Converter</b></p>
+    <textarea placeholder="Input" id="binip"></textarea>
+    <select id="binMode">
+        <optgroup label="Encode">
+            <option value="n2b_2">Number to Binary</option>
+            <option value="s2b_2">String (text) to Binary</option>
+        </optgroup>
+        <optgroup label="Decode">
+            <option value="b2n_2">Binary to Number</option>
+            <option value="b2s_2">Binary to String (text)</option>
+        </optgroup>
+    </select>
+    <textarea placeholder="Output" id="binop" readonly></textarea>
+
+</body>
+<script>
+    function elm(id) {
+        return document.getElementById(id);
+    }
+    //b64 Converter
+    function tconv(b) {
+        let ip = elm("b64tcip");
+        let op = elm("b64tcop");
+        try {
+            if (b) op.value = atob(ip.value);
+            else op.value = btoa(ip.value);
+        } catch (e) {
+            op.value = "There was an error";
+            console.log("Error:\n" + e);
+        }
+    }
+    //universal converter
+    function baseCon(input, mode, base, oldbase) {
+        base = parseInt(base)
+        let output = ""
+        switch (mode) {
+            case "n2b":
+                output = parseInt(input).toString(base)
+                break;
+            case "b2n":
+                output = parseInt(input, base)
+                break;
+
+            case "s2b":
+                input = input.split("")
+                for (let i = 0; i < input.length; i++) {
+                    output += input[i].charCodeAt(0).toString(base) + " "
+                }
+                break;
+            case "b2s":
+                input = input.split(" ")
+                for (let i = 0; i < input.length; i++) {
+                    output += String.fromCharCode(parseInt(input[i], base))
+                }
+                break;
+            case "b2b":
+                break;
+        }
+        return output
+    }
+
+    //event listeners
+    elm("hexip").oninput = elm("hexMode").oninput = () => {
+        let tmp = elm("hexMode").value.split("_")
+        elm("hexop").value = baseCon(elm("hexip").value, tmp[0], tmp[1])
+    }
+
+    elm("octip").oninput = elm("octMode").oninput = () => {
+        let tmp = elm("octMode").value.split("_")
+        elm("octop").value = baseCon(elm("octip").value, tmp[0], tmp[1])
+    }
+
+    elm("binip").oninput = elm("binMode").oninput = () => {
+        let tmp = elm("binMode").value.split("_")
+        elm("binop").value = baseCon(elm("binip").value, tmp[0], tmp[1])
+    }
+
+
+</script>
+
+</html>

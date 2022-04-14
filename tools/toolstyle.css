@@ -11,7 +11,7 @@ textarea {
     color: #fff;
     background: #444;
     width: 70%;
-    height: 60px;
+    height: 90px;
     text-align: center;
     border: 1px solid #888;
     border-radius: 5px;
@@ -28,9 +28,9 @@ input:not([type=checkbox]):not([type=range]):not([type=radio]):not([type=color])
     border-radius: 5px;
 }
 
-.txt2 {
+.txt2, textarea:read-only {
     background: #222;
-    height: 70px;
+    height: 100px;
     border: 1px solid #aaa;
     margin: 3px;
 }
@@ -44,6 +44,10 @@ div.txt2 {
     margin-top: 10px;
     border: 1px solid #aaa;
     border-radius: 5px;
+}
+
+input:focus, textarea:focus, select:focus {
+    outline: 2px solid #999
 }
 
 .dc {
@@ -85,7 +89,7 @@ button {
     }
 
 .btn {
-    width: 71%;
+    width: 70%;
 }
 
 hr {
@@ -102,6 +106,7 @@ select {
     height: 30px;
     width: 70%;
     margin-bottom: 5px;
+    margin-top: 5px;
     border-radius: 5px;
 }
 
@@ -110,18 +115,16 @@ select {
     }
 
 optgroup {
-    font-size: 16px;
-    font-style: italic;
+    background: #252525;
+    font-size: 18px;
+    border: 2px solid #fff
 }
 
 
 option {
-    font-style: normal
+    background: #333333;
+    font-size: 16px
 }
-
-    option:nth-child(odd) {
-        background: #252525
-    }
 
 p {
     font-weight: 400

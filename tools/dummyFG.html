@@ -17,6 +17,7 @@
         <optgroup label="Text Files">
             <option value="txt_pt">Text File</option>
             <option value="txt_md">Markdown File</option>
+            <option value="txt_hex">Hex File</option>
         </optgroup>
         <optgroup label="Image Files">
             <option value="img_c">Colorful Image</option>
@@ -75,13 +76,13 @@
                 let ext = ".txt"
                 switch (type[1]) {
                     case "pt":
-                        for (let i = 0; i < parseInt(datval); i++) {
+                        for (let i = 0; i < datval; i++) {
                             tmp += letters[rnd(letters.length - 1)]
-                            ext = ".txt"
                         }
+                        ext = ".txt"
                         break;
                     case "md":
-                        for (let i = 0; i < parseInt(datval); i++) {
+                        for (let i = 0; i < datval; i++) {
                             let t = rnd(50)
                             if (t == 0) tmp += "\n# "
                             else if (t == 1) tmp += "\n## "
@@ -93,6 +94,12 @@
                             tmp += letters[rnd(letters.length - 1)]
                         }
                         ext = ".md"
+                        break;
+                    case "hex":
+                        for (let i = 0; i < datval; i++) {
+                            tmp += letters[rnd(letters.length - 1)].charCodeAt(0).toString(16) + " "
+                        }
+                        ext = ".hex"
                         break;
                 }
                 preview.innerHTML = tmp.replaceAll("\n", "<br>")
