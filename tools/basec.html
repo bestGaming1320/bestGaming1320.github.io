@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="toolstyle.css">
     <style>
         body {
-            min-height: 1500px
+            min-height: 1900px
         }
     </style>
 </head>
@@ -64,6 +64,16 @@
         </optgroup>
     </select>
     <textarea placeholder="Output" id="binop" readonly></textarea>
+    <hr>
+    <p><b>Universal Converter</b></p>
+    <p>Currently no string (text) support</p>
+    <textarea placeholder="Input" id="uniip"></textarea><br>
+    <p>Convert from</p>
+    <select id="uniMode1"></select><br>
+    <p>to</p>
+    <select id="uniMode2"></select><br>
+    <!--<input type="checkbox" id="nos" /><label for="nos">String (text) Mode</label><br>-->
+    <textarea placeholder="Output" id="uniop" readonly></textarea>
 
 </body>
 <script>
@@ -82,11 +92,12 @@
             console.log("Error:\n" + e);
         }
     }
-    //universal converter
-    function baseCon(input, mode, base, oldbase) {
+    //converter
+    function baseCon(input, mode, base) {
         base = parseInt(base)
         let output = ""
-        switch (mode) {
+        mode = mode.split("_")
+        switch (mode[0]) {
             case "n2b":
                 output = parseInt(input).toString(base)
                 break;
@@ -105,12 +116,34 @@
                 for (let i = 0; i < input.length; i++) {
                     output += String.fromCharCode(parseInt(input[i], base))
                 }
+
                 break;
             case "b2b":
-                break;
+                if (mode[2] == "n") {
+                    output = parseInt(input, mode[1]).toString(base)
+                }
+                else if (mode[2] == "s") {
+                    input = input.split("")
+                    for (let i = 0; i < input.length; i++) {
+                        output += parseInt((input[i].charCodeAt(0)).toString(mode[1])).toString(base) + " "
+                    }
+                    break;
+                }
         }
         return output
     }
+
+    //universal converter select
+    for (let i = 2; i < 37; i++) {
+        let option1 = document.createElement("option")
+        let option2 = document.createElement("option")
+        option1.value = option2.value = "b2b_" + i
+        option1.innerHTML = option2.innerHTML = "Base" + i
+        document.getElementById("uniMode1").appendChild(option1)
+        document.getElementById("uniMode2").appendChild(option2)
+    }
+    elm("uniMode1").value = "b2b_10"
+    elm("uniMode2").value = "b2b_16"
 
     //event listeners
     elm("hexip").oninput = elm("hexMode").oninput = () => {
@@ -126,6 +159,10 @@
     elm("binip").oninput = elm("binMode").oninput = () => {
         let tmp = elm("binMode").value.split("_")
         elm("binop").value = baseCon(elm("binip").value, tmp[0], tmp[1])
+    }
+    elm("uniip").oninput = elm("uniMode1").oninput = elm("uniMode2").oninput = () => {
+        let tmp = elm("uniMode1").value + "_n" //(elm("nos").checked ? "_s" : "_n")
+        elm("uniop").value = baseCon(elm("uniip").value, tmp, elm("uniMode2").value.split("_")[1], tmp[1])
     }
 
 

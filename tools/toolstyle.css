@@ -127,7 +127,8 @@ option {
 }
 
 p {
-    font-weight: 400
+    font-weight: 400;
+    margin: 4px
 }
 
 .pt {
@@ -138,6 +139,10 @@ p {
 .pn {
     font-weight: normal;
     margin: 2px;
+}
+
+.noM {
+    margin:0
 }
 
 a {
