@@ -6,7 +6,7 @@
     <meta name="author" content="bestGaming132">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <meta charset="UTF-8">
-    <meta name="ver" content="1.1.1">
+    <meta name="ver" content="1.1.2">
     <link rel="stylesheet" href="../default.css" />
 </head>
 <body align="center">
@@ -16,10 +16,10 @@
     <p id="pos" style="opacity:1" onclick="chv(this)"></p>
     <div style="width:100%;position:fixed;bottom:0;">
         <div>
-            <button style="width:203px" onclick="mu()">W</button><br>
+            <button style="width:51%" onclick="mu()">W</button><br>
             <button onclick="ml()">A</button>
             <button onclick="mr()">D</button><br>
-            <button style="width:203px" onclick="md()">S</button>
+            <button style="width:51%" onclick="md()">S</button>
             <!--&#8592; 8593 8594 8595-->
         </div>
     </div>
@@ -84,7 +84,7 @@
         //keyboard controls
         document.onkeypress = function (e) {
             e = e || window.event;
-            console.log(e.code)
+            //console.log(e.code)
             switch (e.code) {
                 case "KeyW":
                     mu();
@@ -150,7 +150,8 @@
     </script>
     <style>
         button {
-            width: 100px;
+            min-width: 100px;
+            width: 25%;
             height: 55px;
             font-size: 20px;
             font-weight: 800;
