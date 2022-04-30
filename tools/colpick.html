@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Color Picker</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Tool for color picking">
+    <meta name="author" content="bestGaming132">
+    <meta name="keywords" content="generator" />
+    <script src="../scripts/colpick.js"></script>
+    <link rel="stylesheet" href="toolstyle.css">
+</head>
+
+<body>
+    <p class="pt">Color Picker</p>
+    <col-sel id="cs" data-center="true" data-txt="Click here to select a color" style="width:70%;height:80px"></col-sel>
+    <br>
+    <div style="display:none">
+        <input id="hex" type="text" value="#ffffff" placeholder="hex" style="width:63%!important">
+        <br>
+    </div>
+    <input id="red" type="number" min="0" max="255" value="255" placeholder="red">
+    <input id="green" type="number" min="0" max="255" value="255" placeholder="green">
+    <input id="blue" type="number" min="0" max="255" value="255" placeholder="blue">
+</body>
+<script>
+    "use strict"
+    var collist = {
+        "hex": "#ffffff",
+        "rgb": [255, 255, 255]
+    }
+    var cs = document.getElementById("cs")
+    var hexIn = document.getElementById("hex")
+    var ipt = document.querySelectorAll("input[type=number]")
+    var oldval = [255, 255, 255]
+
+    function update(source) {
+        switch (source) {
+            case "csIP":
+                for (let i = 0; i < ipt.length; i++) {
+                    ipt[i].value = parseInt(collist.rgb[i])
+                    hexIn.value = collist.hex
+                }
+                break;
+            case "rgbIP":
+                cs.setAttribute("value", collist.hex)
+                hexIn.value = collist.hex
+        } 
+    }
+
+    String.prototype.rgb = function (css) {
+        var rgb = [0, 0, 0]
+        let tmp = this.replace("#", "").split("")
+        let tmp2 = 0
+        for (let i = 0; i <= tmp.length; i += (tmp.length / 3)) {
+            if (tmp.length == 6) rgb[tmp2] = parseInt(tmp[i] + tmp[i + 1], 16)
+            else rgb[tmp2] = parseInt(tmp[i] + tmp[i], 16)
+            tmp2++
+        }
+        if (css) return `rgb(${rgb[0]},${rgb[1]},${rgb[2]})`
+        else return rgb
+    }
+    Array.prototype.hex = function () {
+        let res = "#"
+        for (let i = 0; i < 3; i++) {
+            res+= this[i].toString(16).padStart("2","0")
+        }
+        return res//"#"+this[0].toString(16)+this[1].toString(16)+this[2].toString(16)
+    }
+
+    //Event listeners
+    //color picker
+    cs.addEventListener("colchange", (e) => {
+        collist.hex = e.target.getAttribute("value")
+        collist.rgb = collist.hex.rgb()
+        update("csIP")
+    })
+    //rgb input
+    for (let i = 0; i < ipt.length; i++) {
+        ipt[i].oninput = function () {
+            let tmp = parseInt(this.value)
+            if (!tmp) return
+            else if (this.value.length > 0) {
+                if (tmp < 0 || tmp > 255) this.value = oldval[i]
+                collist.rgb[i] = parseInt(this.value)
+                oldval[i] = this.value
+            }
+            this.value = parseInt(this.value)
+            collist.hex = collist.rgb.hex()
+            update("rgbIP")
+        }
+    }
+</script>
+<!--
+event listener -> change value of color in json
+-->
+<style>
+    input {
+        width: 20% !important;
+        display: inline;
+    }
+</style>
+
+</html>

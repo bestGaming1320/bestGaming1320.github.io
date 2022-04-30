@@ -7,6 +7,12 @@ class colSel extends HTMLElement {
         const p = document.createElement("p");
         const datalist = document.createElement("datalist");
 
+        const modEl = col => {
+            div.style.background = col;
+            p.style.color = parseInt(col.replace("#", ""), 16) > 8388607 ? "#000" : "#fff";
+            this.dispatchEvent(new CustomEvent("colchange"));
+        }
+
         inp.value = this.getAttribute("data-def") ? this.getAttribute("data-def") : "#ffffff";
         this.setAttribute("value", inp.value);
 
@@ -34,10 +40,8 @@ class colSel extends HTMLElement {
         inp.type = "color";
         inp.style.opacity = 0;
         inp.oninput = () => {
-            div.style.background = inp.value;
-            this.setAttribute("value", inp.value);
-            this.dispatchEvent(new CustomEvent("colchange"));
-            p.style.color = parseInt(inp.value.replace("#", ""), 16) > 8388607 ? "#000" : "#fff";
+            this.setAttribute("value", inp.value)
+            //modEl(inp.value)
         }
 
         div.onclick = () => inp.click();
@@ -46,6 +50,17 @@ class colSel extends HTMLElement {
         div.style.background = inp.value;
         div.style.border = "2px solid #888";
         if (this.getAttribute("data-center") == "true") div.style.margin = "0 auto";
+
+        var obs = new MutationObserver(mut => {
+            if (mut[0].attributeName == "value") {
+                inp.value = this.getAttribute("value")
+                modEl(inp.value)
+            }
+        })
+
+        obs.observe(this, {
+            attributes: true
+        });
     }
 }
 
