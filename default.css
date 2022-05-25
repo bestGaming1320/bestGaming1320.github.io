@@ -18,7 +18,7 @@ button {
     margin-bottom: 5px
 }
 
-    button:hover, button:focus {
+    button:hover, button:focus, a.abtn:hover, a.abtn:focus {
         background: #444;
         outline: none;
     }
@@ -36,7 +36,7 @@ a {
     }
 
     a:hover {
-        background: #04a !important;
+        background: #04a;
     }
 
     a.abtn {
@@ -57,11 +57,6 @@ a {
 
         a.abtn:visited {
             color: #fff
-        }
-
-        a.abtn:focus {
-            background: #04a;
-            outline: none;
         }
 
 .pt {

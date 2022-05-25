@@ -9,15 +9,14 @@
     <script src="scripts/lang.js"></script>
     <link rel="stylesheet" href="default.css">
 </head>
-<body align="center">
+<body>
     <p id="title" class="pt">Select a page</p>
-    <button id="tool" style="border: 2px solid #0f0;" onclick="location.href='tools/index.html'">Tools</button><br>
-    <button id="game" style="border: 2px solid #f00;" onclick="location.href='games/index.html'">Games</button><br>
-    <button id="colSc" onclick="location.href='colorsc.html'" style="border: 2px solid #0af;">Color Screen</button><br>
-    <button id="clock" onclick="location.href='clock.html'" class="btn" style="border: 2px solid #ff0;">Clock</button><br>
-    <button id="book" onclick="location.href='book/index.html'" style="border: 2px solid #f90">Book</button><br>
-    <button id="docs" onclick="location.href='docs/index.html'" style="border: 2px solid #90f">Documentations</button><br>
-    <!--<button onclick="location.href='tba.html'" style="border: 2px solid #f0f;">tba</button>-->
+    <a id="tool" style="border: 2px solid #0f0;" href="tools/index.html" class="abtn">Tools</a><br>
+    <a id="game" style="border: 2px solid #f00;" href="games/index.html" class="abtn">Games</a><br>
+    <a id="colSc" style="border: 2px solid #0af" href="colorsc.html" class="abtn">Color Screen</a><br>
+    <a id="clock" style="border: 2px solid #ff0;" href="clock.html" class="abtn">Clock</a><br>
+    <a id="book" style="border: 2px solid #f90" href="book/index.html" class="abtn">Book</a><br>
+    <a id="docs" style="border: 2px solid #90f" href="docs/index.html" class="abtn">Documentations</a><br>
 </body>
 <script>
     setL(["title","tool", "game", "colSc", "clock", "book", "docs"], "mIndex")
