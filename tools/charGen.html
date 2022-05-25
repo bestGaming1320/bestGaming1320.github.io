@@ -42,7 +42,8 @@
                 "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsEAAA7BAbiRa+0AAABNSURBVDhPYxhwwAilUYCxsfF/KBMFnD17FkM9hgAuzTCAbggKh5BmGEA2BM4gVjMMwAxhAvMoAKMGDAYDKE5IGABkCDaDcIlT6AUGBgBuDBp2STmLcQAAAABJRU5ErkJggg==",
                 "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsAAAA7AAWrWiQkAAAA/SURBVDhPY6AUMEJpODA2Nv4PZWIFZ8+eRdHDBKXJBiimEbIdBpBdQbELRg0YNQAnAKVI5FSJzkcGA+0FBgYAgBcOe9vkIPcAAAAASUVORK5CYII=",
                 "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADr8AAA6/ATgFUyQAAABQSURBVDhPYxj6gBFKYwBjY+P/UCYYnD17FqtaDEF0jegA3SAUDiHNMIBsCJxBrGYYgBnCBOZRAEYNoGY0wgCpCQkrABmCbBA6HxlQGAYMDADTIR5zWYgNowAAAABJRU5ErkJggg==",
-                "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsAAAA7AAWrWiQkAAABQSURBVDhPY6AUMEJpFGBsbPwfykQBZ8+exVDPBKXJBhgm4rIdBtBdQV0XELIdBpBdAWcQqxkGYIZQ7IVRA6gZjTCAbAhMITYxGBjoMGBgAAAHkBwZrK+V0AAAAABJRU5ErkJggg=="
+                "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsAAAA7AAWrWiQkAAABQSURBVDhPY6AUMEJpFGBsbPwfykQBZ8+exVDPBKXJBhgm4rIdBtBdQV0XELIdBpBdAWcQqxkGYIZQ7IVRA6gZjTCAbAhMITYxGBjoMGBgAAAHkBwZrK+V0AAAAABJRU5ErkJggg==",
+                "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAGUExURTMzMwAAACOWWdUAAAACdFJOU/8A5bcwSgAAAAlwSFlzAAAOvwAADr8BOAVTJAAAAC9JREFUKFNjYEQDOAQYwADCRPAhIiACygUCiACUAwbkCmAYShUBoAgSicQEkoyMAEk/AH8ZHYdUAAAAAElFTkSuQmCC"
             ],
             "eyesL": [
                 "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADr8AAA6/ATgFUyQAAAAcSURBVDhPYxgFNAL/oQDKxQuYoPQoGAUDCRgYAIjLB/uuOKTDAAAAAElFTkSuQmCC",
@@ -78,7 +79,7 @@
         function gen() {
             char.src = images.chars[rnd(images.chars.length - 1)]
         }
-        gen([images.chars[rnd(1)]])
+        gen()
         char.onload = () => eyeL.src = images.eyesL[rnd(images.eyesL.length - 1)]
         eyeL.onload = () => eyeR.src = images.eyesR[rnd(images.eyesR.length - 1)]
         eyeR.onload = () => mouth.src = images.mouths[rnd(images.mouths.length - 1)]
@@ -157,7 +158,7 @@
             if (newImages && typeof newImages === "object") images = newImages
             console.log(typeof newImages)
         }
-        btns[2].onclick = dl
+        btns[2].onclick = () => dl(16)
         btns[3].onclick = () => dl(256)
         btns[4].onclick = () => dl(parseInt(prompt('Enter a number')))
     </script>

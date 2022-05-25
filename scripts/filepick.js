@@ -46,10 +46,12 @@ class filePicker extends HTMLElement {
 
         div.onclick = () => inp.click();
         div.style.height = this.style.height;
+        div.style.minHeight = this.style.minHeight;
         div.style.width = this.style.width;
+        div.style.minWidth = this.style.minWidth;
         div.style.background = "#333";
         div.style.border = "2px solid #888";
-        if (config.centerEl) div.style.margin = "0 auto";
+        if (config.centerEl) div.style.margin = "auto";
     }
 }
 

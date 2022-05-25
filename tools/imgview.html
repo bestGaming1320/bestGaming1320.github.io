@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Image Viewer</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="View images in your browser">
+    <meta name="author" content="bestGaming132">
+    <meta name="keywords" content="image" />
+    <link rel="stylesheet" href="toolstyle.css">
+    <script src="/scripts/filepick.js"></script>
+    <style>
+        :root {
+            --rend: pixelated
+        }
+
+        img {
+            width: 95%;
+            image-rendering: var(--rend);
+            display: block;
+            margin: auto;
+            margin-bottom: 10px
+        }
+
+        dialog {
+            width: 70%;
+            height: 300px;
+            color: #fff;
+            background: #111;
+            border: 2px solid #666;
+            border-radius: 5px;
+            box-shadow: 0 2px 7px #666;
+        }
+
+            dialog::backdrop {
+                background: rgba(22, 22, 22,.4)
+            }
+    </style>
+</head>
+<body>
+    <p class="pt">Image Viewer</p>
+    <p>Note: Images are not uploaded anywhere</p>
+    <file-picker id="fp" style="min-width:250px;width:35%" data-config='{"center":true,"centerEl":true,"multi":true,"fixedH":false,"accept":"image/*"}'></file-picker><br />
+    <button>Load Base64 Image</button><br />
+    <button>Clear Images</button><br />
+    <button>Disable Pixelated Rendering</button><br /><br />
+    <div id="view"></div>
+    <dialog id="dia">
+        <p class="pb">Load Base64 Image</p>
+        <p class="pb">Paste your base64 encoded image in the text box below. To view multiple images, separate every encoded image with a newline.</p>
+        <textarea id="b64"></textarea>
+        <button>Load</button>
+        <button>Cancel</button>
+    </dialog>
+    <script>
+        const btns = document.getElementsByTagName("button")
+        const fp = document.getElementById("fp")
+        const view = document.getElementById("view")
+        const dia = document.getElementById("dia")
+        const b64 = document.getElementById("b64")
+        var pixelated = true
+
+        fp.addEventListener("filepick", e => display(e.detail.files))
+        function display(files, b64) {
+            for (let i = 0; i < files.length; i++) {
+                let img = new Image()
+                img.src = b64 ? files[i] : URL.createObjectURL(files[i])
+                //console.log(files[i])
+                view.appendChild(img)
+            }
+        }
+
+        btns[0].addEventListener("click", () => {
+            dia.showModal()
+        })
+        btns[3].addEventListener("click", () => {
+            display(b64.value.split("\n"), true)
+            b64.value = ""
+            dia.close()
+        })
+        btns[4].addEventListener("click", () => {
+            dia.close()
+        })
+        btns[1].addEventListener("click", () => {
+            view.innerHTML = ""
+        })
+        btns[2].addEventListener("click", function () {
+            pixelated = !pixelated
+            document.querySelector(":root").style.setProperty("--rend", pixelated ? "pixelated" : "unset")
+            this.innerHTML = (pixelated ? "Disable" : "Enable") + " Pixelated Rendering"
+        })
+
+    </script>
+</body>
+</html>
