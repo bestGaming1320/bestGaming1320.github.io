@@ -11,11 +11,12 @@
     <script src="/scripts/filepick.js"></script>
     <style>
         :root {
-            --rend: pixelated
+            --rend: pixelated;
+            --size: 50%
         }
 
         img {
-            width: 95%;
+            width: var(--size);
             image-rendering: var(--rend);
             display: block;
             margin: auto;
@@ -43,7 +44,10 @@
     <file-picker id="fp" style="min-width:250px;width:35%" data-config='{"center":true,"centerEl":true,"multi":true,"fixedH":false,"accept":"image/*"}'></file-picker><br />
     <button>Load Base64 Image</button><br />
     <button>Clear Images</button><br />
-    <button>Disable Pixelated Rendering</button><br /><br />
+    <button>Disable Pixelated Rendering</button><br />
+    <p>Size of images (relative to screen width)</p>
+    <input id="size" type="range" value="50" min="10" max="99" /><label for="size" id="sizel">50%</label>
+    <br /><br />
     <div id="view"></div>
     <dialog id="dia">
         <p class="pb">Load Base64 Image</p>
@@ -56,16 +60,21 @@
         const btns = document.getElementsByTagName("button")
         const fp = document.getElementById("fp")
         const view = document.getElementById("view")
+        const size = document.getElementById("size")
         const dia = document.getElementById("dia")
         const b64 = document.getElementById("b64")
         var pixelated = true
+
+        size.addEventListener("input", e => {
+            document.getElementById("sizel").innerHTML = e.target.value + "%"
+            document.querySelector(":root").style.setProperty("--size", e.target.value + "%")
+        })
 
         fp.addEventListener("filepick", e => display(e.detail.files))
         function display(files, b64) {
             for (let i = 0; i < files.length; i++) {
                 let img = new Image()
                 img.src = b64 ? files[i] : URL.createObjectURL(files[i])
-                //console.log(files[i])
                 view.appendChild(img)
             }
         }

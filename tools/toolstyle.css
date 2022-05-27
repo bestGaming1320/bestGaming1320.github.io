@@ -17,7 +17,7 @@ textarea {
     border-radius: 5px;
 }
 
-input:not([type=checkbox]):not([type=range]):not([type=radio]):not([type=color]):not([type=file]):not([type=color]) {
+input:not([type=checkbox]):not([type=range]):not([type=radio]):not([type=color]):not([type=file]):not([type=color]):not([type=button]) {
     height: 25px;
     width: 70%;
     color: #fff;
@@ -46,8 +46,8 @@ div.txt2 {
     border-radius: 5px;
 }
 
-input:focus, textarea:focus, select:focus {
-    outline: 2px solid #999
+input:not([type=range]):not([type=radio]):not([type=color]):not([type=file]):not([type=color]):not([type=button]):focus, textarea:focus, select:focus {
+    outline: 1px solid #999
 }
 
 .dc {
@@ -68,7 +68,7 @@ input:focus, textarea:focus, select:focus {
         background: #303030
     }
 
-button {
+button, input[type=button] {
     color: #fff;
     background: #333;
     width: 35%;
@@ -80,13 +80,13 @@ button {
     border-radius: 5px;
 }
 
-    button:hover {
+    button:hover, input[type=button]:hover {
         background: #444
     }
 
-    button:focus {
+    button:focus, input[type=button]:focus {
         background: #444;
-        outline: none;
+        outline: 1px solid #999;
     }
 
 .btn {
@@ -143,7 +143,7 @@ p {
 }
 
 .noM {
-    margin:0
+    margin: 0
 }
 
 a {
