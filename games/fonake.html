@@ -6,25 +6,34 @@
     <meta name="author" content="bestGaming132">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <meta charset="UTF-8">
-    <meta name="ver" content="1.1.2">
+    <meta name="ver" content="1.2.0">
     <link rel="stylesheet" href="../default.css" />
 </head>
 <body align="center">
     <h2 id="h2" onclick="if(confirm('View history of Fonake?')) location.href='https://github.com/bestGaming1320/bestGaming1320.github.io/commits/main/games/fonake.html'">Fonake</h2>
-    <canvas style="border:2px solid #999;width:400px;height:200px;image-rendering:pixelated" id="cvs"></canvas>
+    <canvas style="border:2px solid #999;width:90%;image-rendering:pixelated" width="350" height="200" id="cvs"></canvas>
     <p id="score">Score: 0</p>
-    <p id="pos" style="opacity:1" onclick="chv(this)"></p>
-    <div style="width:100%;position:fixed;bottom:0;">
+    <p id="pos" style="opacity:0" onclick="chv(this)"></p>
+    <div id="buttons" style="width:100%;position:fixed;bottom:0;">
         <div>
-            <button style="width:51%" onclick="mu()">W</button><br>
-            <button onclick="ml()">A</button>
-            <button onclick="mr()">D</button><br>
-            <button style="width:51%" onclick="md()">S</button>
-            <!--&#8592; 8593 8594 8595-->
+            <input type="checkbox" id="hold" checked /><label for="hold">Click / Tap and hold enabled<br />(deactivate this, if you have issues)</label><br />
+            <button style="width:51%" id="mu">&#8593</button><br>
+            <button id="ml">&#8592</button>
+            <button id="mr">&#8594</button><br>
+            <button style="width:51%" id="md">&#8595</button>
         </div>
     </div>
     <script>
         document.getElementById("h2").innerHTML = "Fonake V" + document.querySelector('meta[name="ver"]').content;
+        let par = location.search.slice(1).split("&").map(x => x.split("="))
+        for (let i = 0; i < par.length; i++) {
+            switch (par[i][0]) {
+                case "btn":
+                    if (par[i][1] == "1") document.getElementById("buttons").style.display = "block"
+                    else if (par[i][1] == "2") document.getElementById("buttons").style.display = "none"
+            }
+        }
+
         function log(x) { console.log(x) }
         var x = 5; //posX
         var y = 5; //posY
@@ -33,13 +42,14 @@
         var score = 0;
         var cv = document.getElementById("cvs");
         var c = cv.getContext("2d");
+        c.imageSmoothingEnabled = false
         c.fillStyle = "#0f0";
         c.fillRect(x, y, sX, sY);
 
         //move functions
         function mr() { //right d
             fop();
-            if (x != 285) {
+            if (x != 335) {
                 c.fillRect(x += 10, y, sX, sY);
             }
             else {
@@ -54,7 +64,7 @@
                 c.fillRect(x -= 10, y, sX, sY);
             }
             else {
-                c.fillRect(x = 285, y, sX, sY);
+                c.fillRect(x = 335, y, sX, sY);
             }
             uPos();
         }
@@ -65,14 +75,14 @@
                 c.fillRect(x, y -= 10, sX, sY);
             }
             else {
-                c.fillRect(x, y = 135, sX, sY);
+                c.fillRect(x, y = 185, sX, sY);
             }
             uPos();
         }
 
         function md() { //down s
             fop();
-            if (y != 135) {
+            if (y != 185) {
                 c.fillRect(x, y += 10, sX, sY);
             }
             else {
@@ -81,24 +91,72 @@
             uPos();
         }
 
-        //keyboard controls
-        document.onkeypress = function (e) {
-            e = e || window.event;
-            //console.log(e.code)
-            switch (e.code) {
-                case "KeyW":
-                    mu();
-                    break;
-                case "KeyA":
-                    ml();
-                    break;
-                case "KeyS":
-                    md();
-                    break;
-                case "KeyD":
-                    mr();
+        var timerID = null
+        var canMove = true
+        function move(dir, timer) {
+            if (!timer) {
+                if (dir != -1) timerID = setInterval(() => window[dir](), 100)
+                else clearInterval(timerID)
+            }
+            else {
+                window[dir]()
             }
         }
+
+        //button controls
+        const btns = document.getElementsByTagName("button")
+        function cohLis() { //click or hold listener
+            for (let i = 0; i < btns.length; i++) {
+                if (document.getElementById("hold").checked) {
+                    btns[i].onmousedown = btns[i].ontouchstart = function () { move(this.id) }
+                    btns[i].ontouchend = btns[i].onmouseup = btns[i].onmouseleave = function () { move(-1) }
+
+                    btns[i].onclick = null
+                } else {
+                    btns[i].onclick = function () { move(this.id, true) }
+
+                    btns[i].onmousedown = btns[i].onmouseup = btns[i].onmouseleave = btns[i].ontouchstart = btns[i].ontouchend = null
+                }
+            }
+        }
+        cohLis()
+        document.getElementById("hold").addEventListener("input", () => cohLis())
+
+        //btns[i].addEventListener("mousedown", function () { move(this.id) })
+        //btns[i].addEventListener("mouseup", function () { move(-1) })
+        //btns[i].addEventListener("mouseleave", function () { move(-1) })
+
+        //btns[i].addEventListener("touchstart", function () { move(this.id) })
+        //btns[i].addEventListener("touchend", function () { move(-1) })
+
+        //btns[i].addEventListener("click", function () { move(this.id, true) })
+
+
+        //keyboard controls
+        document.addEventListener("keydown", (e) => {
+            //console.log(e.code)
+            if (canMove) {
+                canMove = false
+                setTimeout(() => canMove = true, 65)
+                switch (e.code) {
+                    case "KeyW":
+                    case "ArrowUp":
+                        mu();
+                        break;
+                    case "KeyA":
+                    case "ArrowLeft":
+                        ml();
+                        break;
+                    case "KeyS":
+                    case "ArrowDown":
+                        md();
+                        break;
+                    case "KeyD":
+                    case "ArrowRight":
+                        mr();
+                }
+            }
+        })
 
 
         let fX; //foodX
@@ -107,7 +165,7 @@
             fX = rint(15, 275);
             fY = rint(15, 115);
             c.fillStyle = "#f0f";
-            c.fillRect(fX, fY, sX, sY);
+            c.fillRect(fX + 1, fY + 1, sX - 2, sY - 2);
             document.getElementById("score").innerHTML = "Score: " + score;
             uPos();
         }
@@ -155,6 +213,24 @@
             height: 55px;
             font-size: 20px;
             font-weight: 800;
+        }
+
+        @media screen and (max-width: 800px) {
+            #buttons {
+                display: block
+            }
+        }
+
+        @media (min-width: 800px) {
+            #buttons {
+                display: none
+            }
+        }
+
+        @media (max-width: 290px), (max-height: 550px) {
+            #buttons {
+                display: none
+            }
         }
     </style>
 </body>
