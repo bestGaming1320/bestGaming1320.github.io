@@ -3,40 +3,52 @@
 <head>
     <title>Color Converter</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="Tool to convert hex to rgb and vice versa">
+    <meta name="description" content="Tool to convert HEX to RGB and vice versa">
     <meta name="author" content="bestGaming132">
     <meta name="keywords" content="tool, tools, color" />
     <link rel="stylesheet" href="../toolstyle.css">
 </head>
 <body align="center">
     <h2 style="margin-bottom:1px">Color Converter</h2>
-    <p>Separate colors of rgb codes with spaces</p>
-    <input placeholder="Hex / RGB Code" id="colcip"><br>
-    <button onclick="convCol('hex')">To Hex</button>
-    <button onclick="convCol('rgb')">To RGB</button><br>
-    <p id="colcop" readonly></p>
+    <p>Enter a color code and click on one of the buttons</p>
+    <input placeholder="HEX / RGB Code" id="input"><br>
+    <button id="hex">To HEX</button>
+    <button id="rgb">To RGB</button><br>
+    <p id="output"></p>
     <script>
+        const btns = document.getElementsByTagName("button")
+        const errtxt = "there was an error while converting: "
+        for (let e of btns) {
+            e.addEventListener("click", function () { convCol(this.id) })
+        }
+
         function convCol(x) {
-            let input = document.getElementById("colcip").value.replace("#", "")
-            let arr = []
+            let input = document.getElementById("input").value
             let output = ""
             if (x == "hex") {
-                arr = input.split(" ");
-                output += "#"+arr[0].hex();
-                output += arr[1].hex();
-                output += arr[2].hex();
+                if (input.includes("rgba")) output = "the alpha channel is currently not supported<br>"
+                output += "#" + input.match(/\d{1,3}/g).slice(0,3).map(v => parseInt(v).toString(16).padStart(2, '0')).join("")
+
             }
             else if (x == "rgb") {
-                arr = input.split("")
-                output += "red: " + parseInt(arr[0] + arr[1], 16) + "<br>";
-                output += "green: " + parseInt(arr[2] + arr[3], 16) + "<br>";
-                output += "blue: " + parseInt(arr[4] + arr[5], 16);
+                switch (input.match(/[a-f\d]{1}/gi).length) {
+                    case 3:
+                        output = "rgb(" + input.match(/[a-f\d]{1}/gi).map(v => parseInt(v + v, 16)).join(", ") + ")"
+                        break;
+                    case 6:
+                        output = "rgb(" + input.match(/[a-f\d]{2}/gi).map(v => parseInt(v, 16)).join(", ") + ")"
+                        break;
+                    case 8:
+                        //future rgba
+                        output = "the alpha channel is currently not supported<br>"
+                        output += "rgb(" + input.match(/[a-f\d]{2}/gi).slice(0, 3).map(v => parseInt(v, 16)).join(", ") + ")"
+                        break;
+                    default:
+                        output = errtxt + "invalid hex code"
+                }
             }
-
-            document.getElementById("colcop").innerHTML = output;
-        }
-        String.prototype.hex = function() {
-            return parseInt(this).toString(16);
+            else output = errtxt + "unknown format"
+            document.getElementById("output").innerHTML = output;
         }
     </script>
 </body>

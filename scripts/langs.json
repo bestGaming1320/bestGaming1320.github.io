@@ -1,0 +1,46 @@
+{
+  "settings": {
+    "en": {
+      "metaTitle": "Preferences",
+      "metaDesc": "Preferences for the website",
+      "langSel": "en",
+      "settP": "Preferences",
+      "langP": "Language",
+      "infoP": "Currently only works on these pages:<br>Preferences<br>Homepage"
+    },
+    "de": {
+      "metaTitle": "Präferenzen",
+      "metaDesc": "Präferenzen für die Website",
+      "langSel": "de",
+      "settP": "Präferenzen",
+      "langP": "Sprache",
+      "infoP": "Funktioniert aktuell nur auf diesen Seiten:<br>Präferenzen<br>Homepage"
+    }
+  },
+  "mIndex": {
+    "en": {
+      "metaTitle": "Homepage",
+      "metaDesc": "Links to all my pages",
+      "title": "Select a page",
+      "tool": "Tools",
+      "game": "Games",
+      "colSc": "Color Screen",
+      "clock": "Clock",
+      "book": "Book",
+      "docs": "Documentations",
+      "igm": "Image Math"
+    },
+    "de": {
+      "metaTitle": "Homepage",
+      "metaDesc": "Links zu all meinen Seiten",
+      "title": "Suche eine Seite aus",
+      "tool": "Tools",
+      "game": "Spiele",
+      "colSc": "Farbbildschirm",
+      "clock": "Uhr",
+      "book": "Buch",
+      "docs": "Dokumentationen",
+      "igm": "Image Math"
+    }
+  }
+}

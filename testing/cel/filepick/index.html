@@ -11,6 +11,8 @@
     <file-picker id="fp" data-config='{"center":true,"centerEl":true,"multi":true,"fixedH":false,"accept":"image/*"}'></file-picker>
     <br />
     <file-picker id="fp" data-config='{"center":true,"centerEl":true,"multi":false,"fixedH":true,"accept":"image/*","remEmpt":true}' style="height:55px"></file-picker>
+    <br>
+    <file-picker id="fp" data-enabled="false" data-config='{"center":true,"centerEl":true,"multi":false,"fixedH":false,"accept":"image/*","remEmpt":true,"custText":"Custom filepicker text for disabled filepicker"}' style="height:55px"></file-picker>
 </body>
 <script>
     document.getElementById("fp").addEventListener("filepick", e => console.log(e.detail.files))

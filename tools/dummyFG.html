@@ -17,7 +17,8 @@
         <optgroup label="Text Files">
             <option value="txt_pt">Text File</option>
             <option value="txt_md">Markdown File</option>
-            <option value="txt_hex">Hex File</option>
+            <option value="txt_hex">HEX File</option>
+            <option value="txt_csv">CSV File</option>
         </optgroup>
         <optgroup label="Image Files">
             <option value="img_c">Colorful Image</option>
@@ -40,8 +41,9 @@
     <button id="gennum" class="btn">Generate Random Number</button><br>
     <button id="gen" class="btn">Generate</button><br>
     <button id="dl" class="btn">Download</button><br>
+    <button id="prt" class="btn">Print</button><br>
     <p style="margin-bottom:0">Preview (this is what you'll get)</p>
-    <div id="preview" class="txt2" style="height:50vh"></div>
+    <div id="preview" class="txt2" style="height:50vh;overflow-wrap:anywhere"></div>
 </body>
 <script>
     const typeS = document.getElementById("type")
@@ -52,7 +54,7 @@
     var letters = []
     var type = ["txt", "pt"]
     var imgext = "png"
-    var ls = location.search.slice(1).split("&")
+    var ls = location.search.slice(1).split("&") //after url: .html?Amount&Type&ImageType
 
     dat.value = ls[0] ? ls[0] : ""
     typeS.value = ls[1] ? ls[1] : "txt_pt"
@@ -62,9 +64,9 @@
         if (type[0] == "img") imgtype.disabled = false
     }
 
-    for (let i = 0; i < 58; i++) {
+    for (let i = 0; i < 26; i++) {
         letters.push(String.fromCharCode(65 + i))
-        if (i == 25) i += 6
+        letters.push(String.fromCharCode(97 + i))
     }
     function generate() {
         let datval = parseInt(dat.value);
@@ -100,6 +102,13 @@
                             tmp += letters[rnd(letters.length - 1)].charCodeAt(0).toString(16) + " "
                         }
                         ext = ".hex"
+                        break;
+                    case "csv":
+                        tmp = "id,value\n"
+                        for (let i = 0; i < datval; i++) {
+                            tmp += i + 1 + "," + genLett(rnd(15, 4)) + "\n"
+                        }
+                        ext = ".csv"
                         break;
                 }
                 preview.innerHTML = tmp.replaceAll("\n", "<br>")
@@ -156,6 +165,8 @@
                 ctx.putImageData(imgDat, 0, 0);
                 let img = new Image()
                 img.src = c.toDataURL()
+                img.style.width = "100%"
+                img.style.imageRendering = "pixelated"
                 img.onload = function () {
                     preview.innerHTML = ""
                     preview.appendChild(this)
@@ -168,10 +179,26 @@
         return Math.floor(Math.random() * (max + 1 - min) + min)
     }
 
+    function genLett(amnt) {
+        let tmp = "";
+        while (amnt > 0) {
+            tmp += letters[rnd(letters.length - 1)]
+            amnt--
+        }
+        return tmp
+    }
+
     function dl(cont, ext) {
         let date = new Date()
         a.download = Math.ceil((date.getFullYear() + "" + date.getMinutes() + "" + date.getSeconds() + "" + date.getMilliseconds()) / 10) + ext;
         a.href = cont;
+    }
+
+    function printGen() {
+        let prWin = window.open("")
+        prWin.document.write(document.getElementById("preview").outerHTML)
+        prWin.print()
+        prWin.close()
     }
 
     typeS.addEventListener("change", function () {
@@ -179,7 +206,7 @@
         switch (type[0]) {
             case "txt":
                 if (type[1] == "pt") dat.placeholder = "size in bytes";
-                else if (type[1] == "md") dat.placeholder = "approximate size in bytes";
+                else if (type[1] == "md" || type[1] == "csv") dat.placeholder = "approximate size in bytes";
                 imgtype.disabled = true;
                 break;
             case "img":
@@ -196,6 +223,9 @@
     })
     document.getElementById("dl").addEventListener("click", function () {
         a.click()
+    })
+    document.getElementById("prt").addEventListener("click", function () {
+        printGen()
     })
 
 </script>

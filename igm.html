@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Image Math</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Perform a mathematical operation with data from an image">
+    <meta name="author" content="bestGaming132">
+    <meta name="keywords" content="math" />
+    <meta charset="UTF-8">
+    <!--<link rel="stylesheet" href="/tools/toolstyle.css">-->
+    <link rel="stylesheet" href="/default.css">
+    <link rel="stylesheet" href="/scroll.css">
+    <script src="/scripts/filepick.js"></script>
+    <style>
+        body {
+            min-height: 130vh
+        }
+
+        img {
+            width: 90%;
+            max-height: 1500px;
+            image-rendering: pixelated;
+            background-image: url(/resources/2x2.png);
+            background-size: 10%;
+            outline: 2px solid #aaa
+        }
+
+        table {
+            margin: auto;
+            text-align: center;
+            empty-cells: show;
+            display: none
+        }
+    </style>
+</head>
+
+<body>
+    <p class="pt">Image Math</p>
+    <file-picker id="inp" type="file" data-config='{"center":true,"centerEl":true,"multi":false,"fixedH":false,"accept":"image/*"}'></file-picker>
+    <br />
+    <img id="mig" src="" alt="MathImage"><br />
+    <p id="guide">
+        Guide (click to show or hide)
+        <br />
+        <table id="g">
+            <tbody>
+                <tr><td><br /></td></tr>
+                <tr><th>RGB Channels</th><td>The values of these will be multiplied<br />Most alpha channel values ignore this option</td></tr>
+                <tr><td><br /></td></tr>
+                <tr><th>Alpha Channel Value</th><th>Meaning</th></tr>
+                <tr><td>255</td><td>Normal Number</td></tr>
+                <tr><td>254</td><td>Negative Number</td></tr>
+                <tr><td>100</td><td>Addition (Plus Sign)</td></tr>
+                <tr><td>101</td><td>Subtraction (Minus Sign)</td></tr>
+                <tr><td>102</td><td>Multiplication (Multiplication Sign)</td></tr>
+                <tr><td>103</td><td>Division (Division Sign)</td></tr>
+                <tr><td>104</td><td>Modulo (Remainder)</td></tr>
+                <tr><td>105</td><td>Exponentiation</td></tr>
+                <tr><td>106</td><td>Square Root</td></tr>
+                <tr><td>120</td><td>Opening Parenthesis</td></tr>
+                <tr><td>121</td><td>Closing Parenthesis</td></tr>
+                <tr><td>122</td><td>Comma</td></tr>
+                <tr><td>123</td><td>Dot / Period / Full Stop</td></tr>
+                <tr><td>200</td><td>Random Number<br />(if Blue value is 200 min = Red, max = Green;<!--<br />if Blue value is 201;--><br />else min = 0, max = 1)</td></tr>
+            </tbody>
+        </table>
+        <br />
+    </p>
+    <button id="recalc">Recalculate</button>
+    <p id="p" style="overflow-y:scroll" class="nobar"></p>
+</body>
+<script>
+    "use strict"
+    const el = e => document.getElementById(e)
+    const rnd = (min, max) => min == null ? Math.random() : Math.floor(Math.random() * (max - min + 1)) + min
+    const char = e => String.fromCharCode(e)
+    const evl = e => e.replaceAll("Math.sqrt", "\u221a").replaceAll("**", "^").replaceAll("\n", "<br>")
+    const im64 = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAABCAYAAAAW/mTzAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsIAAA7CARUoSoAAAAAXSURBVBhXY/jPAEIpKVxGYDqVkcnoPwBAzwX/IoCGvQAAAABJRU5ErkJggg=="
+    var mode = false //Math or JS
+    var im = im64
+    el("mig").src = im64
+    
+
+    function conv(im) {
+        el("mig").src = im
+        let img = new Image()
+        const c = document.createElement("canvas")
+        const ctx = c.getContext("2d")
+        var resStr = ""
+        img.src = im
+        img.onload = () => {
+            c.height = img.height
+            c.width = img.width
+            ctx.drawImage(img, 0, 0)
+            let imgDat = ctx.getImageData(0, 0, c.width, c.height)
+            for (let i = 0; i < imgDat.data.length; i += 4) {
+                let tmp = []
+                for (let j = 0; j < 4; j++) {
+                    tmp[j] = imgDat.data[i + j]
+                }
+                switch (imgDat.data[i + 3]) {
+                    default:
+                    case 255: {
+                        let resTmp = tmp[0]
+                        if (tmp[1] != 0) resTmp *= tmp[1]
+                        if (tmp[2] != 0) resTmp *= tmp[2]
+                        resStr += resTmp
+                    } break;
+                    case 254: {
+                        let resTmp = tmp[0]
+                        if (tmp[1] != 0) resTmp *= tmp[1]
+                        if (tmp[2] != 0) resTmp *= tmp[2]
+                        resStr += "(-" + resTmp + ")"
+                    } break;
+                    case 100:
+                        resStr += " + "
+                        break;
+                    case 101:
+                        resStr += " - "
+                        break;
+                    case 102:
+                        resStr += " * "
+                        break;
+                    case 103:
+                        resStr += " / "
+                        break;
+                    case 104:
+                        resStr += " % "
+                        break;
+                    case 105:
+                        resStr += " ** "
+                        break;
+                    case 106:
+                        resStr += " Math.sqrt( "
+                        break;
+
+                    case 120:
+                        resStr += " ( "
+                        break;
+                    case 121:
+                        resStr += " ) "
+                        break;
+                    case 122:
+                        resStr += " , "
+                        break;
+                    case 123:
+                        resStr += "."
+                        break;
+
+                    case 50:
+                        resStr += "\n"
+                        break;
+                    case 51:
+                        resStr += "//"
+                        break;
+                    case 52:
+                        resStr += "/*"
+                        break;
+                    case 53:
+                        resStr += "*/"
+                        break;
+
+                    case 200:
+                        resStr += (() => {
+                            switch (tmp[2]) {
+                                case 200:
+                                    return `rnd(${tmp[0]},${tmp[1]})`
+                                    break;
+                                case 201:
+                                    return "rnd( "
+                                    break;
+                                default:
+                                    return "rnd()"
+                        }
+                        })()
+                        break;
+                }
+            }
+            el("p").innerHTML = `${mode ? evl(resStr) : resStr} <br><br>`
+            try {
+                el("p").innerHTML += `= ${new Function("return " + resStr)()}`
+            } catch (e) {
+                el("p").innerHTML += "There was an error:<br>" + e
+            }
+        }
+    }
+
+    el("inp").addEventListener("filepick", e => {
+        im = URL.createObjectURL(e.detail.files[0])
+        conv(im)
+    })
+    el("recalc").addEventListener("click", e => conv(im))
+    el("guide").addEventListener("click", () => el("g").style.display = el("g").style.display == "table" ? "none" : "table")
+
+    conv(im64)
+</script>
+</html>
