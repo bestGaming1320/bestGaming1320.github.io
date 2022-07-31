@@ -197,8 +197,13 @@
     function printGen() {
         let prWin = window.open("")
         prWin.document.write(document.getElementById("preview").outerHTML)
+        prWin.document.close()
+        prWin.addEventListener('afterprint', () => {
+            prWin.close()
+            preview.innerHTML += "_" + Date.now()
+        });
+        preview.innerHTML = Date.now()
         prWin.print()
-        prWin.close()
     }
 
     typeS.addEventListener("change", function () {

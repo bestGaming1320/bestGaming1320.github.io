@@ -1,7 +1,7 @@
-﻿/* width */
+/* width */
 ::-webkit-scrollbar {
-    width: 5px;
-    height: 5px;
+    width: 10px;
+    height: 10px;
     background: #666
 }
 
@@ -26,4 +26,8 @@
 /* no scrollbar*/
 .nobar::-webkit-scrollbar {
     display:none
+}
+
+.both {
+    border-left: 10px solid #333
 }

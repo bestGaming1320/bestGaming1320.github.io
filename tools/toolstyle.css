@@ -11,10 +11,12 @@ textarea {
     color: #fff;
     background: #444;
     width: 70%;
-    height: 90px;
+    min-height: 80px;
+    height: 10vh;
     text-align: center;
     border: 1px solid #888;
     border-radius: 5px;
+    resize: vertical
 }
 
 input:not([type=checkbox]):not([type=range]):not([type=radio]):not([type=color]):not([type=file]):not([type=color]):not([type=button]) {
@@ -36,14 +38,16 @@ input:not([type=checkbox]):not([type=range]):not([type=radio]):not([type=color])
 }
 
 div.txt2 {
-    height: 30vh;
+    min-height: 80px;
+    height: 10vh;
     width: 70%;
-    overflow-y: scroll;
+    overflow: auto;
     overflow-wrap: break-word;
     margin: 0 auto;
     margin-top: 10px;
     border: 1px solid #aaa;
     border-radius: 5px;
+    resize: vertical
 }
 
 input:not([type=range]):not([type=radio]):not([type=color]):not([type=file]):not([type=color]):not([type=button]):focus, textarea:focus, select:focus {
@@ -73,24 +77,24 @@ button, input[type=button] {
     background: #333;
     width: 35%;
     min-width: 250px;
-    height: 28px;
+    min-height: 28px;
     margin: 4px;
     border: 2px solid #777;
     font-size: 15px;
     border-radius: 5px;
 }
 
-    button:hover, input[type=button]:hover {
+    button:hover, input[type=button]:hover, select:hover {
         background: #444
     }
 
-    button:focus, input[type=button]:focus {
+    button:focus, input[type=button]:focus, select:focus {
         background: #444;
         outline: 1px solid #999;
     }
 
 .btn {
-    width: 70%;
+    width: 71%;
 }
 
 hr {
@@ -109,6 +113,7 @@ select {
     margin-bottom: 5px;
     margin-top: 5px;
     border-radius: 5px;
+    border: 2px solid #777
 }
 
     select:disabled {
@@ -161,10 +166,17 @@ a {
 code {
     background: #252525
 }
+
+.text {
+    font-size: 18px;
+    font-family: Arial;
+    text-align: center
+}
+
 /* width */
 ::-webkit-scrollbar {
-    width: 5px;
-    height: 5px;
+    width: 10px;
+    height: 10px;
     background: #666
 }
 

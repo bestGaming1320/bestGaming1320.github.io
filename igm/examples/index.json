@@ -1,0 +1,11 @@
+{
+  "name": "Image Math Example Images",
+  "desc": "Examples for Image Math",
+  "formatV": 1,
+  "previewFiles":  true,
+  "files": [
+    "example1.png",
+    "example2.png",
+    "example3.png"
+  ]
+}

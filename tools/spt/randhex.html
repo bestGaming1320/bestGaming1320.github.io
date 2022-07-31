@@ -22,20 +22,25 @@
                 color: #222;
             }
 
-            p.brt:hover {
+            p.brt:hover, p.brt:focus {
                 color: #fff;
                 outline: 2px solid #fff;
             }
 
-            p.drk:hover {
+            p.drk:hover, p.drk:focus {
                 color: #000;
                 outline: 2px solid #000;
             }
 
-            p.brt:hover, p.drk:hover {
+            p.brt:hover, p.brt:focus, p.drk:hover, p.drk:focus {
                 font-weight: 700;
                 text-decoration: underline
             }
+
+        #copyinfo {
+            margin: auto;
+            width: 70%
+        }
     </style>
 </head>
 
@@ -46,11 +51,11 @@
         <option value="hex">Mode: HEX Code</option>
         <option value="rgb">Mode: RGB Code</option>
     </select>
-    <button class="btn" onclick="genCol(1)">Generate 1 Color Code</button><br>
-    <button class="btn" onclick="genCol(5)">Generate 5 Color Codes</button><br>
-    <button class="btn" onclick="genCol(10)">Generate 10 Color Codes</button><br>
-    <button class="btn" onclick="genCol(25)">Generate 25 Color Codes</button><br>
-    <button class="btn" onclick="genCol('c')">Generate custom amount of Color codes</button><br>
+    <button class="btn" value="1">Generate 1 Color Code</button><br>
+    <button class="btn" value="5">Generate 5 Color Codes</button><br>
+    <button class="btn" value="10">Generate 10 Color Codes</button><br>
+    <button class="btn" value="25">Generate 25 Color Codes</button><br>
+    <button class="btn" value="c">Generate custom amount of color codes</button><br>
     <div class="nobar txt2" id="hop"></div><br>
     <p id="copyinfo"></p>
     <script>
@@ -66,7 +71,7 @@
 
         function txtCol(color) {
             if (document.getElementById("mode").value == "rgb") color = color.match(/\d{1,3}/g).map(v => parseInt(v).toString(16).padStart(2, '0')).join("")
-            return parseInt(color.replace("#", ""), 16) > 8388607 ? "drk" : "brt"
+            return parseInt(color.slice(1), 16) > 8388607 ? "drk" : "brt"
         }
 
         function genCol(x) {
@@ -86,12 +91,16 @@
             navigator.clipboard.writeText(cont)
             let ci = document.getElementById("copyinfo")
             ci.innerHTML = "Copied " + cont
-            ci.style.color = cont
+            ci.style.color = txtCol(cont) == "drk" ? "#000" : "#fff"
+            ci.style.background = cont
         }
         let config = location.search.slice(1).split("&")
         document.getElementById("mode").value = config[1] ? config[1] : "hex"
         genCol(config[0] ? parseInt(config[0]) : 5)
 
+        Array.from(document.getElementsByTagName("button")).forEach(el => {
+            el.addEventListener("click", function () { genCol(this.value) })
+        })
     </script>
 </body>
 </html>

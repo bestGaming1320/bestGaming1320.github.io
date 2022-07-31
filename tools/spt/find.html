@@ -9,24 +9,25 @@
     <link rel="stylesheet" href="../toolstyle.css">
 </head>
 <body align="center">
-    <h2 style="margin-bottom:1px">Finder</h2>
+    <h2 style="margin-bottom:1px">Occurrence Finder</h2>
     <p onclick="cCol()" id="cC" style="margin:1px">Click here to change <span style="color:#ff3e3e">highlight color</span></p>
-    <input style="height:20px;margin-bottom:3px" class="txt" placeholder="Word to find" id="fW" oninput="find()"><br>
-<textarea style="height:20vh" placeholder="Text" class="txt" id="fT" oninput="find()"></textarea><br>
-    <p style="margin:auto;color:#fff;background:#222;width:70%;height:20vh;overflow-y:scroll;word-wrap: break-word;outline:1px solid #9e9e9e;" id="findOp"></p>
-
+    <input style="height:20px;margin-bottom:3px" class="txt" placeholder="Occurence to find" id="fW" oninput="find()"><br>
+    <input type="checkbox" id="igc">
+    <label for="igc">Ignore if occurrence is uppercase or lowercase</label>
+    <br><br>
+    <textarea style="height:20vh" placeholder="Text" class="txt" id="fT" oninput="find()"></textarea><br>
+    <p id="occuNum"></p>
+    <div class="txt2" id="findOp" style="height:30vh"></div>
     <script>
         var color = "#ff3e3e"
         function find() {
-            var findTxt = document.getElementById("fT").value
-            var findWord = document.getElementById("fW").value
-            var findResult = findTxt.replaceAll(findWord, "<span style=\"color:" + color + "\"><b>" + findWord + "</b></span>")
-            let res1 = findResult.split("\n")
-            let res2 = ""
-            for (i = 0; i < res1.length; i++) {
-                res2 += res1[i]+"<br>"
-            }
-            document.getElementById("findOp").innerHTML = res2
+            let findTxt = document.getElementById("fT").value
+            let findWord = document.getElementById("fW").value
+            let findWordReg = new RegExp(document.getElementById("fW").value, (document.getElementById("igc").checked ? "gi" : "g"))
+            let findResult = findTxt.replaceAll(findWordReg, "<span style=\"color:" + color + "\"><b>" + findWord + "</b></span>")
+            let occu = findTxt.split(findWordReg).length - 1
+            document.getElementById("findOp").innerHTML = findResult.replaceAll("\n", "<br>")
+            document.getElementById("occuNum").innerHTML = `Found ${occu >= 1 ? occu : 0} occurences of ${findWord}`
         }
         function cCol() {
             color = prompt("Choose a color in HEX format", color)

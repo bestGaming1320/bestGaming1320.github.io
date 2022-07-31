@@ -9,64 +9,77 @@
     <link rel="stylesheet" href="../toolstyle.css">
 </head>
 <body align="center">
-    <h2 style="margin-bottom:1px">Random Selector</h2><br>
-    <input class="txt" type="text" id="txtt"><br>
-    <button onClick="addItem()" class="btn">Add Item</button><br>
-    <button onClick="rando(1)">Pick Random</button>
-    <button onClick="rando(5)">Pick 5 Random</button><br>
-    <button onClick="removeLast()">Remove last item</button>
-    <button onClick="resetL()">Remove all items</button>
-    <p style="margin:4px">Current Items:</p>
-<textarea class="txt2" readonly id="txt2">None</textarea>
+    <h2 style="margin-bottom:1px">Selector Picker</h2><br>
+    <input class="txt" type="text" id="input"><br>
+    <button class="btn">Add Item</button><br>
+    <button id="1">Pick Random</button>
+    <button id="5">Pick 5 Random</button><br>
+    <button id="10">Pick 10 Random</button>
+    <button id="25">Pick 25 Random</button><br>
+    <button class="btn">Clear list of selectable items</button>
+    <p style="margin:4px">Note: you can also click on items to remove them from the list<br><br>List of selectable items:</p>
+    <div id="list" class="txt2" style="height: 150px"></div>
+    <p style="margin:4px">Selected items:</p>
+    <textarea readonly id="output"></textarea>
     <script>
         var items = [];
+        const buttons = Array.from(document.getElementsByTagName("button"))
+        const input = document.getElementById("input")
+        const list = document.getElementById("list")
+        const output = document.getElementById("output")
+
         function addItem() {
-            if (/\S/.test(document.getElementById("txtt").value)) {
-                items.push(document.getElementById("txtt").value);
-                console.log("Added " + items[items.length - 1]);
-                var text = ""
-                for (i = 0; i < items.length; i++) {
-                    text += items[i] + "\n";
-                    document.getElementById("txt2").value = text
-                }
-            } else {
-                console.log("Input is empty")
+            if (/\S/.test(input.value)) {
+                items.push(input.value);
+                listItems()
+                input.value = ""
             }
         }
 
-        function rando(num) {
+        function listItems() {
+            list.innerHTML = ""
+            items.forEach((item, index) => {
+                let p = document.createElement("p")
+                p.classList.add("dc")
+                p.innerHTML = item
+                p.addEventListener("click", function () {
+                    items.splice(index, 1)
+                    listItems()
+                })
+                list.appendChild(p)
+            })
+        }
+
+        function pickRand(num) {
             if (!items.length == 0) {
-                let output = "";
-                for (ii = 0; ii < num; ii++) {
-                    let rnd = Math.floor(Math.random() * items.length);
-                    output += items[rnd] + "\n";
+                for (i = 0; i < num; i++) {
+                    output.value += items[Math.floor(Math.random() * items.length)] + "\n"
                 }
-                alert(output)
-            } else {
-                console.log("Items is empty")
             }
         }
 
-        function resetL() {
-            var conf = confirm("Are you sure you want to remove all items?")
-            if (conf == true) {
-                console.log("Removed " + items.length + " items")
+        function clearList() {
+            if (confirm("Are you sure you want to clear the list?")) {
                 items.splice(0, items.length)
-                document.getElementById("txt2").value = "None"
-            }
-            else {
-                console.log("Canceled")
+                list.innerHTML = ""
+                output.value = ""
             }
         }
 
-        function removeLast() {
-            var text = ""
-            items.pop()
-            for (i = 0; i < items.length; i++) {
-                text += items[i] + "\n";
-                document.getElementById("txt2").value = text
+        //event listeners
+        buttons.forEach(btn => {
+            if (btn.id != "") {
+                btn.addEventListener("click", function () {
+                    pickRand(parseInt(this.id), 10)
+                })
             }
-        }
+        })
+        buttons[0].addEventListener("click", () => {
+            addItem()
+        })
+        buttons[5].addEventListener("click", () => {
+            clearList()
+        })
     </script>
 </body>
 </html>

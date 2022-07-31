@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Downloader</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Download things from my website">
+    <meta name="author" content="bestGaming132">
+    <meta name="keywords" content="download" />
+    <link rel="stylesheet" href="/default.css">
+    <link rel="stylesheet" href="/scroll.css">
+</head>
+<body>
+    <p class="pt">Downloader</p>
+    <p>Note that if there is <img style="display:inline;min-width:20px;min-height:20px" src="/resources/2x2.png"> in the background it means an image has transparency<br>Click on a field to download its file</p>
+    <div id="content"></div>
+</body>
+<script>
+    //start
+    const loc = location.search.slice(1)
+    const content = document.getElementById("content")
+    var contentJson;
+
+    //create and return a paragraph element
+    function p(txt, cb, title = false) {
+        let p = document.createElement("p")
+        p.innerHTML = txt
+        if (title) p.classList.add("pt")
+        cb(p)
+    }
+
+    //create and return an image element
+    function img(url, cb) {
+        let img = document.createElement("img")
+        img.onload = cb(img)
+        img.src = url
+    }
+
+    //create and return a div element
+    function div(text, url, cb, download = false) {
+        let div = document.createElement("div")
+        if (contentJson.previewFiles) {
+            switch (text.slice(text.lastIndexOf(".") + 1)) {
+                case "png":
+                    img(url + "/" + text, image => div.appendChild(image))
+            }
+        }
+        if (download) {
+            div.addEventListener("click", () => dl(url + "/" + text))
+        }
+        p(text, pElm => {
+            div.appendChild(pElm)
+            cb(div)
+        })
+    }
+
+    //download something
+    function dl(url, base64 = false) {
+        if (confirm("You are about to download a file. Click on OK to continue")) {
+            fetch(url).then(resp => {
+                if (resp.ok) return resp.blob()
+            }).then(blob => {
+                if (!base64) {
+                    let a = document.createElement("a")
+                    a.href = URL.createObjectURL(blob)
+                    a.download = url.slice(url.lastIndexOf("/") + 1)
+                    a.click()
+                } else {
+                    let fr = new FileReader();
+                    fr.onload = function () { copy(this.result) }
+                    fr.readAsDataURL(blob)
+                }
+            })
+        }
+    }
+
+    //load download list
+    function load(url) {
+        url = url ? url : loc
+        content.innerHTML = ""
+        fetch(url + "/index.json").then(resp => {
+            if (resp.ok) return resp.json()
+        }).then(resp => {
+            contentJson = resp
+            contentJson.files.forEach((elm, index) => {
+                div(elm, url, divE => content.appendChild(divE), true)
+            })
+        })
+
+    }
+
+    function copy(cont) {
+        if (confirm("Do you want to copy the following base64? On mobile it is not recommended to copy large base64 encoded text or files.\nAmount of characters: " + cont.length + "\n\n" + cont)) navigator.clipboard.writeText(cont)
+    }
+
+    const search = location.search.slice(1)
+    if (search != "generateurl") load(decodeURIComponent(search))
+    else alert("Comming soon")
+</script>
+<style>
+    #content {
+        width: 80vw;
+        height: 80vh;
+        min-height: 80vh;
+        overflow-y: auto;
+        background: #111;
+        outline: 2px solid #111
+    }
+
+    div {
+        margin: auto;
+        width: 99%;
+        height: 150px;
+        border: 1px solid #333;
+        object-fit: contain;
+        overflow: hidden
+    }
+
+    img:not([style="display:inline"]) {
+        max-width: 100%;
+        min-height: 100px;
+        image-rendering: pixelated;
+        background-image: url(/resources/2x2.png);
+        background-size: 10%;
+        border: 2px solid #333;
+        object-fit: contain
+    }
+
+    div p {
+        font-size: 20px;
+    }
+
+    img.il {
+    }
+</style>
+</html>
