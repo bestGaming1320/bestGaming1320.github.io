@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../default.css">
+    <link rel="stylesheet" href="../scroll.css">
+    <title></title>
+</head>
+
+<body>
+
+</body>
+<style>
+    body {
+        min-height: 130vh;
+    }
+
+    div {
+        height: 50vh;
+        width: 100%
+    }
+</style>
+<script>
+
+    function scr() { return (window.pageYOffset !== undefined) ? window.pageYOffset : (document.documentElement || document.body.parentNode || document.body).scrollTop }
+    function scrBtm(elm = document.documentElement, offset = 50) {
+        return elm.scrollHeight - Math.ceil(elm.scrollTop) - offset <= elm.clientHeight
+    }
+    let offset = location.search.slice(1)
+    offset = offset ? offset : 100
+    addEventListener("scroll", () => {
+        //let elm = document.documentElement
+        //console.log(scrBtm(document.documentElement, 100), elm.scrollHeight, Math.ceil(elm.scrollTop), elm.clientHeight, elm.scrollHeight - Math.ceil(elm.scrollTop) - 100)
+        if (scrBtm(document.documentElement, offset)) {
+            let div = document.createElement("div")
+            div.innerHTML = "#" + (Math.floor(Math.random() * 16777216, 16)).toString(16).padStart(6, "0")
+            div.style.background = div.innerHTML
+            document.body.appendChild(div)
+        }
+    })
+</script>
+
+</html>

@@ -31,8 +31,9 @@ input:not([type=checkbox]):not([type=range]):not([type=radio]):not([type=color])
 }
 
 .txt2, textarea:read-only {
+    width: 70%;
     background: #222;
-    height: 100px;
+    min-height: 100px;
     border: 1px solid #aaa;
     margin: 3px;
 }

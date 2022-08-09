@@ -15,10 +15,13 @@
     <input type="checkbox" oninput="oppo= !oppo" id="check">
     <label for="check">Enable opposite color for face</label><br>
     <button class="btn">Generate</button><br>
+    <button class="btn">Load Seed</button><br>
     <button class="btn">Load custom images for generation</button><br>
     <button class="btn">Download Image (16x16)</button><br>
     <button class="btn">Download Enlarged Image (256x256)</button><br>
-    <button class="btn">Download Enlarged Image (custom size)</button><br>
+    <button class="btn">Download Enlarged Image (custom size)</button><br><br>
+    <p style="font-size: 20px;display:inline-block" class="txt2">Seed - Used to load a generated character<br><span id="seed" style="font-size:18px"></brspan></p>
+    
     <style>
         body {
             background-color: #000;
@@ -71,19 +74,36 @@
             ]
         }
         var images = defImages
-        var oppo = false
-        var char = new Image();
-        var eyeL = new Image();
-        var eyeR = new Image();
-        var mouth = new Image();
+        var seed = location.search.slice(1).split("&"),
+            oppo = seed[7] == "true" || seed[7] == "false" ? JSON.parse(seed[7]) : false, 
+            genOnce = false //wether or not image was generated already
+        var char = new Image(),
+            eyeL = new Image(),
+            eyeR = new Image(),
+            mouth = new Image();
         function gen() {
-            char.src = images.chars[rnd(images.chars.length - 1)]
+            if (seed[0] == "" || genOnce) {
+                seed = [
+                    rnd(images.chars.length - 1),
+                    rnd(images.eyesL.length - 1),
+                    rnd(images.eyesR.length - 1),
+                    rnd(images.mouths.length - 1),
+                    rnd(255),
+                    rnd(255),
+                    rnd(255),
+                    oppo
+                ]
+                history.replaceState({}, "", "?" + seed.join("&"))
+            }
+            genOnce = true
+            document.getElementById("seed").innerHTML = `Seed String: ${seed.join("&")}<br>Seed URL: <a href="${location.href}">${location.href}</a>`
+            char.src = images.chars[seed[0]]
         }
         gen()
-        char.onload = () => eyeL.src = images.eyesL[rnd(images.eyesL.length - 1)]
-        eyeL.onload = () => eyeR.src = images.eyesR[rnd(images.eyesR.length - 1)]
-        eyeR.onload = () => mouth.src = images.mouths[rnd(images.mouths.length - 1)]
-        mouth.onload = () => recolorImage([char, eyeL, eyeR, mouth], 51, 51, 51, rnd(255), rnd(255), rnd(255));
+        char.onload = () => eyeL.src = images.eyesL[seed[1]]
+        eyeL.onload = () => eyeR.src = images.eyesR[seed[2]]
+        eyeR.onload = () => mouth.src = images.mouths[seed[3]]
+        mouth.onload = () => recolorImage([char, eyeL, eyeR, mouth], 51, 51, 51, seed[4], seed[5], seed[6]);
 
 
         function recolorImage(img, oldRed, oldGreen, oldBlue, newRed, newGreen, newBlue) {
@@ -96,7 +116,7 @@
             }
             var imgDat = ctx.getImageData(0, 0, 16, 16);
             let nRGB = [newRed, newGreen, newBlue]
-            let nnRGB = opos(nRGB)
+            let nnRGB = oppo ? nRGB.map(v => 255 - v) : nRGB
             for (var i = 0; i < imgDat.data.length; i += 4) {
                 if (imgDat.data[i] == oldRed && imgDat.data[i + 1] == oldGreen && imgDat.data[i + 2] == oldBlue) {
                     imgDat.data[i] = newRed;
@@ -119,20 +139,6 @@
             if (!max) return Math.floor(Math.random() * 3)
             else return Math.floor(Math.random() * (max + 1 - min) + min)
         }
-        function bow(cols) {
-            let code = ""
-            for (let i = 0; i < cols.length; i++) {
-                code += cols[i].toString(16)
-            }
-            if (parseInt(code, 16) > 0xffffff / 2) return true
-            else return false
-        }
-        function opos(cols) {
-            for (let i = 0; i < cols.length; i++) {
-                cols[i] = 255 - cols[i]
-            }
-            return cols
-        }
         function dl(res) {
             let a = document.createElement("a")
             let date = new Date()
@@ -154,13 +160,19 @@
         var btns = document.getElementsByTagName("button")
         btns[0].onclick = gen
         btns[1].onclick = () => {
+            genOnce = false
+            seed = prompt("Please enter a seed string")
+            if(seed == null) seed = location.search.slice(1).split("&")
+            gen()
+        }
+        btns[2].onclick = () => {
             let newImages = JSON.parse(prompt("Enter a json code"))
             if (newImages && typeof newImages === "object") images = newImages
             console.log(typeof newImages)
         }
-        btns[2].onclick = () => dl(16)
-        btns[3].onclick = () => dl(256)
-        btns[4].onclick = () => dl(parseInt(prompt('Enter a number')))
+        btns[3].onclick = () => dl(16)
+        btns[4].onclick = () => dl(256)
+        btns[5].onclick = () => dl(parseInt(prompt('Enter a number')))
     </script>
 </body>
 </html>

@@ -52,6 +52,7 @@
 
         function pickRand(num) {
             if (!items.length == 0) {
+                output.value = ""
                 for (i = 0; i < num; i++) {
                     output.value += items[Math.floor(Math.random() * items.length)] + "\n"
                 }
