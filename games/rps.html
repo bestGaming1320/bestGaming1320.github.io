@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Rock Paper Scissors</title>
+    <meta name="description" content="Very simple rock paper scissors game">
+    <meta name="author" content="bestGaming132">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <meta charset="UTF-8">
+    <meta name="ver" content="0.1">
+    <link rel="stylesheet" href="/default.css" />
+    <style>
+        button {
+            width: 80%;
+            min-height: 100px;
+            height: 20vh;
+            margin-bottom: 10px;
+            font-size: 20px;
+            background: #222
+        }
+        button:hover, button:focus {
+            background: #444
+        }
+
+        #feed {
+            margin-bottom:5vh
+        }
+
+        #score {
+            font-size: 16px
+        }
+
+        .rock, .paper, .scissors {
+            font-weight: bold
+        }
+
+        .rock {
+            color: #4a515d;
+            border-color: #4a515d
+        }
+
+        .paper {
+            color: #ffe4c4;
+            border-color: #ffe4c4
+        }
+
+        .scissors {
+            color: #b0c4de;
+            border-color: #b0c4de
+        }
+    </style>
+</head>
+
+<body>
+    <p id="title" class="pt">Rock Paper Scissors</p>
+    <p id="score">Wins: 0<br>Losses: 0<br>Ties: 0</p>
+    <p id="feed">&nbsp;</p>
+    <button id="rock" class="rock">Rock</button><br>
+    <button id="paper" class="paper">Paper</button><br>
+    <button id="scissors" class="scissors">Scissors</button>
+</body>
+<script>
+    "use strict"
+    document.getElementById("title").innerHTML = "Rock Paper Scissors V" + document.querySelector('meta[name="ver"]').content
+
+    var scores = [0, 0, 0],
+        playing = false
+    const picks = ["rock", "paper", "scissors"],
+        buttons = Array.from(document.getElementsByTagName("button")),
+        feed = document.getElementById("feed"),
+        score = document.getElementById("score")
+    picks.rnd = () => { return picks[Math.floor(Math.random() * picks.length)] }
+
+    function play(pick) {
+        if (playing) return;
+        playing = true
+        document.getElementById(pick).style.borderColor = ""
+        let compPick = picks.rnd()
+        feed.innerHTML = "computer picking..."
+        setTimeout(() => {
+            if (pick == compPick) {
+                feed.innerHTML = "Tie! Both you and the computer picked " + conv(pick)
+                scores[2]++
+            }
+            else if (
+                (pick == picks[0] && compPick == picks[1]) || //rock vs paper
+                (pick == picks[1] && compPick == picks[2]) || //paper vs scissors
+                (pick == picks[2] && compPick == picks[0])) { //scissors vs rock
+                feed.innerHTML = `You Loose! You picked ${conv(pick)} and got beaten by the computers pick ${conv(compPick)}`
+                scores[1]++
+            }
+            else {
+                feed.innerHTML = `You Win! You picked ${conv(pick)} and beat the computers pick ${conv(compPick)}`
+                scores[0]++
+            }
+            score.innerHTML = `Wins: ${scores[0]}<br>Losses: ${scores[1]}<br>Ties: ${scores[2]}`
+            playing = false
+        }, 200)
+    }
+
+    function conv(content) { return `<span class=${content}>${content}</span>` }
+    
+
+    buttons.forEach(el => el.addEventListener("click", function () { play(this.id) }))
+</script>
+
+</html>

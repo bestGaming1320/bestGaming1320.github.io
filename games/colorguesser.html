@@ -51,7 +51,7 @@
     const dia = document.getElementById("dia")
     var sec = "u"
 
-    var awnser = ""
+    var answer = ""
     var score = 0
     var high = localStorage.getItem("high") ? localStorage.getItem("high") : 0
 
@@ -89,9 +89,9 @@
             ccols[i].style.background = "rgb(" + col + ")"
             //ccols[i].style.borderColor = opposite(col)
         }
-        awnser = rgb(1)
-        col.innerHTML = awnser + "<br>" + awnser.toHex()
-        ccols[rnd()].style.background = awnser
+        answer = rgb(1)
+        col.innerHTML = answer + "<br>" + answer.toHex()
+        ccols[rnd()].style.background = answer
         timer()
     }
 
@@ -102,7 +102,7 @@
             aw = "you took too long to "
             score = 0
         }
-        else if (awnser == val.split(")")[0] + ")") {
+        else if (answer == val.split(")")[0] + ")") {
             score++
             aw = "correct"
             if (score > high) {
