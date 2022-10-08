@@ -1,3 +1,6 @@
+/* import scrollbar style */
+@import url(/scroll.css);
+
 body {
     color: #fff;
     background: #000;
@@ -34,6 +37,13 @@ input:not([type=checkbox]):not([type=range]):not([type=radio]):not([type=color])
     width: 70%;
     background: #222;
     min-height: 100px;
+    border: 1px solid #aaa;
+    margin: 3px;
+}
+
+input.txt2, input:read-only:not([type=checkbox]):not([type=range]):not([type=radio]):not([type=color]):not([type=file]):not([type=color]):not([type=button]) {
+    min-height: 25px;
+    background: #222;
     border: 1px solid #aaa;
     margin: 3px;
 }
@@ -114,7 +124,8 @@ select {
     margin-bottom: 5px;
     margin-top: 5px;
     border-radius: 5px;
-    border: 2px solid #777
+    border: 2px solid #777;
+    padding-left: 13px
 }
 
     select:disabled {
@@ -138,6 +149,9 @@ p {
     margin: 4px
 }
 
+.pb {
+    font-weight: 700;
+}
 .pt {
     font-weight: 700;
     font-size: 25px
@@ -172,31 +186,4 @@ code {
     font-size: 18px;
     font-family: Arial;
     text-align: center
-}
-
-/* width */
-::-webkit-scrollbar {
-    width: 10px;
-    height: 10px;
-    background: #666
-}
-
-/* Track */
-::-webkit-scrollbar-track {
-    background: #333;
-}
-
-/* Handle */
-::-webkit-scrollbar-thumb {
-    background: #aaa;
-}
-
-    /* Handle on hover */
-    ::-webkit-scrollbar-thumb:hover {
-        background: #888;
-    }
-
-/* bottom right square */
-::-webkit-scrollbar-corner {
-    background: #333;
 }

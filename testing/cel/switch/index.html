@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Custom Switch Element</title>
+    <script src="switch.js"></script>
+    <link rel="stylesheet" href="/default.css" />
+</head>
+
+<body align="center">
+    <h2>Custom Switch Element</h2>
+    <switch-el id="swt1" data-config='{"checked": true, "text": "Demo default enabled switch"}'></switch-el>
+    <switch-el id="swt2" data-config='{"checked": false, "text": "Demo different text for off", "onText":"Demo different text for on"}'></switch-el>
+</body>
+<script>
+    function elm(e) {
+        return document.getElementById(e)
+    }
+
+    elm("swt1").addEventListener("input", e => {
+        console.log("Checked value using attribute", elm("swt1").getAttribute("data-checked"))
+    })
+    elm("swt2").addEventListener("input", e => {
+        console.log("Checked value using event:", e.detail.checked)
+    })
+</script>
+
+</html>
